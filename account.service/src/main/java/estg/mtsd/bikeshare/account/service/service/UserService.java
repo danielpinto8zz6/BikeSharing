@@ -8,8 +8,9 @@ public interface UserService {
 
 	void save(UserVo userVo) ;
 	void update(UserVo userVo) ;
-	void delete(String id);
-	UserVo get(String id);
+	void delete(Integer id);
+	UserVo get(Integer id);
+	UserVo getByUsername(String username);
 	List<UserVo> getAll();
 
 }

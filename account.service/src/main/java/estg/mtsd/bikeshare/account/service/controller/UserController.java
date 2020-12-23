@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,41 +29,47 @@ public class UserController {
 
 	@PostMapping("user")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void save(UserVo userVo) {
+	@ResponseBody
+	public void save(@RequestBody UserVo userVo) {
 		userService.save(userVo);
 	}
 
-	@GetMapping("user/{id}")
-	public UserVo get( @PathVariable String id) {
-		return userService.get(id);
+	// @GetMapping("user/{id}")
+	// public UserVo get(@PathVariable Integer id) {
+	// 	return userService.get(id);
+	// }
+
+	@GetMapping("user/{email}")
+	public UserVo get(@PathVariable String email) {
+		return userService.getByUsername(email);
 	}
 
 	@GetMapping("user")
-	public List<UserVo>  getAll() {
+	public List<UserVo> getAll() {
 		return userService.getAll();
 	}
-	
+
 	@PutMapping("user")
 	public void update(UserVo userVo) {
 		userService.update(userVo);
 	}
-	
+
 	@DeleteMapping("user/{id}")
-	public void delete( @PathVariable String id) {
+	public void delete(@PathVariable Integer id) {
 		userService.delete(id);
 	}
-	
+
 	@ExceptionHandler(EntityExistsException.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CONFLICT)
 	public String handleEntityExistsException(EntityExistsException e) {
-	    return e.getMessage();
+		return e.getMessage();
 	}
-	
+
 	@ExceptionHandler(EntityNotFoundException.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public String handleEntityNotFoundException(EntityNotFoundException e) {
-	    return e.getMessage();
+		return e.getMessage();
 	}
 }

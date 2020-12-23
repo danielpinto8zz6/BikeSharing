@@ -25,56 +25,58 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public void save(UserVo userVo) {	
-		String id = userVo.getId();
-		Boolean objectAlreadyExists=userDao.existsById(id);
-		if(!objectAlreadyExists) {
+	public void save(UserVo userVo) {
+		String username = userVo.getUsername();
+
+		Boolean userAlreadyExists = userDao.existsByUsername(username);
+		if (!userAlreadyExists) {
 			User user = new User();
 			BeanUtils.copyProperties(userVo, user);
 			userDao.save(user);
-		}else {
+		} else {
 			throw new EntityExistsException();
 		}
-		
+
 	}
-	
+
 	@Override
 	@Transactional
 	public void update(UserVo userVo) {
-		String id = userVo.getId();
-		Boolean objectExists=userDao.existsById(id);
-		if(objectExists) {
+		Integer id = userVo.getId();
+		Boolean objectExists = userDao.existsById(id);
+		if (objectExists) {
 			User user = new User();
 			BeanUtils.copyProperties(userVo, user);
 			userDao.save(user);
-		}else {
+		} else {
 			throw new EntityNotFoundException();
 		}
 	}
 
 	@Override
 	@Transactional
-	public void delete(String id) {
-		Boolean objectExists=userDao.existsById(id);
-		if(objectExists) {
+	public void delete(Integer id) {
+		Boolean objectExists = userDao.existsById(id);
+		if (objectExists) {
 			userDao.deleteById(id);
-		}else {
+		} else {
 			throw new EntityNotFoundException();
 		}
 	}
 
 	@Override
 	@Transactional
-	public UserVo get(String id) {
+	public UserVo get(Integer id) {
 		Optional<User> userOptional = userDao.findById(id);
-		UserVo userVo=null;
-		if(userOptional.isPresent()) {
+		UserVo userVo = null;
+		if (userOptional.isPresent()) {
 			userVo = new UserVo();
-			BeanUtils.copyProperties(userOptional.get(), userVo);	
-		}else {
+			BeanUtils.copyProperties(userOptional.get(), userVo);
+			userVo.setPassword(null);
+		} else {
 			throw new EntityNotFoundException();
 		}
-		
+
 		return userVo;
 	}
 
@@ -87,11 +89,25 @@ public class UserServiceImpl implements UserService {
 			for (User user : userList) {
 				UserVo userVo = new UserVo();
 				BeanUtils.copyProperties(user, userVo);
+				userVo.setPassword(null);
 				userVoList.add(userVo);
 			}
 		}
 		return userVoList;
 	}
 
-}
+	@Override
+	public UserVo getByUsername(String username) {
+		Optional<User> userOptional = userDao.findByUsername(username);
+		UserVo userVo = null;
+		if (userOptional.isPresent()) {
+			userVo = new UserVo();
+			BeanUtils.copyProperties(userOptional.get(), userVo);
+			userVo.setPassword(null);
+		} else {
+			throw new EntityNotFoundException();
+		}
 
+		return userVo;
+	}
+}

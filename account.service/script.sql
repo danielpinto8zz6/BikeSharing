@@ -1,8 +1,6 @@
-CREATE TABLE user (
-email VARCHAR(255) ,
-password VARCHAR(255) ,
-id VARCHAR(255) PRIMARY KEY,
+CREATE TABLE users (
+id SERIAL PRIMARY KEY,
 username VARCHAR(255) ,
-photourl CHAR(255) 
+password VARCHAR(255),
+role VARCHAR(255)
 );
-
