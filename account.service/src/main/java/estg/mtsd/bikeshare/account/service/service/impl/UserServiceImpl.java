@@ -10,6 +10,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.account.service.dao.UserDao;
@@ -23,6 +25,11 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserDao userDao;
 
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 	@Override
 	@Transactional
 	public void save(UserVo userVo) {
@@ -32,6 +39,9 @@ public class UserServiceImpl implements UserService {
 		if (!userAlreadyExists) {
 			User user = new User();
 			BeanUtils.copyProperties(userVo, user);
+
+			user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
+
 			userDao.save(user);
 		} else {
 			throw new EntityExistsException();
@@ -103,7 +113,6 @@ public class UserServiceImpl implements UserService {
 		if (userOptional.isPresent()) {
 			userVo = new UserVo();
 			BeanUtils.copyProperties(userOptional.get(), userVo);
-			userVo.setPassword(null);
 		} else {
 			throw new EntityNotFoundException();
 		}
