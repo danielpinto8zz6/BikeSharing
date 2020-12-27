@@ -12,6 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.auth.service.service.AccountServiceProxy;
+
+import estg.mtsd.bikeshare.shared.library.models.UserVo;
+
 import lombok.Data;
 
 @Service // It has to be annotated with @Service.

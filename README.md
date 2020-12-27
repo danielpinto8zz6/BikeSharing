@@ -12,6 +12,7 @@
 | rent-service  | 8500  |
 | travel-history-service  | 8600  |
 | travel-history-process-service  | 8700  |
+| payment-manager-service  | 9100  |
 | zuul-server  | 8762  |
 | eureka-server  | 8761  ||
 

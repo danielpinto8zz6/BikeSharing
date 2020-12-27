@@ -17,7 +17,8 @@ import org.springframework.stereotype.Service;
 import estg.mtsd.bikeshare.account.service.dao.UserDao;
 import estg.mtsd.bikeshare.account.service.entity.User;
 import estg.mtsd.bikeshare.account.service.service.UserService;
-import estg.mtsd.bikeshare.account.service.vo.UserVo;
+
+import estg.mtsd.bikeshare.shared.library.models.UserVo;
 
 @Service
 public class UserServiceImpl implements UserService {

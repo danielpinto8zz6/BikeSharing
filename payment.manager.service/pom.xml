@@ -8,9 +8,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>estg.mtsd.bikeshare</groupId>
-	<artifactId>account.service</artifactId>
+	<artifactId>payment.manager.service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>account.service</name>
+	<name>payment.manager.service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -30,6 +30,10 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 
 		<dependency>
@@ -58,11 +62,6 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>estg.mtsd.bikeshare</groupId>
-			<artifactId>shared.library</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

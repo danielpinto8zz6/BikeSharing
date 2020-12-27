@@ -1,4 +1,4 @@
-package estg.mtsd.bikeshare.auth.service.security;
+package estg.mtsd.bikeshare.shared.library.models;
 
 import lombok.Data;
 

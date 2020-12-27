@@ -1,4 +1,4 @@
-package estg.mtsd.bikeshare.account.service.controller;
+package estg.mtsd.bikeshare.payment.manager.service.controller;
 
 import java.util.List;
 
@@ -9,68 +9,61 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import estg.mtsd.bikeshare.account.service.service.UserService;
-
-import estg.mtsd.bikeshare.shared.library.models.UserVo;
+import estg.mtsd.bikeshare.payment.manager.service.service.PaymentService;
+import estg.mtsd.bikeshare.payment.manager.service.vo.PaymentRequest;
+import estg.mtsd.bikeshare.payment.manager.service.vo.PaymentVo;
 
 @RestController
-public class UserController {
+public class PaymentController {
 
 	@Autowired
-	UserService userService;
+	PaymentService paymentService;
 
-	@PostMapping("user")
+	@PostMapping("payment")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	@ResponseBody
-	public void save(@RequestBody UserVo userVo) {
-		userService.save(userVo);
+	public void generate(PaymentRequest paymentRequest) {
+		paymentService.generate(paymentRequest);
 	}
 
-	// @GetMapping("user/{id}")
-	// public UserVo get(@PathVariable Integer id) {
-	// 	return userService.get(id);
-	// }
-
-	@RequestMapping("user/{email}")
-	public UserVo get(@PathVariable String email) {
-		return userService.getByUsername(email);
+	@GetMapping("payment/{id}")
+	public PaymentVo get( @PathVariable Integer id) {
+		return paymentService.get(id);
 	}
 
-	@RequestMapping("user")
-	public List<UserVo> getAll() {
-		return userService.getAll();
+	@GetMapping("payment")
+	public List<PaymentVo>  getAll() {
+		return paymentService.getAll();
 	}
-
-	@PutMapping("user")
-	public void update(UserVo userVo) {
-		userService.update(userVo);
+	
+	@PutMapping("payment")
+	public void update(PaymentVo paymentVo) {
+		paymentService.update(paymentVo);
 	}
-
-	@DeleteMapping("user/{id}")
-	public void delete(@PathVariable Integer id) {
-		userService.delete(id);
+	
+	@DeleteMapping("payment/{id}")
+	public void delete( @PathVariable Integer id) {
+		paymentService.delete(id);
 	}
-
+	
 	@ExceptionHandler(EntityExistsException.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CONFLICT)
 	public String handleEntityExistsException(EntityExistsException e) {
-		return e.getMessage();
+	    return e.getMessage();
 	}
-
+	
 	@ExceptionHandler(EntityNotFoundException.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public String handleEntityNotFoundException(EntityNotFoundException e) {
-		return e.getMessage();
+	    return e.getMessage();
 	}
 }
