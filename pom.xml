@@ -22,7 +22,7 @@
         <module>travel.history.service</module>
         <module>zuul.server</module>
         <module>shared.library</module>
-        <module>payment.generator.service</module>
+        <module>payment.manager.service</module>
     </modules>
 
     <build>

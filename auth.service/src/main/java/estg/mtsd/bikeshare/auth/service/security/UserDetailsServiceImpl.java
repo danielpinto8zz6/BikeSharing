@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-				.commaSeparatedStringToAuthorityList(user.getId().toString());
+				.commaSeparatedStringToAuthorityList("ROLE_" + user.getRole());
 
 		// The "User" class is provided by Spring and represents a model class for user
 		// to be returned by UserDetailsService

@@ -1,6 +1,7 @@
 package estg.mtsd.bikeshare.zuul.server.security;
 
 import java.io.IOException;
+import java.security.Key;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 
 public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
@@ -53,9 +55,13 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 		try { // exceptions might be thrown in creating the claims if for example the token is
 				// expired
 
+			byte[] encodedKeyBytes = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+					.getBytes();
+			Key key = Keys.hmacShaKeyFor(encodedKeyBytes);
+
 			// 4. Validate the token
-			Claims claims = Jwts.parser().setSigningKey(jwtConfig.getSecret().getBytes()).parseClaimsJws(token)
-					.getBody();
+			Claims claims = Jwts.parserBuilder().setSigningKey(key).build()
+					.parseClaimsJws(token).getBody();
 
 			String username = claims.getSubject();
 			if (username != null) {

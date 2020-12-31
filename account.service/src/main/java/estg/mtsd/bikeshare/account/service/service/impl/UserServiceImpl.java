@@ -41,7 +41,8 @@ public class UserServiceImpl implements UserService {
 			BeanUtils.copyProperties(userVo, user);
 
 			user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
-
+			user.setRole("USER");
+			
 			userDao.save(user);
 		} else {
 			throw new EntityExistsException();
