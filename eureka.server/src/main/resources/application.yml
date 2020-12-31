@@ -1,0 +1,32 @@
+server:
+  port: 8761
+spring:
+  profiles:
+    active: "dev"
+  application:
+    name: eureka-server
+
+---
+
+spring:
+  profiles: dev
+eureka:
+  numberRegistrySyncRetries: 1
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    enableSelfPreservation: true
+
+---
+
+spring:
+  profiles: prod
+eureka:
+  instance:
+    hostname: "${HOSTNAME}.eureka-server"
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_ADDRESS}

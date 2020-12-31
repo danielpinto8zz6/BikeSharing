@@ -42,7 +42,7 @@ metadata:
 spec:
   serviceName: 'eureka'
   # n instances
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: eureka
@@ -52,17 +52,18 @@ spec:
         app: eureka
     spec:
       containers:
-        - name: eureka
-          image: eureka-server:lastest
+        - name: eureka-server
+          image: eureka-server:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8761
-          resources:
-            requests:
-              memory: "1Gi"
-              cpu: "500m"
-            limits:
-              memory: "1200Mi"
-              cpu: "500m"
+          #resources:
+            #requests:
+              #memory: "1Gi"
+              #cpu: "500m"
+            #limits:
+              #memory: "1200Mi"
+              #cpu: "500m"
           env:
             - name: EUREKA_SERVER_ADDRESS
               valueFrom:
