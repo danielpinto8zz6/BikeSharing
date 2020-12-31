@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.User;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,12 +20,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import estg.mtsd.bikeshare.shared.library.vo.UserVo;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import lombok.Data;
 
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -49,7 +51,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 		try {
 
 			// 1. Get credentials from request
-			UserCredentials creds = new ObjectMapper().readValue(request.getInputStream(), UserCredentials.class);
+			UserVo creds = new ObjectMapper().readValue(request.getInputStream(), UserVo.class);
 
 			// 2. Create auth object (contains credentials) which will be used by auth
 			// manager
@@ -74,7 +76,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
 		Long now = System.currentTimeMillis();
 		Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-		
+
 		String token = Jwts.builder().setSubject(auth.getName())
 				// Convert to list of strings.
 				// This is important because it affects the way we get them back in the Gateway.
@@ -86,16 +88,11 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
 		// Add token to header
 		response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);
+		response.addHeader("Content-Type", "application/json");
 
 		response.setStatus(HttpServletResponse.SC_OK);
-		response.getWriter().write(token);
+		response.getWriter().write("{ \"token\": \"" + token + "\"}");
 		response.getWriter().flush();
 		response.getWriter().close();
-	}
-
-	// A (temporary) class just to represent the user credentials
-	@Data
-	private static class UserCredentials {
-		private String username, password;
 	}
 }

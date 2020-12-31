@@ -1,4 +1,4 @@
-package estg.mtsd.bikeshare.account.service.controller;
+package estg.mtsd.bikeshare.rent.service.controller;
 
 import java.util.List;
 
@@ -9,67 +9,60 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import estg.mtsd.bikeshare.account.service.service.UserService;
-import estg.mtsd.bikeshare.shared.library.vo.UserVo;
+import estg.mtsd.bikeshare.rent.service.service.RentService;
+import estg.mtsd.bikeshare.rent.service.vo.RentVo;
 
 @RestController
-public class UserController {
+public class RentController {
 
 	@Autowired
-	UserService userService;
+	RentService rentService;
 
-	@PostMapping("user")
+	@PostMapping("rent")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	@ResponseBody
-	public void save(@RequestBody UserVo userVo) {
-		userService.save(userVo);
+	public void save(RentVo rentVo) throws Exception {
+		rentService.save(rentVo);
 	}
 
-	// @GetMapping("user/{id}")
-	// public UserVo get(@PathVariable Integer id) {
-	// 	return userService.get(id);
-	// }
-
-	@RequestMapping("user/{email}")
-	public UserVo get(@PathVariable String email) {
-		return userService.getByUsername(email);
+	@GetMapping("rent/{id}")
+	public RentVo get( @PathVariable Integer id) {
+		return rentService.get(id);
 	}
 
-	@RequestMapping("user")
-	public List<UserVo> getAll() {
-		return userService.getAll();
+	@GetMapping("rent")
+	public List<RentVo>  getAll() {
+		return rentService.getAll();
 	}
-
-	@PutMapping("user")
-	public void update(UserVo userVo) {
-		userService.update(userVo);
+	
+	@PutMapping("rent")
+	public void update(RentVo rentVo) {
+		rentService.update(rentVo);
 	}
-
-	@DeleteMapping("user/{id}")
-	public void delete(@PathVariable Integer id) {
-		userService.delete(id);
+	
+	@DeleteMapping("rent/{id}")
+	public void delete( @PathVariable Integer id) {
+		rentService.delete(id);
 	}
-
+	
 	@ExceptionHandler(EntityExistsException.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CONFLICT)
 	public String handleEntityExistsException(EntityExistsException e) {
-		return e.getMessage();
+	    return e.getMessage();
 	}
-
+	
 	@ExceptionHandler(EntityNotFoundException.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public String handleEntityNotFoundException(EntityNotFoundException e) {
-		return e.getMessage();
+	    return e.getMessage();
 	}
 }

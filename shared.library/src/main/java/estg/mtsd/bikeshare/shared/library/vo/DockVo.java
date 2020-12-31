@@ -1,4 +1,4 @@
-package estg.mtsd.bikeshare.dockmanagement.service.vo;
+package estg.mtsd.bikeshare.shared.library.vo;
 
 import lombok.Data;
 

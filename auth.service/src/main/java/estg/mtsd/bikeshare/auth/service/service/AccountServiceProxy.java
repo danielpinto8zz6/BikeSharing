@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import estg.mtsd.bikeshare.shared.library.models.UserVo;
+import estg.mtsd.bikeshare.shared.library.vo.UserVo;
 
 @FeignClient(name = "account-service") // Service Id of account service
 public interface AccountServiceProxy {

@@ -2,8 +2,7 @@ package estg.mtsd.bikeshare.account.service.service;
 
 import java.util.List;
 
-import estg.mtsd.bikeshare.shared.library.models.UserVo;
-
+import estg.mtsd.bikeshare.shared.library.vo.UserVo;
 
 public interface UserService {
 

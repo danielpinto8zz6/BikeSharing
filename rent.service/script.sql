@@ -1,0 +1,8 @@
+CREATE TABLE rent (
+id INTEGER PRIMARY KEY,
+dockId INTEGER ,
+bikeId INTEGER ,
+date VARCHAR(255) ,
+status INTEGER 
+);
+

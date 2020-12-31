@@ -1,4 +1,4 @@
-package estg.mtsd.bikeshare.account.service.entity;
+package estg.mtsd.bikeshare.dock.service.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,20 +11,24 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "dock")
+public class Dock {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "username")
-	private String username;
+	@Column(name = "latitude")
+	private Long latitude;
 
-	@Column(name = "password")
-	private String password;
+	@Column(name = "longitude")
+	private Long longitude;
 
-	@Column(name = "role")
-	private String role;
+	@Column(name = "location")
+	private String location;
+
+	@Column(name = "bikeid")
+	private Integer bikeId;
+
 }

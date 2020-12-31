@@ -1,4 +1,4 @@
-package estg.mtsd.bikeshare.shared.library.models;
+package estg.mtsd.bikeshare.shared.library.vo;
 
 import lombok.Data;
 

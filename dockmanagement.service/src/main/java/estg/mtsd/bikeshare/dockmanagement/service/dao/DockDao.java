@@ -6,5 +6,4 @@ import estg.mtsd.bikeshare.dockmanagement.service.entity.Dock;
 
 @Repository
 public interface DockDao extends JpaRepository<Dock, Integer>{
-
 }

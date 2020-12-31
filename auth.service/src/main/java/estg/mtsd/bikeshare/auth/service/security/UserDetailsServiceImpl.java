@@ -12,9 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.auth.service.service.AccountServiceProxy;
-
-import estg.mtsd.bikeshare.shared.library.models.UserVo;
-
+import estg.mtsd.bikeshare.shared.library.vo.UserVo;
 import lombok.Data;
 
 @Service // It has to be annotated with @Service.
@@ -31,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		}
 
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-				.commaSeparatedStringToAuthorityList("ROLE_" + user.getRole());
+				.commaSeparatedStringToAuthorityList(user.getId().toString());
 
 		// The "User" class is provided by Spring and represents a model class for user
 		// to be returned by UserDetailsService
