@@ -1,0 +1,30 @@
+eureka:
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    hostname: bike-management-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+server:
+  port: 8800
+spring:
+  application:
+    name: bike-management-service
+  datasource:
+    initialization-mode: always
+    password: Pass2020!
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/bike
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true

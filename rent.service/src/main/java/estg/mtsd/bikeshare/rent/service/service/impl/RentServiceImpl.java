@@ -23,7 +23,7 @@ public class RentServiceImpl implements RentService {
 	@Autowired
 	RentDao rentDao;
 
-	@Autowired(required = true)
+	@Autowired
 	private DockServiceProxy dockService;
 
 	@Override

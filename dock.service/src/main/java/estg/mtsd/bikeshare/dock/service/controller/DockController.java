@@ -52,7 +52,7 @@ public class DockController {
 
 	@GetMapping("dock")
 	public Page<DockVo> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
-			@RequestParam(required = false) Boolean onlyWithBikes) {
+			@RequestParam(defaultValue = "false") Boolean onlyWithBikes) {
 		PageRequest paging = PageRequest.of(page, size);
 
 		if (onlyWithBikes) {

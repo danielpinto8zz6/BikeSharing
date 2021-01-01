@@ -1,4 +1,4 @@
-package estg.mtsd.bikeshare.payment.manager;
+package estg.mtsd.bikeshare.payment.manager.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
