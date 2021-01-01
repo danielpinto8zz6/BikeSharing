@@ -3,7 +3,7 @@ eureka:
         registerWithEureka: true
         fetchRegistry: true
         service-url:
-            default-zone: http://localhost:8761/eureka
+            default-zone: "http://localhost:8761/eureka"
     instance:
         # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
         preferIpAddress: true
@@ -19,7 +19,7 @@ spring:
         initialization-mode: always
         password: Pass2020!
         platform: postgres
-        url: jdbc:postgresql://localhost:5432/account
+        url: "jdbc:postgresql://localhost:5432/account"
         username: postgres
     jpa:
         hibernate:
