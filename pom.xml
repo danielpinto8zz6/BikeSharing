@@ -12,17 +12,18 @@
         <module>account.service</module>
         <module>auth.service</module>
         <module>bikemanagement.service</module>
+        <module>dock.service</module>
         <module>dockmanagement.service</module>
-        <module>feedback.service</module>
         <module>eureka.server</module>
+        <module>feedback.service</module>
         <module>payment.calculator.service</module>
+        <module>payment.manager.service</module>
         <module>payment.service</module>
         <module>rent.service</module>
+        <module>shared.library</module>
         <module>travel.history.process.service</module>
         <module>travel.history.service</module>
         <module>zuul.server</module>
-        <module>shared.library</module>
-        <module>payment.manager.service</module>
     </modules>
 
     <build>
