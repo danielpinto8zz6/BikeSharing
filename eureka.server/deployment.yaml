@@ -48,8 +48,7 @@ spec:
     spec:
       containers:
         - name: eureka
-          image: eureka-server:latest
-          imagePullPolicy: Never
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/eureka-server:latest
           ports:
             - containerPort: 8761
           env:
@@ -71,3 +70,6 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
+      imagePullSecrets: 
+      - name: gitlab-auth
+
