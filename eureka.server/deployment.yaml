@@ -49,6 +49,7 @@ spec:
       containers:
         - name: eureka
           image: registry.gitlab.com/danielpinto8zz6/bikeshare/eureka-server:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8761
           env:

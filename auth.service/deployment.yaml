@@ -31,11 +31,12 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: auth-service:latest
-          imagePullPolicy: Never
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/auth-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8200
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
-
+      imagePullSecrets: 
+      - name: gitlab-auth

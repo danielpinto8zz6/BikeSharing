@@ -31,8 +31,8 @@ spec:
     spec:
       containers:
         - name: account-service
-          image: account-service:latest
-          imagePullPolicy: Never
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/account-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8100
           env:
@@ -40,4 +40,5 @@ spec:
               value: "prod"
             - name: JVM_OPTS
               value: "-Xms1g -Xmx1g"
-
+      imagePullSecrets: 
+      - name: gitlab-auth

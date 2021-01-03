@@ -32,10 +32,12 @@ spec:
     spec:
       containers:
         - name: zuul-server
-          image: zuul-server:latest
-          imagePullPolicy: Never
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/zuul-server:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 9090
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
+      imagePullSecrets: 
+      - name: gitlab-auth
