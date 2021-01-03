@@ -1,12 +1,14 @@
 package estg.mtsd.bikeshare.rent.service.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,9 @@ public class RentServiceImpl implements RentService {
 
 		Rent rent = new Rent();
 		BeanUtils.copyProperties(rentVo, rent);
+		rentDao.save(rent);
+
+		// TODO: notify kafka to open dock
 	}
 
 	@Override

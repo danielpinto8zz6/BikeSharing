@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +29,7 @@ public class RentController {
 
 	@PostMapping("rent")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void save(RentVo rentVo) throws Exception {
+	public void save(@RequestBody RentVo rentVo) throws Exception {
 		rentService.save(rentVo);
 	}
 

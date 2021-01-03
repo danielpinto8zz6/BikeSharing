@@ -1,72 +1,48 @@
 package estg.mtsd.bikeshare.rent.service.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import lombok.Data;
+
+@Data
 @Entity
-@Table(name="rent")
+@Table(name = "rent")
 public class Rent {
 
 	@Id
-	@Column(name="id")
-	private Integer id ;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
 
-	@Column(name="dockId")
-	private Integer dockId ;
+	@Column(name = "dock_id")
+	private Integer dockId;
 
-	@Column(name="bikeId")
-	private Integer bikeId ;
+	@Column(name = "bike_id")
+	private Integer bikeId;
 
-	@Column(name="date")
-	private String date ;
+	@Column(name = "user_id")
+	private Integer userId;
 
-	@Column(name="status")
-	private Integer status ;
+	@Column(name = "create_at", nullable=false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date date;
 
-	public Rent(){
-		super();
-	}
+	@Column(name = "status")
+	private Integer status;
 
-	public Integer getId(){
-		return this.id;
-	}
-
-	public void setId(Integer id){
-		this.id = id;
-	}
-
-	public Integer getDockId(){
-		return this.dockId;
-	}
-
-	public void setDockId(Integer dockId){
-		this.dockId = dockId;
-	}
-
-	public Integer getBikeId(){
-		return this.bikeId;
-	}
-
-	public void setBikeId(Integer bikeId){
-		this.bikeId = bikeId;
-	}
-
-	public String getDate(){
-		return this.date;
-	}
-
-	public void setDate(String date){
-		this.date = date;
-	}
-
-	public Integer getStatus(){
-		return this.status;
-	}
-
-	public void setStatus(Integer status){
-		this.status = status;
+	@PrePersist
+	protected void onCreate() {
+		date = new Date();
 	}
 
 }
