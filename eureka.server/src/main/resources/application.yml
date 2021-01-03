@@ -25,8 +25,9 @@ eureka:
 spring:
   profiles: prod
 eureka:
+  numberRegistrySyncRetries: 1
   instance:
-    hostname: "${HOSTNAME}.eureka"
+    hostname: "${HOSTNAME}"
   client:
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVER_ADDRESS}
+    registerWithEureka: false
+    fetchRegistry: false

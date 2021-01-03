@@ -1,13 +1,4 @@
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: eureka-cm
-data:
-  # if you want to deploy n instances of eureka cluster,
-  # you should set eureka_service_address: http://eureka-0.eureka:8761/eureka,...,http://eureka-(n-1).eureka:8761/eureka
-  eureka_service_address: http://eureka-0.eureka:8761/eureka
----
-apiVersion: v1
 kind: Service
 metadata:
   name: eureka-lb
@@ -62,11 +53,6 @@ spec:
           ports:
             - containerPort: 8761
           env:
-            - name: EUREKA_SERVER_ADDRESS
-              valueFrom:
-                configMapKeyRef:
-                  name: eureka-cm
-                  key: eureka_service_address
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: JVM_OPTS
