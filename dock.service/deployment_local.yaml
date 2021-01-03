@@ -31,8 +31,8 @@ spec:
     spec:
       containers:
         - name: dock-service
-          image: registry.gitlab.com/danielpinto8zz6/bikeshare/dock-service:latest
-          imagePullPolicy: Always
+          image: dock-service:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8900
           env:

@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: "IfNotPresent"
           envFrom:                                # Get the environmental variables from a secret file whose name is "postgres-secret" 
             - secretRef:
-                name: postgres-account-secret
+                name: pgadmin-secret
           ports:
             - containerPort: 80
               name: pgadminport

@@ -1,43 +1,44 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: dock-service
+  name: account-service
   labels:
-    app: dock-service
+    app: account-service
 spec:
   selector:
-    app: dock-service
+    app: account-service
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 8900
+      targetPort: 8100
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dock-service
+  name: account-service
   labels:
-    app: dock-service
+    app: account-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dock-service
+      app: account-service
   template:
     metadata:
       labels:
-        app: dock-service
+        app: account-service
     spec:
       containers:
-        - name: dock-service
-          image: registry.gitlab.com/danielpinto8zz6/bikeshare/dock-service:latest
-          imagePullPolicy: Always
+        - name: account-service
+          image: account-service:latest
+          imagePullPolicy: Never
           ports:
-            - containerPort: 8900
+            - containerPort: 8100
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: JVM_OPTS
               value: "-Xms1g -Xmx1g"
-
+      imagePullSecrets: 
+      - name: gitlab-auth

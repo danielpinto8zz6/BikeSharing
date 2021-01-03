@@ -1,40 +1,40 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: dock-service
+  name: feedback-service
   labels:
-    app: dock-service
+    app: feedback-service
 spec:
   selector:
-    app: dock-service
+    app: feedback-service
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 8900
+      targetPort: 8300
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dock-service
+  name: feedback-service
   labels:
-    app: dock-service
+    app: feedback-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dock-service
+      app: feedback-service
   template:
     metadata:
       labels:
-        app: dock-service
+        app: feedback-service
     spec:
       containers:
-        - name: dock-service
-          image: registry.gitlab.com/danielpinto8zz6/bikeshare/dock-service:latest
-          imagePullPolicy: Always
+        - name: feedback-service
+          image: feedback-service:latest
+          imagePullPolicy: Never
           ports:
-            - containerPort: 8900
+            - containerPort: 8300
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
