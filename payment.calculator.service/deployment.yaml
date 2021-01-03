@@ -1,0 +1,43 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: payment-calculator-service
+  labels:
+    app: payment-calculator-service
+spec:
+  selector:
+    app: payment-calculator-service
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 9000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-calculator-service
+  labels:
+    app: payment-calculator-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-calculator-service
+  template:
+    metadata:
+      labels:
+        app: payment-calculator-service
+    spec:
+      containers:
+        - name: payment-calculator-service
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/payment-calculator-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9000
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: JVM_OPTS
+              value: "-Xms1g -Xmx1g"
+
