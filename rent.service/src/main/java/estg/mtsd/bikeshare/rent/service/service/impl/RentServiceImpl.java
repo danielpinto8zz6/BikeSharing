@@ -1,23 +1,22 @@
 package estg.mtsd.bikeshare.rent.service.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
-import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.rent.service.dao.RentDao;
 import estg.mtsd.bikeshare.rent.service.entity.Rent;
+import estg.mtsd.bikeshare.rent.service.producers.RentProducer;
 import estg.mtsd.bikeshare.rent.service.service.DockServiceProxy;
 import estg.mtsd.bikeshare.rent.service.service.RentService;
-import estg.mtsd.bikeshare.rent.service.vo.RentVo;
+import estg.mtsd.bikeshare.shared.library.vo.RentVo;
 
 @Service
 public class RentServiceImpl implements RentService {
@@ -28,9 +27,12 @@ public class RentServiceImpl implements RentService {
 	@Autowired
 	private DockServiceProxy dockService;
 
+	@Autowired
+	private RentProducer rentProducer;
+
 	@Override
 	@Transactional
-	public void save(RentVo rentVo) throws Exception {
+	public void rent(RentVo rentVo) throws Exception {
 		Integer dockId = rentVo.getDockId();
 		Integer bikeId = rentVo.getBikeId();
 
@@ -44,7 +46,9 @@ public class RentServiceImpl implements RentService {
 		BeanUtils.copyProperties(rentVo, rent);
 		rentDao.save(rent);
 
-		// TODO: notify kafka to open dock
+		// Notify kafka to open dock and remove bike from dock
+		BeanUtils.copyProperties(rent, rentVo);
+		rentProducer.send(rentVo);
 	}
 
 	@Override

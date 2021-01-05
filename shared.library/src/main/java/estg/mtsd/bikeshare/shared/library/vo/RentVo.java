@@ -1,4 +1,4 @@
-package estg.mtsd.bikeshare.rent.service.vo;
+package estg.mtsd.bikeshare.shared.library.vo;
 
 import java.util.Date;
 

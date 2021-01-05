@@ -2,11 +2,12 @@ package estg.mtsd.bikeshare.rent.service.service;
 
 import java.util.List;
 
-import estg.mtsd.bikeshare.rent.service.vo.RentVo;
+import estg.mtsd.bikeshare.shared.library.vo.RentVo;
+
 
 public interface RentService {
 
-	void save(RentVo rentVo) throws Exception ;
+	void rent(RentVo rentVo) throws Exception ;
 	void update(RentVo rentVo) ;
 	void delete(Integer id);
 	RentVo get(Integer id);

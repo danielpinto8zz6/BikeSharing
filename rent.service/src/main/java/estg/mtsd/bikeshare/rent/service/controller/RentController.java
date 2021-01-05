@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import estg.mtsd.bikeshare.rent.service.service.RentService;
-import estg.mtsd.bikeshare.rent.service.vo.RentVo;
+import estg.mtsd.bikeshare.shared.library.vo.RentVo;
 
 @RestController
 public class RentController {
@@ -29,8 +29,8 @@ public class RentController {
 
 	@PostMapping("rent")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void save(@RequestBody RentVo rentVo) throws Exception {
-		rentService.save(rentVo);
+	public void rent(@RequestBody RentVo rentVo) throws Exception {
+		rentService.rent(rentVo);
 	}
 
 	@GetMapping("rent/{id}")
