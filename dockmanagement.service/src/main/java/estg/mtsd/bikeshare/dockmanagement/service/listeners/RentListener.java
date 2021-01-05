@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+import estg.mtsd.bikeshare.dockmanagement.service.producers.DockEventProducer;
 import estg.mtsd.bikeshare.dockmanagement.service.service.DockService;
+import estg.mtsd.bikeshare.dockmanagement.service.vo.DockEvent;
+import estg.mtsd.bikeshare.dockmanagement.service.vo.DockEvent.DockEventEnum;
 import estg.mtsd.bikeshare.shared.library.vo.DockVo;
 import estg.mtsd.bikeshare.shared.library.vo.RentVo;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +22,13 @@ public class RentListener {
     @Autowired
     DockService dockService;
 
-    @Value("${topic.name.consumer")
+    @Autowired
+    DockEventProducer dockEventProducer;
+
+    @Value("${rent.consumer")
     private String topicName;
 
-    @KafkaListener(topics = "${topic.name.consumer}", groupId = "group_id")
+    @KafkaListener(topics = "${rent.consumer}", groupId = "group_id")
     public void consume(ConsumerRecord<String, RentVo> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());
@@ -38,7 +44,9 @@ public class RentListener {
 
             dockService.update(dock);
 
-            // TODO: Open dock
+            // Unlock bike
+            DockEvent dockEvent = new DockEvent(dock.getBikeId(), dock.getId(), DockEventEnum.UNLOCK_BIKE);
+            dockEventProducer.send(dockEvent);
         }
     }
 }
