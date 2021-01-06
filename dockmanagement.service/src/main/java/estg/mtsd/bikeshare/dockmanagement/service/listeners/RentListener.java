@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.dockmanagement.service.producers.DockEventProducer;
 import estg.mtsd.bikeshare.dockmanagement.service.service.DockService;
-import estg.mtsd.bikeshare.dockmanagement.service.vo.DockEvent;
-import estg.mtsd.bikeshare.dockmanagement.service.vo.DockEvent.DockEventEnum;
+import estg.mtsd.bikeshare.shared.library.vo.DockEvent;
+import estg.mtsd.bikeshare.shared.library.vo.DockEvent.DockEventEnum;
 import estg.mtsd.bikeshare.shared.library.vo.DockVo;
 import estg.mtsd.bikeshare.shared.library.vo.RentVo;
 import lombok.RequiredArgsConstructor;

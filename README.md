@@ -13,6 +13,7 @@
 | travel-history-service  | 8600  |
 | travel-history-process-service  | 8700  |
 | payment-manager-service  | 9100  |
+| dummy-service  | 9200  |
 | zuul-server  | 8762  |
 | eureka-server  | 8761  ||
 

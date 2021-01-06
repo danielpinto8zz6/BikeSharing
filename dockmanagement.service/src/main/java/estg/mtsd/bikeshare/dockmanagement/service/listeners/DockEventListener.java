@@ -7,7 +7,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.dockmanagement.service.service.DockService;
-import estg.mtsd.bikeshare.dockmanagement.service.vo.DockEvent;
+import estg.mtsd.bikeshare.shared.library.vo.DockEvent;
 import estg.mtsd.bikeshare.shared.library.vo.DockVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class DockListener {
+public class DockEventListener {
 
     @Autowired
     DockService dockService;
