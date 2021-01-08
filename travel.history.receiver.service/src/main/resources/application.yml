@@ -1,0 +1,32 @@
+server:
+  port: 9300
+spring:
+  application:
+    name: travel-history-receiver-service
+
+eureka:
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    hostname: travel-history-receiver-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+
+  kafka:
+    consumer:
+      bootstrap-servers: 127.0.0.1:9092
+      group-id: travel-event
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+topic:
+  name:
+    producer: travel-event
+
+auto:
+  create:
+    topics:
+      enable: true

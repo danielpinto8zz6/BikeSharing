@@ -1,4 +1,4 @@
-package estg.mtsd.bikeshare.travel.history.process.service;
+package estg.mtsd.bikeshare.travel.history.receiver.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

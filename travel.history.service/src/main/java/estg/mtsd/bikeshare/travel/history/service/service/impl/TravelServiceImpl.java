@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import estg.mtsd.bikeshare.shared.library.vo.TravelVo;
+import estg.mtsd.bikeshare.travel.history.service.entity.Travel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.travel.history.service.dao.TravelDao;
-import estg.mtsd.bikeshare.travel.history.service.entity.Travel;
 import estg.mtsd.bikeshare.travel.history.service.service.TravelService;
-import estg.mtsd.bikeshare.travel.history.service.vo.TravelVo;
 
 @Service
 public class TravelServiceImpl implements TravelService {
@@ -20,7 +20,7 @@ public class TravelServiceImpl implements TravelService {
 	TravelDao travelDao;
 
 	@Override
-	public void save(TravelVo travelVo) {	
+	public void save(TravelVo travelVo) {
 		Integer id = travelVo.getId();
 		Boolean objectAlreadyExists=travelDao.existsById(id);
 		if(!objectAlreadyExists) {

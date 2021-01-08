@@ -18,10 +18,6 @@ spring:
                     lob:
                         non_contextual_creation: true
 
-auto:
-    create:
-        topics:
-            enable: true
 eureka:
     instance:
         # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
@@ -51,3 +47,8 @@ topic:
     name:
         consumer: bike-availability
         producer: topico.comando.teste
+
+auto:
+    create:
+        topics:
+            enable: true

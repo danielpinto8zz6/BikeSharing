@@ -2,6 +2,7 @@ package estg.mtsd.bikeshare.travel.history.service.controller;
 
 import java.util.List;
 
+import estg.mtsd.bikeshare.shared.library.vo.TravelVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import estg.mtsd.bikeshare.travel.history.service.service.TravelService;
-import estg.mtsd.bikeshare.travel.history.service.vo.TravelVo;
 
 @RestController
 public class TravelController {
@@ -46,4 +46,5 @@ public class TravelController {
 	public void delete( @PathVariable Integer id) {
 		travelService.delete(id);
 	}
+
 }

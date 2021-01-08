@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import estg.mtsd.bikeshare.travel.history.process.service.dao.TravelDao;
 import estg.mtsd.bikeshare.travel.history.process.service.entity.Travel;
 import estg.mtsd.bikeshare.travel.history.process.service.service.TravelService;
-import estg.mtsd.bikeshare.travel.history.process.service.vo.TravelVo;
+import estg.mtsd.bikeshare.shared.library.vo.TravelVo;
 
 @Service
 public class TravelServiceImpl implements TravelService {

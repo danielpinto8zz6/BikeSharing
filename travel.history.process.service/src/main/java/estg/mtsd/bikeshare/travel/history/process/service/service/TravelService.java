@@ -2,7 +2,7 @@ package estg.mtsd.bikeshare.travel.history.process.service.service;
 
 import java.util.List;
 
-import estg.mtsd.bikeshare.travel.history.process.service.vo.TravelVo;
+import estg.mtsd.bikeshare.shared.library.vo.TravelVo;
 
 public interface TravelService {
 

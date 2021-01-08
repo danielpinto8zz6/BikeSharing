@@ -22,6 +22,7 @@
         <module>rent.service</module>
         <module>shared.library</module>
         <module>travel.history.process.service</module>
+        <module>travel.history.receiver.service</module>
         <module>travel.history.service</module>
         <module>zuul.server</module>
         <module>dummy.service</module>
