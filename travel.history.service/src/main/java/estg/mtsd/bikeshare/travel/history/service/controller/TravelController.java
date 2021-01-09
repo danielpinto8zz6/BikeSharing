@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,12 +24,12 @@ public class TravelController {
 
 	@PostMapping("travel")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void save(TravelVo travelVo) {
+	public void save(@RequestBody TravelVo travelVo) {
 		travelService.save(travelVo);
 	}
 
 	@GetMapping("travel/{id}")
-	public TravelVo get( @PathVariable Integer id) {
+	public TravelVo get( @PathVariable String id) {
 		return travelService.get(id);
 	}
 
@@ -43,7 +44,7 @@ public class TravelController {
 	}
 	
 	@DeleteMapping("travel/{id}")
-	public void delete( @PathVariable Integer id) {
+	public void delete( @PathVariable String id) {
 		travelService.delete(id);
 	}
 

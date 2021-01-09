@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import estg.mtsd.bikeshare.travel.history.service.entity.Travel;
 
 @Repository
-public interface TravelDao extends MongoRepository<Travel, Integer>{
+public interface TravelDao extends MongoRepository<Travel, String>{
 
 }

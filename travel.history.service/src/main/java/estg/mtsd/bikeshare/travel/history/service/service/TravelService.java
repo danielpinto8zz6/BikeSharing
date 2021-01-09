@@ -10,9 +10,9 @@ public interface TravelService {
 
     void update(TravelVo travelVo);
 
-    void delete(Integer id);
+    void delete(String id);
 
-    TravelVo get(Integer id);
+    TravelVo get(String id);
 
     List<TravelVo> getAll();
 

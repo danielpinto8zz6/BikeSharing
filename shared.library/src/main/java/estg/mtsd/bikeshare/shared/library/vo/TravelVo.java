@@ -8,13 +8,13 @@ import lombok.Data;
 @Data
 public class TravelVo {
 
-	private Integer id;
+	private String id;
 
 	private Date startDate;
 
 	private Date endDate;
 
-	private String bike;
+	private Integer bikeId;
 
 	private List<TravelEventVo> gps;
 	

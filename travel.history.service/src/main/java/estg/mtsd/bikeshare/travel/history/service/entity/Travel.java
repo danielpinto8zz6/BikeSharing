@@ -1,6 +1,5 @@
 package estg.mtsd.bikeshare.travel.history.service.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import org.springframework.data.annotation.Id;
@@ -13,7 +12,7 @@ import java.util.Date;
 public class Travel {
 
 	@Id
-	private Integer id;
+	private String id;
 
 	private Date startDate;
 

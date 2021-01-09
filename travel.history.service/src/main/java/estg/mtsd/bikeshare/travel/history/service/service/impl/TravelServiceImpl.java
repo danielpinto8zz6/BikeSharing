@@ -36,7 +36,7 @@ public class TravelServiceImpl implements TravelService {
 
 	@Override
 	public void update(TravelVo travelVo) {
-		Integer id = travelVo.getId();
+		String id = travelVo.getId();
 		boolean objectExists = travelDao.existsById(id);
 		if (objectExists) {
 			Travel travel = new Travel();
@@ -46,7 +46,7 @@ public class TravelServiceImpl implements TravelService {
 	}
 
 	@Override
-	public void delete(Integer id) {
+	public void delete(String id) {
 		boolean objectExists = travelDao.existsById(id);
 		if (objectExists) {
 			travelDao.deleteById(id);
@@ -54,7 +54,7 @@ public class TravelServiceImpl implements TravelService {
 	}
 
 	@Override
-	public TravelVo get(Integer id) {
+	public TravelVo get(String id) {
 		Optional<Travel> travelOptional = travelDao.findById(id);
 		TravelVo travelVo = null;
 		if (travelOptional.isPresent()) {
