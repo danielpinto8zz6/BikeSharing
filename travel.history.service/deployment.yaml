@@ -1,44 +1,44 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: travel-history-receiver-service
+  name: travel-history-service
   labels:
-    app: travel-history-receiver-service
+    app: travel-history-service
 spec:
   selector:
-    app: travel-history-receiver-service
+    app: travel-history-service
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 9300
+      targetPort: 8600
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: travel-history-receiver-service
+  name: travel-history-service
   labels:
-    app: travel-history-receiver-service
+    app: travel-history-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: travel-history-receiver-service
+      app: travel-history-service
   template:
     metadata:
       labels:
-        app: travel-history-receiver-service
+        app: travel-history-service
     spec:
       containers:
-        - name: travel-history-receiver-service
-          image: registry.gitlab.com/danielpinto8zz6/bikeshare/travel-history-receiver-service:latest
-          imagePullPolicy: Always
+        - name: travel-history-service
+          image: travel-history-service:latest
+          imagePullPolicy: Never
           ports:
-            - containerPort: 9300
+            - containerPort: 8600
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: JVM_OPTS
               value: "-Xms1g -Xmx1g"
-      imagePullSecrets: 
-      - name: gitlab-auth
+#      imagePullSecrets: 
+#      - name: gitlab-auth

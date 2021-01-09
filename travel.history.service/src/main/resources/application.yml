@@ -12,7 +12,7 @@ spring:
   
   data:
     mongodb:
-      uri: mongodb://mongoadmin:secret@localhost:27888/travel-history?authSource=admin&retryWrites=true
+      uri: mongodb://mongo:Pass2020!@localhost:27888/travel-history?authSource=admin&retryWrites=true
 
 eureka:
   client:
