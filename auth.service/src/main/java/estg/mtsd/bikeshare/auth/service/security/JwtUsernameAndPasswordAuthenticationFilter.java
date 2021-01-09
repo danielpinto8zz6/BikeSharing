@@ -22,7 +22,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.Data;
 

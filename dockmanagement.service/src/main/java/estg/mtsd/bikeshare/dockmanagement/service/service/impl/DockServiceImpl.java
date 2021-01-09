@@ -26,18 +26,14 @@ public class DockServiceImpl implements DockService {
 	@Override
 	public Boolean dockHasBike(Integer dockId, Integer bikeId) {
 		Optional<Dock> dockOptional = dockDao.findById(dockId);
-		if (dockOptional.isPresent()) {
-			return dockOptional.get().getBikeId() == bikeId;
-		} 
-
-		return false;
+		return dockOptional.filter(dock -> dock.getBikeId().equals(bikeId)).isPresent();
 	}
 
 	@Override
 	@Transactional
 	public void save(DockVo dockVo) {
 		Integer id = dockVo.getId();
-		Boolean objectAlreadyExists = dockDao.existsById(id);
+		boolean objectAlreadyExists = dockDao.existsById(id);
 		if (!objectAlreadyExists) {
 			Dock dock = new Dock();
 			BeanUtils.copyProperties(dockVo, dock);
@@ -52,7 +48,7 @@ public class DockServiceImpl implements DockService {
 	@Transactional
 	public void update(DockVo dockVo) {
 		Integer id = dockVo.getId();
-		Boolean objectExists = dockDao.existsById(id);
+		boolean objectExists = dockDao.existsById(id);
 		if (objectExists) {
 			Dock dock = new Dock();
 			BeanUtils.copyProperties(dockVo, dock);
@@ -65,7 +61,7 @@ public class DockServiceImpl implements DockService {
 	@Override
 	@Transactional
 	public void delete(Integer id) {
-		Boolean objectExists = dockDao.existsById(id);
+		boolean objectExists = dockDao.existsById(id);
 		if (objectExists) {
 			dockDao.deleteById(id);
 		} else {
@@ -77,7 +73,7 @@ public class DockServiceImpl implements DockService {
 	@Transactional
 	public DockVo get(Integer id) {
 		Optional<Dock> dockOptional = dockDao.findById(id);
-		DockVo dockVo = null;
+		DockVo dockVo;
 		if (dockOptional.isPresent()) {
 			dockVo = new DockVo();
 			BeanUtils.copyProperties(dockOptional.get(), dockVo);
@@ -93,7 +89,7 @@ public class DockServiceImpl implements DockService {
 	public List<DockVo> getAll() {
 		List<Dock> dockList = dockDao.findAll();
 		List<DockVo> dockVoList = new ArrayList<>();
-		if (dockList != null && !dockList.isEmpty()) {
+		if (!dockList.isEmpty()) {
 			for (Dock dock : dockList) {
 				DockVo dockVo = new DockVo();
 				BeanUtils.copyProperties(dock, dockVo);

@@ -38,6 +38,10 @@ zuul:
       dock-service:
           path: /dock/**
           serviceId: dock-service
+      travel-history-receiver-service:
+          path: /travel-history-receiver/**
+          serviceId: travel-history-receiver-service
+
 
 eureka:
   instance:
@@ -83,7 +87,10 @@ zuul:
       dock-service:
           path: /dock/**
           serviceId: dock-service
-
+      travel-history-receiver-service:
+          path: /travel-history-receiver/**
+          serviceId: travel-history-receiver-service
+          
 eureka:
   instance:
     # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip

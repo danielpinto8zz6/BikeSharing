@@ -1,31 +1,56 @@
 server:
   port: 9300
 spring:
+  profiles:
+    active: "dev"
   application:
     name: travel-history-receiver-service
+
+---
+spring:
+  profiles: dev
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9094
+      group-id: travel-event
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 eureka:
   instance:
     # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
     preferIpAddress: true
     # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
     hostname: travel-history-receiver-service
   client:
     registerWithEureka: true
     fetchRegistry: true
     service-url:
-      default-zone: http://localhost:8761/eureka
-
-  kafka:
-    consumer:
-      bootstrap-servers: 127.0.0.1:9092
-      group-id: travel-event
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      defaultZone: http://localhost:8761/eureka
 topic:
   name:
     producer: travel-event
 
+---
+spring:
+  profiles: prod
+  kafka:
+    producer:
+      bootstrap-servers: kafka-0.kafka.kafka-ca1.svc.cluster.local:9092
+      group-id: travel-event
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+eureka:
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
+    hostname: travel-history-receiver-service
+  client:
+    registerWithEureka: trkafka.bootstrapAddress=localhost:9092
 auto:
   create:
     topics:

@@ -4,7 +4,7 @@ metadata:
   name: kafka-manager
   namespace: kafka-ca1
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: kafka-manager
   ports:
