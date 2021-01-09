@@ -6,19 +6,6 @@ spring:
     active: "dev"
   application:
     name: zuul-server
-
-
----
-
-spring:
-  profiles: dev
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 60000
 zuul:
   ribbon:
     eager-load:
@@ -41,18 +28,58 @@ zuul:
       travel-history-receiver-service:
           path: /travel-history-receiver/**
           serviceId: travel-history-receiver-service
-
+      travel-history-service:
+          path: /travel-history/**
+          serviceId: travel-history-service
+      travel-history-process-service:
+          path: /travel-history-process/**
+          serviceId: travel-history-process-service
+      rent-service:
+          path: /rent/**
+          serviceId: rent-service
+      bikemanagement-service:
+          path: /bikemanagement/**
+          serviceId: bikemanagement-service
+      dummy-service:
+          path: /dummy/**
+          serviceId: dummy-service
+      feedback-service:
+          path: /feedback/**
+          serviceId: feedback-service
+      payment-calculator-service:
+          path: /payment-calculator/**
+          serviceId: payment-calculator-service
+      payment-manager-service:
+          path: /payment-manager/**
+          serviceId: payment-manager-service
+      payment-service:
+          path: /payment/**
+          serviceId: payment-service
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
 
 eureka:
   instance:
     # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
     preferIpAddress: true
     # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
     hostname: zuul-server
   client:
     registerWithEureka: true
     fetchRegistry: true
+
+---
+
+spring:
+  profiles: dev
+
+eureka:
+  client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
 
@@ -60,45 +87,8 @@ eureka:
 
 spring:
   profiles: prod
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 60000
-zuul:
-  ribbon:
-    eager-load:
-      enabled: true
-  #Service will be mapped under the /api URI
-#  Uncomment to disable auto-registering all services read from Eureka
-#  ignoredServices: '*'
-  routes:
-      account-service:
-          path: /account/**
-          serviceId: account-service
-      auth-service:
-          path: /auth/**
-          sensitive-headers: "Cookie,Set-Cookie   "
-          serviceId: auth-service
-          strip-prefix: false
-      dock-service:
-          path: /dock/**
-          serviceId: dock-service
-      travel-history-receiver-service:
-          path: /travel-history-receiver/**
-          serviceId: travel-history-receiver-service
           
 eureka:
-  instance:
-    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
-    preferIpAddress: true
-    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-    hostname: zuul-server
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     serviceUrl:
       defaultZone: http://eureka:8761/eureka
