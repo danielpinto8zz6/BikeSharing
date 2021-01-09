@@ -14,7 +14,7 @@ public class TravelEventController {
 
     @PostMapping("travel")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void save(TravelEventVo travelEventVo) {
+    public void save(@RequestBody TravelEventVo travelEventVo) {
         travelEventService.save(travelEventVo);
     }
 

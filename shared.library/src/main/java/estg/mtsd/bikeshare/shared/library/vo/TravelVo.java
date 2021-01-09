@@ -1,6 +1,7 @@
 package estg.mtsd.bikeshare.shared.library.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -13,7 +14,8 @@ public class TravelVo {
 
 	private Date endDate;
 
-	private String gps;
-
 	private String bike;
+
+	private List<TravelEventVo> gps;
+	
 }

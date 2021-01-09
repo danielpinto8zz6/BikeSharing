@@ -50,7 +50,7 @@ eureka:
     # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
     hostname: travel-history-receiver-service
   client:
-    registerWithEureka: trkafka.bootstrapAddress=localhost:9092
+    registerWithEureka: true
 auto:
   create:
     topics:
