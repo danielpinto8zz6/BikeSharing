@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: travel-history-service
-          image: registry.gitlab.com/danielpinto8zz6/bikeshare/travel-history-service:latest
+          image: travel-history-service:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8600
@@ -40,5 +40,5 @@ spec:
               value: "prod"
             - name: JVM_OPTS
               value: "-Xms1g -Xmx1g"
-      imagePullSecrets: 
-      - name: gitlab-auth
+#      imagePullSecrets: 
+#      - name: gitlab-auth
