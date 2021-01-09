@@ -1,20 +1,49 @@
 server:
-    port: 8600
+  port: 8600
 spring:
-    application:
-        name: travel-history-service
-    data:
-        mongodb:
-            uri: mongodb://mongoadmin:secret@localhost:27888/travel-history?authSource=admin&retryWrites=true
+  profiles:
+    active: "dev"
+  application:
+    name: travel-history-service
+
+---
+spring:
+  profiles: dev
+  
+  data:
+    mongodb:
+      uri: mongodb://mongoadmin:secret@localhost:27888/travel-history?authSource=admin&retryWrites=true
 
 eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
+    hostname: travel-history-service
+
+---    
+spring:
+  profiles: prod
+    
+  data:
+    mongodb:
+      uri: mongodb://mongoadmin:secret@mongodb:27888/travel-history?authSource=admin&retryWrites=true
+    
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://eureka:8761/eureka
     instance:
-        # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
-        preferIpAddress: true
-        # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-        hostname: travel-history-service
-    client:
-        fetchRegistry: true
-        registerWithEureka: true
-        service-url:
-            default-zone: http://localhost:8761/eureka
+      # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+      preferIpAddress: true
+      # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+      # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
+      hostname: travel-history-service

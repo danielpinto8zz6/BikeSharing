@@ -1,0 +1,44 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: travel-history-process-service
+  labels:
+    app: travel-history-process-service
+spec:
+  selector:
+    app: travel-history-process-service
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8700
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: travel-history-process-service
+  labels:
+    app: travel-history-process-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: travel-history-process-service
+  template:
+    metadata:
+      labels:
+        app: travel-history-process-service
+    spec:
+      containers:
+        - name: travel-history-process-service
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/travel-history-process-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8700
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: JVM_OPTS
+              value: "-Xms1g -Xmx1g"
+      imagePullSecrets: 
+      - name: gitlab-auth
