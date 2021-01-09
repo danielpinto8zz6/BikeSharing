@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment                                # Type of the kubernetes resource
 metadata:
-  name: postgres-dock                       # Name of the deployment
+  name: postgres-bike                       # Name of the deployment
   labels:                                        # Labels applied to this deployment 
-    app: postgres-dock
+    app: postgres-bike
 spec:
   selector:
     matchLabels:                                  # This deployment applies to the Pods matching the specified labels
-      app: postgres-dock
-      tier: postgres-dock
+      app: postgres-bike
+      tier: postgres-bike
   replicas: 1
   template:                                       # Template for the Pods in this deployment
     metadata:
       labels:                                     # Labels to be applied to the Pods in this deployment
-        app: postgres-dock
-        tier: postgres-dock
+        app: postgres-bike
+        tier: postgres-bike
     spec:                                         # The spec for the containers that will be run inside the Pods in this deployment
       containers:
         - image: postgres:latest                  # The container image
@@ -22,25 +22,25 @@ spec:
           imagePullPolicy: "IfNotPresent"
           envFrom:                                # Get the environmental variables from a secret file whose name is "postgres-secret" 
             - secretRef:
-                name: postgres-dock-secret            
+                name: postgres-bike-secret            
           ports:
             - containerPort: 5432                   # The port that the container exposes 
               name: postgres
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgres-dock-db		    # This name should match the name specified in `volumes.name`
+              name: postgres-bike-db		    # This name should match the name specified in `volumes.name`
       volumes:                                      # A PersistentVolume is mounted as a volume to the Pod 
-        - name: postgres-dock-db
+        - name: postgres-bike-db
           persistentVolumeClaim:
-            claimName: postgres-dock-pv-claim
+            claimName: postgres-bike-pv-claim
 
 ---
 apiVersion: v1                                      # API version
 kind: Service                                       # Type of kubernetes resource 
 metadata:
-  name: postgres-dock                            # Name of the resource
+  name: postgres-bike                            # Name of the resource
   labels:                                           # Labels that will be applied to the resource
-    app: postgres-dock
+    app: postgres-bike
 spec:
   ports:
   - name: postgres
@@ -48,8 +48,8 @@ spec:
     nodePort: 30433
   type: NodePort
   selector:                                         # Selects any Pod with labels `app=fullstack-postgres,tier=postgres`
-    app: postgres-dock
-    tier: postgres-dock
+    app: postgres-bike
+    tier: postgres-bike
 
 
 

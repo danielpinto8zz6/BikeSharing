@@ -1,52 +1,121 @@
 server:
-    port: 8900
+  port: 8900						#Check
 spring:
-    application:
-        name: dock-service
-    datasource:
-        initialization-mode: always
-        password: Pass2020!
-        platform: postgres
-        url: jdbc:postgresql://localhost:5432/dock
-        username: postgres
-    jpa:
-        hibernate:
-            ddl-auto: none
-        properties:
-            hibernate:
-                jdbc:
-                    lob:
-                        non_contextual_creation: true
-    kafka:
-        consumer:
-            auto-offset-reset: earliest
-            bootstrap-servers: 127.0.0.1:9092
-            group-id: dock-management
-            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-        producer:
-            bootstrap-servers: 127.0.0.1:9092
-            group-id: dock-management
-            key-serializer: org.apache.kafka.common.serialization.StringSerializer
-            value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  profiles:
+    active: "dev"
+  application:
+    name: dock-management-service
+
+---
+spring:
+  profiles: dev
+  
+  datasource:						#Check
+    initialization-mode: always			#Check
+    password: Pass2020!				#Check
+    platform: postgres					#Check
+    url: jdbc:postgresql://localhost:5432/dock	#Check
+    username: postgres					#Check
+  jpa:							#Check
+    hibernate:						#Check
+      ddl-auto: none					#Check
+    properties:					#Check
+      hibernate:					#Check
+        jdbc:						#Check
+          lob:						#Check
+            non_contextual_creation: true		#Check
+  
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9094
+      group-id: dock-management
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    producer:
+      bootstrap-servers: localhost:9094
+      group-id: dock-management
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
 dock-event:
-    producer: dock-event
-    consumer: dock-event
+  producer: dock-event
+  consumer: dock-event
+
 rent:
-    consumer: rent
+  consumer: rent
 
 auto:
-    create:
-        topics:
-            enable: true
+  create:
+    topics:
+      enable: true
+      
 eureka:
-    instance:
-        # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
-        preferIpAddress: true
-        # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-        hostname: dock-service
-    client:
-        registerWithEureka: true
-        fetchRegistry: true
-        service-url:
-            default-zone: http://localhost:8761/eureka
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
+    hostname: travel-history-process-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+---
+spring:
+  profiles: prod
+  
+  datasource:
+    initialization-mode: always
+    password: Pass2020!
+    platform: postgres
+    url: jdbc:postgresql://postgres-dock:5432/dock
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: kafka-0.kafka.kafka-ca1.svc.cluster.local:9092
+      group-id: dock-management
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    producer:
+      bootstrap-servers: kafka-0.kafka.kafka-ca1.svc.cluster.local:9092
+      group-id: dock-management
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+dock-event:
+  producer: dock-event
+  consumer: dock-event
+
+rent:
+  consumer: rent
+
+auto:
+  create:
+    topics:
+      enable: true
+      
+eureka:
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
+    hostname: travel-history-process-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://eureka:8761/eureka

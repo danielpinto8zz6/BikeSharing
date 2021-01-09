@@ -7,7 +7,6 @@ spring:
     name: eureka
 
 ---
-
 spring:
   profiles: dev
 eureka:
@@ -21,7 +20,6 @@ eureka:
     enableSelfPreservation: false
 
 ---
-
 spring:
   profiles: prod
 eureka:

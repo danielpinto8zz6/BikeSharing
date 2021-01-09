@@ -58,7 +58,7 @@ eureka:
     # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
     hostname: travel-history-process-service
   client:
-    registerWithEureka: trkafka.bootstrapAddress=localhost:9092
+    registerWithEureka: trkafka.bootstrapAddress=kafka-0.kafka.kafka-ca1.svc.cluster.local:9092
     
 topic:
   name:

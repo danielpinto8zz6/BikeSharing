@@ -55,3 +55,4 @@ auto:
   create:
     topics:
       enable: true
+

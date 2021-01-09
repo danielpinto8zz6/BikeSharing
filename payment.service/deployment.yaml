@@ -1,43 +1,44 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: dock-service
+  name: payment-service
   labels:
-    app: dock-service
+    app: payment-service
 spec:
   selector:
-    app: dock-service
+    app: payment-service
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 9400
+      targetPort: 8400
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dock-service
+  name: payment-service
   labels:
-    app: dock-service
+    app: payment-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dock-service
+      app: payment-service
   template:
     metadata:
       labels:
-        app: dock-service
+        app: payment-service
     spec:
       containers:
-        - name: dock-service
-          image: dock-service:latest
-          imagePullPolicy: Never
+        - name: payment-service
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/payment-service:latest
+          imagePullPolicy: Always
           ports:
-            - containerPort: 9400
+            - containerPort: 8400
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: JVM_OPTS
               value: "-Xms1g -Xmx1g"
-
+      imagePullSecrets: 
+      - name: gitlab-auth

@@ -1,43 +1,44 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: dock-service
+  name: rent-service
   labels:
-    app: dock-service
+    app: rent-service
 spec:
   selector:
-    app: dock-service
+    app: rent-service
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 9400
+      targetPort: 8500
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dock-service
+  name: rent-service
   labels:
-    app: dock-service
+    app: rent-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dock-service
+      app: rent-service
   template:
     metadata:
       labels:
-        app: dock-service
+        app: rent-service
     spec:
       containers:
-        - name: dock-service
-          image: dock-service:latest
+        - name: rent-service
+          image: rent-service:latest
           imagePullPolicy: Never
           ports:
-            - containerPort: 9400
+            - containerPort: 8500
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: JVM_OPTS
               value: "-Xms1g -Xmx1g"
-
+#      imagePullSecrets: 
+#      - name: gitlab-auth

@@ -1,44 +1,42 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: dock-service
+  name: dummy-service
   labels:
-    app: dock-service
+    app: dummy-service
 spec:
   selector:
-    app: dock-service
+    app: dummy-service
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 9400
+      targetPort: 9200
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dock-service
+  name: dummy-service
   labels:
-    app: dock-service
+    app: dummy-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dock-service
+      app: dummy-service
   template:
     metadata:
       labels:
-        app: dock-service
+        app: dummy-service
     spec:
       containers:
-        - name: dock-service
-          image: registry.gitlab.com/danielpinto8zz6/bikeshare/dock-service:latest
+        - name: dummy-service
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/dummy-service:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 9400
+            - containerPort: 9200
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
-            - name: JVM_OPTS
-              value: "-Xms1g -Xmx1g"
       imagePullSecrets: 
-      - name: gitlab-auth
+      - name: gitlab-dummy
