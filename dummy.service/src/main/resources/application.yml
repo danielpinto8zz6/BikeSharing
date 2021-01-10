@@ -38,7 +38,7 @@ eureka:
     preferIpAddress: true
     # The hostname of the service, to register the pod and turn it easier for the gateway to find it
     # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
-    hostname: travel-history-process-service
+    hostname: dummy-service
   client:
     registerWithEureka: true
     fetchRegistry: true
@@ -52,12 +52,12 @@ spring:
   kafka:
     consumer:
       auto-offset-reset: earliest
-      bootstrap-servers: kafka-0.kafka.kafka-ca1.svc.cluster.local:9092
+      bootstrap-servers: kafka-0.broker.kafka:9092
       group-id: dummy
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     producer:
-      bootstrap-servers: kafka-0.kafka.kafka-ca1.svc.cluster.local:9092
+      bootstrap-servers: kafka-0.broker.kafka:9092
       group-id: dummy
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer

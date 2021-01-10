@@ -72,9 +72,9 @@ spring:
 
   kafka:
     consumer:
-      bootstrap-servers: kafka-0.kafka.kafka-ca1.svc.cluster.local:9092
+      bootstrap-servers: kafka-0.broker.kafka:9092
     producer:
-      bootstrap-servers: kafka-0.kafka.kafka-ca1.svc.cluster.local:9092
+      bootstrap-servers: kafka-0.broker.kafka:9092
 
 eureka:
   instance:
