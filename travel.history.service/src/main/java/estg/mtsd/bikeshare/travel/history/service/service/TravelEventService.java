@@ -8,9 +8,9 @@ public interface TravelEventService {
 
     void save(TravelEventVo travelEventVo);
 
-    void delete(String id);
+    void delete(Integer rentalId);
 
-    TravelEventVo get(String id);
+    TravelEventVo get(Integer rentalId);
 
     List<TravelEventVo> getAll();
 

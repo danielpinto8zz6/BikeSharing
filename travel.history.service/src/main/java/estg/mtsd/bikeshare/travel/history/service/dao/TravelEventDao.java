@@ -1,6 +1,7 @@
 package estg.mtsd.bikeshare.travel.history.service.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -9,5 +10,11 @@ import estg.mtsd.bikeshare.travel.history.service.entity.TravelEvent;
 
 @Repository
 public interface TravelEventDao extends MongoRepository<TravelEvent, String>{
-    List<TravelEvent> findAllByTravelId(String travelId);
+    List<TravelEvent> findAllByRentalId(Integer rentalId);
+
+    Optional<TravelEvent> findByRentalId(Integer rentalId);
+
+    boolean existsByRentalId(Integer rentalId);
+
+    void deleteByRentalId(Integer rentalId);
 }

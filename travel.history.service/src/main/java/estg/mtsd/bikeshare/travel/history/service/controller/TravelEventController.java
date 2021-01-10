@@ -21,7 +21,7 @@ public class TravelEventController {
     }
 
     @GetMapping("travel/{id}")
-    public TravelEventVo get(@PathVariable String id) {
+    public TravelEventVo get(@PathVariable Integer id) {
         return travelEventService.get(id);
     }
 
@@ -31,7 +31,7 @@ public class TravelEventController {
     }
 
     @DeleteMapping("travel/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable Integer id) {
         travelEventService.delete(id);
     }
 

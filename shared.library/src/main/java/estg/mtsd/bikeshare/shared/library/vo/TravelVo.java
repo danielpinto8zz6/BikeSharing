@@ -16,7 +16,7 @@ public class TravelVo {
 
 	private Integer bikeId;
 
-	private Integer rentId;
+	private Integer rentalId;
 
 	private Integer userId;
 

@@ -64,7 +64,7 @@ public class TravelServiceImpl implements TravelService {
 			travelVo = new TravelVo();
 			BeanUtils.copyProperties(travelOptional.get(), travelVo);
 
-			List<TravelEvent> travelEvents = travelEventDao.findAllByTravelId(travelVo.getId());
+			List<TravelEvent> travelEvents = travelEventDao.findAllByRentalId(travelVo.getRentalId());
 
 			List<TravelEventVo> travelEventsVo = travelEvents.stream().map(this::convertToTravelEventVo)
 					.collect(Collectors.toList());
@@ -84,7 +84,7 @@ public class TravelServiceImpl implements TravelService {
 				TravelVo travelVo = new TravelVo();
 				BeanUtils.copyProperties(travel, travelVo);
 
-				List<TravelEvent> travelEvents = travelEventDao.findAllByTravelId(travelVo.getId());
+				List<TravelEvent> travelEvents = travelEventDao.findAllByRentalId(travelVo.getRentalId());
 
 				List<TravelEventVo> travelEventsVo = travelEvents.stream().map(this::convertToTravelEventVo)
 						.collect(Collectors.toList());
