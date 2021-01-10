@@ -5,6 +5,26 @@ spring:
     active: "dev"
   application:
     name: travel-history-receiver-service
+  kafka:
+    producer:
+      group-id: travel-event
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: travel-history-receiver-service
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+
+travel-event:
+  producer: travel-event
+
+auto:
+  create:
+    topics:
+      enable: true
 
 ---
 spring:
@@ -12,25 +32,11 @@ spring:
   kafka:
     producer:
       bootstrap-servers: localhost:9094
-      group-id: travel-event
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 eureka:
-  instance:
-    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
-    preferIpAddress: true
-    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
-    hostname: travel-history-receiver-service
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
-topic:
-  name:
-    producer: travel-event
 
 ---
 spring:
@@ -38,21 +44,7 @@ spring:
   kafka:
     producer:
       bootstrap-servers: kafka-0.kafka.kafka-ca1.svc.cluster.local:9092
-      group-id: travel-event
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
 eureka:
-  instance:
-    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
-    preferIpAddress: true
-    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
-    hostname: travel-history-receiver-service
   client:
-    registerWithEureka: true
-auto:
-  create:
-    topics:
-      enable: true
-
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka

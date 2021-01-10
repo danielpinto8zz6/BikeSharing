@@ -24,8 +24,8 @@ public class TravelController {
 
 	@PostMapping("travel")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void save(@RequestBody TravelVo travelVo) {
-		travelService.save(travelVo);
+	public TravelVo save(@RequestBody TravelVo travelVo) {
+		return travelService.save(travelVo);
 	}
 
 	@GetMapping("travel/{id}")

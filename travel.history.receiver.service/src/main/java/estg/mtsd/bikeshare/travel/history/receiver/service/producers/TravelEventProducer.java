@@ -15,7 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TravelEventProducer {
-    @Value("${topic.name.producer}")
+
+    @Value("${travel-event.producer}")
     private String topicName;
 
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();

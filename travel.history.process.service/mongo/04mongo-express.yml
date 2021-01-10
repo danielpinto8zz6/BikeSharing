@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  #namespace: mongodb-namespace
   name: mongo-express
   labels:
     app: mongo-express
@@ -21,7 +20,7 @@ spec:
         imagePullPolicy: "IfNotPresent"
         envFrom:                                # Get the environmental variables from a secret file whose name is "postgres-secret" 
           - secretRef:
-              name: mongodb-secret
+              name: mongodb-travel-history-secret
         ports:
         - containerPort: 8081
        
@@ -29,7 +28,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  #namespace: mongodb-namespace
   name: mongoexpress-service
   labels:
     app: mongo-express

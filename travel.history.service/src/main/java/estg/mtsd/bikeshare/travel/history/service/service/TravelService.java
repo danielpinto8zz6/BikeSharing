@@ -6,7 +6,7 @@ import estg.mtsd.bikeshare.shared.library.vo.TravelVo;
 
 public interface TravelService {
 
-    void save(TravelVo travelVo);
+    TravelVo save(TravelVo travelVo);
 
     void update(TravelVo travelVo);
 

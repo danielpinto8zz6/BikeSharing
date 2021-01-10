@@ -1,0 +1,12 @@
+CREATE TABLE rental (
+    id INTEGER PRIMARY KEY,
+    dock_id INTEGER NOT NULL,
+    bike_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    start_date TIMESTAMP WITHOUT TIME ZONE,
+    end_date TIMESTAMP WITHOUT TIME ZONE,
+    status INTEGER
+);
+
+CREATE SEQUENCE hibernate_sequence START 1;
+CREATE SEQUENCE my_seq_gen START 1;

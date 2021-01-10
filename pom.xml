@@ -19,7 +19,7 @@
         <module>payment.calculator.service</module>
         <module>payment.manager.service</module>
         <module>payment.service</module>
-        <module>rent.service</module>
+        <module>rental.service</module>
         <module>shared.library</module>
         <module>travel.history.process.service</module>
         <module>travel.history.receiver.service</module>

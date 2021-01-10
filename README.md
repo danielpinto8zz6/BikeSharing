@@ -10,7 +10,7 @@
 | feedback-service  | 8300  |
 | payment-calculator-service  | 9000  |
 | payment-service  | 8400  |
-| rent-service  | 8500  |
+| rental-service  | 8500  |
 | travel-history-service  | 8600  |
 | travel-history-process-service  | 8700  |
 | payment-manager-service  | 9100  |

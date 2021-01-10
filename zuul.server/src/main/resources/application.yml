@@ -34,9 +34,9 @@ zuul:
       travel-history-process-service:
           path: /travel-history-process/**
           serviceId: travel-history-process-service
-      rent-service:
-          path: /rent/**
-          serviceId: rent-service
+      rental-service:
+          path: /rental/**
+          serviceId: rental-service
       bikemanagement-service:
           path: /bikemanagement/**
           serviceId: bikemanagement-service

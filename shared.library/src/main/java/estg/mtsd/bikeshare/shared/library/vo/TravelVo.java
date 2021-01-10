@@ -16,6 +16,10 @@ public class TravelVo {
 
 	private Integer bikeId;
 
+	private Integer rentId;
+
+	private Integer userId;
+
 	private List<TravelEventVo> gps;
 	
 }

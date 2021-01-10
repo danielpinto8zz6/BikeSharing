@@ -28,10 +28,13 @@ public class TravelServiceImpl implements TravelService {
 	TravelEventDao travelEventDao;
 
 	@Override
-	public void save(TravelVo travelVo) {
+	public TravelVo save(TravelVo travelVo) {
 		Travel travel = new Travel();
 		BeanUtils.copyProperties(travelVo, travel);
-		travelDao.save(travel);
+		Travel travelEntity = travelDao.save(travel);
+		BeanUtils.copyProperties(travelEntity, travelVo);
+		
+		return travelVo;
 	}
 
 	@Override
@@ -81,13 +84,13 @@ public class TravelServiceImpl implements TravelService {
 				TravelVo travelVo = new TravelVo();
 				BeanUtils.copyProperties(travel, travelVo);
 
-			List<TravelEvent> travelEvents = travelEventDao.findAllByTravelId(travelVo.getId());
+				List<TravelEvent> travelEvents = travelEventDao.findAllByTravelId(travelVo.getId());
 
-			List<TravelEventVo> travelEventsVo = travelEvents.stream().map(this::convertToTravelEventVo)
-					.collect(Collectors.toList());
+				List<TravelEventVo> travelEventsVo = travelEvents.stream().map(this::convertToTravelEventVo)
+						.collect(Collectors.toList());
 
-			travelVo.setGps(travelEventsVo);
-				
+				travelVo.setGps(travelEventsVo);
+
 				travelVoList.add(travelVo);
 			}
 		}

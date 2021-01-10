@@ -15,9 +15,13 @@ public class Travel {
 	private String id;
 
 	private Date startDate;
-
+	
 	private Date endDate;
 
+	private Integer userId;
+
 	private Integer	bikeId;
+
+	private Integer rentId;
 
 }

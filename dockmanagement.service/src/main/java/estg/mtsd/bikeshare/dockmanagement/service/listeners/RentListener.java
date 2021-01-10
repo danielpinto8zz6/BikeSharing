@@ -11,7 +11,7 @@ import estg.mtsd.bikeshare.dockmanagement.service.service.DockService;
 import estg.mtsd.bikeshare.shared.library.vo.DockEvent;
 import estg.mtsd.bikeshare.shared.library.vo.DockEvent.DockEventEnum;
 import estg.mtsd.bikeshare.shared.library.vo.DockVo;
-import estg.mtsd.bikeshare.shared.library.vo.RentVo;
+import estg.mtsd.bikeshare.shared.library.vo.RentalVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,20 +25,20 @@ public class RentListener {
     @Autowired
     DockEventProducer dockEventProducer;
 
-    @Value("${rent.consumer")
+    @Value("${rental.consumer")
     private String topicName;
 
-    @KafkaListener(topics = "${rent.consumer}", groupId = "group_id")
-    public void consume(ConsumerRecord<String, RentVo> payload) {
+    @KafkaListener(topics = "${rental.consumer}", groupId = "group_id")
+    public void consume(ConsumerRecord<String, RentalVo> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());
         log.info("Headers: " + payload.headers());
         log.info("Partion: " + payload.partition());
         log.info("Order: " + payload.value());
 
-        RentVo rent = payload.value();
+        RentalVo rental = payload.value();
 
-        DockVo dock = dockService.get(rent.getDockId());
+        DockVo dock = dockService.get(rental.getDockId());
         if (dock != null) {
             dock.setBikeId(null);
 
