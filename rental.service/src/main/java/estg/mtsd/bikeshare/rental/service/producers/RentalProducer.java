@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class RentalProducer {
-    @Value("${topic.name.producer}")
+    @Value("${topic.rental.producer}")
     private String topicName;
 
     private final KafkaTemplate<String, RentalVo> kafkaTemplate;

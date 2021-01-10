@@ -18,17 +18,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class RentListener {
+public class RentalListener {
     @Autowired
     DockService dockService;
 
     @Autowired
     DockEventProducer dockEventProducer;
 
-    @Value("${rental.consumer")
+    @Value("${topic.rental.consumer")
     private String topicName;
 
-    @KafkaListener(topics = "${rental.consumer}", groupId = "group_id")
+    @KafkaListener(topics = "${topic.rental.consumer}", groupId = "group_id")
     public void consume(ConsumerRecord<String, RentalVo> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());

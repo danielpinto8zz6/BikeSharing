@@ -1,5 +1,6 @@
 package estg.mtsd.bikeshare.travel.history.receiver.service.producers;
 
+import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import estg.mtsd.bikeshare.shared.library.vo.TravelEventVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +20,10 @@ public class TravelEventProducer {
     @Value("${travel-event.producer}")
     private String topicName;
 
-    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void send(TravelEventVo travelEventVo) {
-        String travelEventJson = gson.toJson(travelEventVo);
+        String travelEventJson = JsonUtils.toJson(travelEventVo);
 
         kafkaTemplate.send(topicName, travelEventJson);
 

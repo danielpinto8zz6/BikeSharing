@@ -1,13 +1,10 @@
 package estg.mtsd.bikeshare.travel.history.process.service.listeners;
 
+import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import estg.mtsd.bikeshare.shared.library.vo.TravelEventVo;
 import estg.mtsd.bikeshare.travel.history.process.service.service.TravelEventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,8 +22,6 @@ public class TravelEventListener {
     @Value("${topic.name.consumer")
     private String topicName;
 
-    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
     @KafkaListener(topics = "${topic.name.consumer}", groupId = "group_id")
     public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
@@ -35,7 +30,7 @@ public class TravelEventListener {
         log.info("Partion: " + payload.partition());
         log.info("Order: " + payload.value());
 
-        TravelEventVo travelEvent = gson.fromJson(payload.value(), TravelEventVo.class);
+        TravelEventVo travelEvent = JsonUtils.fromJson(payload.value(), TravelEventVo.class);
 
         travelEventService.save(travelEvent);
     }

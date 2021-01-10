@@ -1,13 +1,11 @@
-package estg.mtsd.bikeshare.rental.service.service;
-
-import java.util.List;
+package estg.mtsd.bikeshare.rental.process.service.service;
 
 import estg.mtsd.bikeshare.shared.library.vo.RentalVo;
 
+import java.util.List;
+
 
 public interface RentalService {
-
-    void rental(RentalVo rentalVo) throws Exception;
 
     void update(RentalVo rentalVo);
 

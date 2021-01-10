@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class DockEventProducer {
-    @Value("${dock-event.producer}")
+    @Value("${topic.dock-event.producer}")
     private String topicName;
 
     private final KafkaTemplate<String, DockEvent> kafkaTemplate;

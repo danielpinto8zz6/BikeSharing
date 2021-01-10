@@ -20,10 +20,10 @@ public class DockEventListener {
     @Autowired
     DockService dockService;
 
-    @Value("${dock-event.consumer")
+    @Value("${topic.dock-event.consumer")
     private String topicName;
 
-    @KafkaListener(topics = "${dock-event.consumer}", groupId = "group_id")
+    @KafkaListener(topics = "${topic.dock-event.consumer}", groupId = "group_id")
     public void consume(ConsumerRecord<String, DockEvent> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());
