@@ -1,0 +1,44 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rental-service
+  labels:
+    app: rental-service
+spec:
+  selector:
+    app: rental-service
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8500
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rental-service
+  labels:
+    app: rental-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rental-service
+  template:
+    metadata:
+      labels:
+        app: rental-service
+    spec:
+      containers:
+        - name: rental-service
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/rental-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8500
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: JVM_OPTS
+              value: "-Xms1g -Xmx1g"
+      imagePullSecrets: 
+      - name: gitlab-auth
