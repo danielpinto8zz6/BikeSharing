@@ -19,7 +19,6 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-
   kafka:
     consumer:
       auto-offset-reset: earliest

@@ -32,7 +32,7 @@ spec:
       containers:
         - name: dock-management-service
           image: dock-management-service:latest
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           ports:
             - containerPort: 8900
           env:

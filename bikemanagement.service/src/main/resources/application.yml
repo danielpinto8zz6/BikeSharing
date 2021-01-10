@@ -44,7 +44,7 @@ spring:
     initialization-mode: always
     password: Pass2020!
     platform: postgres
-    url: jdbc:postgresql://postgres-account:5432/bike
+    url: jdbc:postgresql://postgres-bike:5432/bike
     username: postgres
   jpa:
     hibernate:

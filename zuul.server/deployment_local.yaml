@@ -1,42 +1,42 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: auth-service
+  name: zuul-server
   labels:
-    app: auth-service
+    app: zuul-server
 spec:
   selector:
-    app: auth-service
-  type: ClusterIP
+    app: zuul-server
+  type: LoadBalancer
   ports:
     - port: 80
-      targetPort: 8200
+      targetPort: 9090
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-service
+  name: zuul-server
   labels:
-    app: auth-service
+    app: zuul-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth-service
+      app: zuul-server
   template:
     metadata:
       labels:
-        app: auth-service
+        app: zuul-server
     spec:
       containers:
-        - name: auth-service
-          image: auth-service:latest
+        - name: zuul-server
+          image: zuul-server:latest
           imagePullPolicy: Never
           ports:
-            - containerPort: 8200
+            - containerPort: 9090
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
-#      imagePullSecrets: 
-#      - name: gitlab-auth
+      imagePullSecrets: 
+      - name: gitlab-auth

@@ -32,7 +32,7 @@ spec:
       containers:
         - name: travel-history-receiver-service
           image: travel-history-receiver-service:latest
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           ports:
             - containerPort: 9300
           env:

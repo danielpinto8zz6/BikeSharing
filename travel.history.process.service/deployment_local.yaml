@@ -32,7 +32,7 @@ spec:
       containers:
         - name: travel-history-process-service
           image: travel-history-process-service:latest
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           ports:
             - containerPort: 8700
           env:
