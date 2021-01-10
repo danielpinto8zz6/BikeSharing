@@ -5,14 +5,10 @@ spring:
     active: "dev"
   application:
     name: payment-service
-    
----
-spring:
-  profiles: dev  
+  
   kafka:
     consumer:
       auto-offset-reset: earliest
-      bootstrap-servers: localhost:9094
       group-id: payment
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -27,14 +23,25 @@ topic:
     consumer: payment
     
 eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
   instance:
     # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
     preferIpAddress: true
     # The hostname of the service, to register the pod and turn it easier for the gateway to find it
     hostname: payment-service
+
+    
+---
+spring:
+  profiles: dev  
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9094
+    
+eureka:
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     service-url:
       default-zone: http://localhost:8761/eureka
 
@@ -43,29 +50,10 @@ spring:
   profiles: prod
   kafka:
     consumer:
-      auto-offset-reset: earliest
       bootstrap-servers: kafka-0.broker.kafka:9092
-      group-id: payment
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
-auto:
-  create:
-    topics:
-      enable: true
-      
-topic:
-  name:
-    consumer: payment
-    
 eureka:
-  instance:
-    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
-    preferIpAddress: true
-    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-    hostname: payment-service
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     service-url:
       default-zone: http://eureka:8761/eureka
+

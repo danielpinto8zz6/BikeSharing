@@ -6,15 +6,10 @@ spring:
   application:
     name: rental-service
 
----
-spring:
-  profiles: dev
-  
   datasource:
     initialization-mode: always
     password: Pass2020!
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/rental
     username: postgres
   jpa:
     hibernate:
@@ -28,19 +23,17 @@ spring:
   kafka:
     consumer:
       auto-offset-reset: earliest
-      bootstrap-servers: localhost:9094
       group-id: bike-availability
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     producer:
-      bootstrap-servers: localhost:9094
-      group-id: group_id								#Check
+      group-id: group_id                                                         #Check
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 topic:
   name:
-    producer: topico.comando.teste							#Check
+    producer: topico.comando.teste                                                #Check
     consumer: bike-availability
     
 auto:
@@ -49,15 +42,31 @@ auto:
       enable: true
       
 eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
   instance:
     # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
     preferIpAddress: true
     # The hostname of the service, to register the pod and turn it easier for the gateway to find it
     # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
     hostname: rental-service
+
+---
+spring:
+  profiles: dev
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rental
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9094
+    producer:
+      bootstrap-servers: localhost:9094
+      
+eureka:
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
 
@@ -66,52 +75,16 @@ spring:
   profiles: prod
   
   datasource:
-    initialization-mode: always
-    password: Pass2020!
-    platform: postgres
     url: jdbc:postgresql://postgres-dock:5432/rental
-    username: postgres
-  jpa:
-    hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
   
   kafka:
     consumer:
-      auto-offset-reset: earliest
       bootstrap-servers: kafka-0.broker.kafka:9092
-      group-id: bike-availability
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
     producer:
       bootstrap-servers: kafka-0.broker.kafka:9092
-      group-id: group_id
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
-topic:
-  rental:
-    producer: rental
-
-auto:
-  create:
-    topics:
-      enable: true
-      
+     
 eureka:
-  instance:
-    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
-    preferIpAddress: true
-    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
-    hostname: rental-service
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     service-url:
       defaultZone: http://eureka:8761/eureka
 

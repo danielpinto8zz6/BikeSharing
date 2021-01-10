@@ -6,16 +6,18 @@ spring:
   application:
     name: eureka
 
+eureka:
+  numberRegistrySyncRetries: 1
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+
 ---
 spring:
   profiles: dev
 eureka:
-  numberRegistrySyncRetries: 1
   instance:
     preferIpAddress: true
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
   server:
     enableSelfPreservation: false
 
@@ -23,9 +25,7 @@ eureka:
 spring:
   profiles: prod
 eureka:
-  numberRegistrySyncRetries: 1
   instance:
     hostname: "${HOSTNAME}"
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
+
+    

@@ -5,67 +5,51 @@ spring:
     active: "dev"
   application:
     name: bike-management-service
+  datasource:
+    initialization-mode: always
+    password: Pass2020!
+    platform: postgres
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+  instance:
+    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
+    preferIpAddress: true
+    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
+    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
+    hostname: bike-management-service
 
 ---
 spring:
   profiles: dev
   datasource:
-    initialization-mode: always
-    password: Pass2020!
-    platform: postgres
     url: jdbc:postgresql://localhost:5432/bike
-    username: postgres
-  jpa:
-    hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
 
 eureka:
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
-  instance:
-    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
-    preferIpAddress: true
-    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
-    hostname: bike-management-service
 
 ---
 spring:
   profiles: prod
   datasource:
-    initialization-mode: always
-    password: Pass2020!
-    platform: postgres
     url: jdbc:postgresql://postgres-bike:5432/bike
-    username: postgres
-  jpa:
-    hibernate:
-      ddl-auto: none
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
 
 eureka:
   client:
-    registerWithEureka: true
-    fetchRegistry: true
     service-url:
       defaultZone: http://eureka:8761/eureka
-  instance:
-    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
-    preferIpAddress: true
-    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
-    hostname: bike-management-service
 
 
