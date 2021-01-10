@@ -89,13 +89,13 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     producer:
       bootstrap-servers: kafka-0.kafka.kafka-ca1.svc.cluster.local:9092
-      group-id: group_id								#Check
+      group-id: group_id
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 topic:
   rental:
-    producer: rental							#Check
+    producer: rental
 
 auto:
   create:

@@ -77,9 +77,10 @@ eureka:
     preferIpAddress: true
     # The hostname of the service, to register the pod and turn it easier for the gateway to find it
     # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
-    hostname: travel-history-process-service
+    hostname: dummy-service
   client:
     registerWithEureka: true
     fetchRegistry: true
     service-url:
       defaultZone: http://eureka:8761/eureka
+      
