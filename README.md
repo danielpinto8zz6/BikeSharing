@@ -16,7 +16,7 @@
 | payment-manager-service  | 9100  |
 | dummy-service  | 9200  |
 | travel-history-receiver-service  | 9300  |
-| rental-process-service  | 9400  |
+| rental-process-service  | 9500  |
 | zuul-server  | 8762  |
 | eureka-server  | 8761  ||
 
