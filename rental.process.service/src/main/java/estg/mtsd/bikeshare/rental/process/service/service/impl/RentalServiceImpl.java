@@ -17,62 +17,76 @@ import java.util.Optional;
 @Service
 public class RentalServiceImpl implements RentalService {
 
-	@Autowired
-	RentalDao rentalDao;
+    @Autowired
+    RentalDao rentalDao;
 
-	@Override
-	@Transactional
-	public void update(RentalVo rentalVo) {
-		Integer id = rentalVo.getId();
-		boolean objectExists = rentalDao.existsById(id);
-		if (objectExists) {
-			Rental rental = new Rental();
-			BeanUtils.copyProperties(rentalVo, rental);
-			rentalDao.save(rental);
-		} else {
-			throw new EntityNotFoundException();
-		}
-	}
+    @Override
+    @Transactional
+    public void update(RentalVo rentalVo) {
+        Integer id = rentalVo.getId();
+        boolean objectExists = rentalDao.existsById(id);
+        if (objectExists) {
+            Rental rental = new Rental();
+            BeanUtils.copyProperties(rentalVo, rental);
+            rentalDao.save(rental);
+        } else {
+            throw new EntityNotFoundException();
+        }
+    }
 
-	@Override
-	@Transactional
-	public void delete(Integer id) {
-		boolean objectExists = rentalDao.existsById(id);
-		if (objectExists) {
-			rentalDao.deleteById(id);
-		} else {
-			throw new EntityNotFoundException();
-		}
-	}
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        boolean objectExists = rentalDao.existsById(id);
+        if (objectExists) {
+            rentalDao.deleteById(id);
+        } else {
+            throw new EntityNotFoundException();
+        }
+    }
 
-	@Override
-	@Transactional
-	public RentalVo get(Integer id) {
-		Optional<Rental> rentOptional = rentalDao.findById(id);
-		RentalVo rentalVo = null;
-		if (rentOptional.isPresent()) {
-			rentalVo = new RentalVo();
-			BeanUtils.copyProperties(rentOptional.get(), rentalVo);
-		} else {
-			throw new EntityNotFoundException();
-		}
+    @Override
+    @Transactional
+    public RentalVo get(Integer id) {
+        Optional<Rental> rentOptional = rentalDao.findById(id);
+        RentalVo rentalVo = null;
+        if (rentOptional.isPresent()) {
+            rentalVo = new RentalVo();
+            BeanUtils.copyProperties(rentOptional.get(), rentalVo);
+        } else {
+            throw new EntityNotFoundException();
+        }
 
-		return rentalVo;
-	}
+        return rentalVo;
+    }
 
-	@Override
-	@Transactional
-	public List<RentalVo> getAll() {
-		List<Rental> rentalList = rentalDao.findAll();
-		List<RentalVo> rentalVoList = new ArrayList<>();
-		if (!rentalList.isEmpty()) {
-			for (Rental rental : rentalList) {
-				RentalVo rentalVo = new RentalVo();
-				BeanUtils.copyProperties(rental, rentalVo);
-				rentalVoList.add(rentalVo);
-			}
-		}
-		return rentalVoList;
-	}
+    @Override
+    @Transactional
+    public List<RentalVo> getAll() {
+        List<Rental> rentalList = rentalDao.findAll();
+        List<RentalVo> rentalVoList = new ArrayList<>();
+        if (!rentalList.isEmpty()) {
+            for (Rental rental : rentalList) {
+                RentalVo rentalVo = new RentalVo();
+                BeanUtils.copyProperties(rental, rentalVo);
+                rentalVoList.add(rentalVo);
+            }
+        }
+        return rentalVoList;
+    }
+
+    @Override
+    public RentalVo getByBikeId(Integer bikeId) {
+        Optional<Rental> rentOptional = rentalDao.findByBikeIdAndEndDateIsNull(bikeId);
+        RentalVo rentalVo;
+        if (rentOptional.isPresent()) {
+            rentalVo = new RentalVo();
+            BeanUtils.copyProperties(rentOptional.get(), rentalVo);
+        } else {
+            throw new EntityNotFoundException();
+        }
+
+        return rentalVo;
+    }
 
 }

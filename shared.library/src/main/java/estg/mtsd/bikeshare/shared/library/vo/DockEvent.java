@@ -1,10 +1,10 @@
 package estg.mtsd.bikeshare.shared.library.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
-@AllArgsConstructor
 public class DockEvent {
     public enum DockEventEnum {
         BIKE_INSERTED,
@@ -17,4 +17,13 @@ public class DockEvent {
     private Integer dockId;
 
     private DockEventEnum event;
+
+    private Date timestamp;
+
+    public DockEvent(Integer bikeId, Integer dockId, DockEventEnum event) {
+        this.bikeId = bikeId;
+        this.dockId = dockId;
+        this.event = event;
+        this.timestamp = new Date();
+    }
 }

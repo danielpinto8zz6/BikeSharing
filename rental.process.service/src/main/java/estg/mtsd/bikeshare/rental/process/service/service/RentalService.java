@@ -1,5 +1,6 @@
 package estg.mtsd.bikeshare.rental.process.service.service;
 
+import estg.mtsd.bikeshare.rental.process.service.entity.Rental;
 import estg.mtsd.bikeshare.shared.library.vo.RentalVo;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface RentalService {
     RentalVo get(Integer id);
 
     List<RentalVo> getAll();
+
+    RentalVo getByBikeId(Integer bikeId);
 
 }

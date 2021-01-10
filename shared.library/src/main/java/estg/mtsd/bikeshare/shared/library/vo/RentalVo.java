@@ -15,8 +15,6 @@ public class RentalVo {
 
 	private Integer userId;
 
-	private Date date;
-
 	private Date startDate;
 
 	private Date endDate;
