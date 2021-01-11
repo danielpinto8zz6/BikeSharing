@@ -1,16 +1,16 @@
 package estg.mtsd.bikeshare.dockmanagement.service.listeners;
 
+import estg.mtsd.bikeshare.dockmanagement.service.service.DockService;
+import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
+import estg.mtsd.bikeshare.shared.library.vo.DockEvent;
+import estg.mtsd.bikeshare.shared.library.vo.DockVo;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-
-import estg.mtsd.bikeshare.dockmanagement.service.service.DockService;
-import estg.mtsd.bikeshare.shared.library.vo.DockEvent;
-import estg.mtsd.bikeshare.shared.library.vo.DockVo;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,16 +24,16 @@ public class DockEventListener {
     private String topicName;
 
     @KafkaListener(topics = "${topic.dock-event.consumer}", groupId = "group_id")
-    public void consume(ConsumerRecord<String, DockEvent> payload) {
+    public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());
         log.info("Headers: " + payload.headers());
         log.info("Partion: " + payload.partition());
         log.info("Order: " + payload.value());
 
-        DockEvent event = payload.value();
+        DockEvent event = JsonUtils.fromJson(payload.value(), DockEvent.class);
 
-        DockVo dock = null;
+        DockVo dock;
         switch (event.getEvent()) {
             case BIKE_INSERTED:
                 dock = dockService.get(event.getDockId());

@@ -1,5 +1,6 @@
 package estg.mtsd.bikeshare.rental.process.service.listeners;
 
+import estg.mtsd.bikeshare.rental.process.service.producers.RentalProducer;
 import estg.mtsd.bikeshare.rental.process.service.service.RentalService;
 import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import estg.mtsd.bikeshare.shared.library.vo.DockEvent;
@@ -23,6 +24,9 @@ public class DockEventListener {
     @Autowired
     private RentalService rentalService;
 
+    @Autowired
+    private RentalProducer rentalProducer;
+
     @KafkaListener(topics = "${topic.dock-event.consumer}", groupId = "group_id")
     public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
@@ -39,7 +43,8 @@ public class DockEventListener {
 
                 rentalService.update(rentalVo);
 
-                // TODO: notify user and generate payment
+                // Generate payment
+                rentalProducer.send(rentalVo);
             }
         }
     }

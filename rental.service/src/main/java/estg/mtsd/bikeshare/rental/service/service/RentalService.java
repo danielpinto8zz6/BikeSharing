@@ -7,7 +7,7 @@ import estg.mtsd.bikeshare.shared.library.vo.RentalVo;
 
 public interface RentalService {
 
-    void rental(RentalVo rentalVo) throws Exception;
+    RentalVo rental(RentalVo rentalVo) throws Exception;
 
     void update(RentalVo rentalVo);
 

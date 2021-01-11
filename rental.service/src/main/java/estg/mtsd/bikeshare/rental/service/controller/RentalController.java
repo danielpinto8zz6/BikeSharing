@@ -29,8 +29,8 @@ public class RentalController {
 
 	@PostMapping("rental")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void rental(@RequestBody RentalVo rentalVo) throws Exception {
-		rentalService.rental(rentalVo);
+	public RentalVo rental(@RequestBody RentalVo rentalVo) throws Exception {
+		return rentalService.rental(rentalVo);
 	}
 
 	@GetMapping("rental/{id}")

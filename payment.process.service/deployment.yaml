@@ -1,0 +1,44 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: payment-process-service
+  labels:
+    app: payment-process-service
+spec:
+  selector:
+    app: payment-process-service
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 9100
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-process-service
+  labels:
+    app: payment-process-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-process-service
+  template:
+    metadata:
+      labels:
+        app: payment-process-service
+    spec:
+      containers:
+        - name: payment-process-service
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/payment-process-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9100
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: JVM_OPTS
+              value: "-Xms1g -Xmx1g"
+      imagePullSecrets: 
+      - name: gitlab-auth

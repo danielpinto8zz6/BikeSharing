@@ -13,7 +13,7 @@
 | rental-service  | 8500  |
 | travel-history-service  | 8600  |
 | travel-history-process-service  | 8700  |
-| payment-manager-service  | 9100  |
+| payment-process-service  | 9100  |
 | dummy-service  | 9200  |
 | travel-history-receiver-service  | 9300  |
 | rental-process-service  | 9500  |

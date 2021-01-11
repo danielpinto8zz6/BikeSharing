@@ -5,37 +5,45 @@ spring:
     active: "dev"
   application:
     name: rental-process-service
+
   jpa:
+    generate-dll: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         jdbc:
           lob:
             non_contextual_creation: true
+
   datasource:
     initialization-mode: always
     password: Pass2020!
     platform: postgres
     username: postgres
+
   kafka:
     consumer:
       auto-offset-reset: earliest
-      group-id: bike-availability
+      group-id: dock-event
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     producer:
-      group-id: group_id
+      group-id: rental-process
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 topic:
   dock-event:
     consumer: dock-event
+  rental:
+    producer: rental
+
 auto:
   create:
     topics:
       enable: true
+
 eureka:
   client:
     registerWithEureka: true
@@ -67,7 +75,7 @@ spring:
   profiles: prod
 
   datasource:
-    url: jdbc:postgresql://postgres-dock:5432/rental
+    url: jdbc:postgresql://postgres-rental:5432/rental
 
   kafka:
     consumer:
@@ -79,4 +87,3 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka:8761/eureka
-

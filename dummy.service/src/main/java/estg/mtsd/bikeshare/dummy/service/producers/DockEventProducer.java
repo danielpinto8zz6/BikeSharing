@@ -1,5 +1,6 @@
 package estg.mtsd.bikeshare.dummy.service.producers;
 
+import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import estg.mtsd.bikeshare.shared.library.vo.DockEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -12,13 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class DockEventProducer {
-    @Value("${dock-event.producer}")
+    @Value("${topic.dock-event.producer}")
     private String topicName;
 
-    private final KafkaTemplate<String, DockEvent> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void send(DockEvent event) {
-        log.info("Payload sent!");
-        kafkaTemplate.send(topicName, event);
+        kafkaTemplate.send(topicName, JsonUtils.toJson(event));
+        log.info("Dock event sent!");
     }
 }

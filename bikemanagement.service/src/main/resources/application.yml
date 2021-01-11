@@ -11,8 +11,9 @@ spring:
     platform: postgres
     username: postgres
   jpa:
+    generate-dll: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         jdbc:
@@ -24,10 +25,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
   instance:
-    # Leave prefer ip address to allow the gateway inside the kubernetes cluster to find this service by it's pod ip
     preferIpAddress: true
-    # The hostname of the service, to register the pod and turn it easier for the gateway to find it
-    # For deploying eureka clients in Kubernetes you need to set the hostname as the same name of the service
     hostname: bike-management-service
 
 ---
@@ -51,5 +49,4 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka:8761/eureka
-
 

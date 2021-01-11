@@ -32,7 +32,7 @@ public class RentalServiceImpl implements RentalService {
 
 	@Override
 	@Transactional
-	public void rental(RentalVo rentalVo) throws Exception {
+	public RentalVo rental(RentalVo rentalVo) throws Exception {
 		Integer dockId = rentalVo.getDockId();
 		Integer bikeId = rentalVo.getBikeId();
 
@@ -49,6 +49,8 @@ public class RentalServiceImpl implements RentalService {
 		// Notify kafka to open dock and remove bike from dock
 		BeanUtils.copyProperties(rental, rentalVo);
 		rentalProducer.send(rentalVo);
+
+		return rentalVo;
 	}
 
 	@Override

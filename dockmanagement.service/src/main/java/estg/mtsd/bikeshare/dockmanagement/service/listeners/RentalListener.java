@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.dockmanagement.service.producers.DockEventProducer;
 import estg.mtsd.bikeshare.dockmanagement.service.service.DockService;
+import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import estg.mtsd.bikeshare.shared.library.vo.DockEvent;
 import estg.mtsd.bikeshare.shared.library.vo.DockEvent.DockEventEnum;
 import estg.mtsd.bikeshare.shared.library.vo.DockVo;
@@ -29,14 +30,14 @@ public class RentalListener {
     private String topicName;
 
     @KafkaListener(topics = "${topic.rental.consumer}", groupId = "group_id")
-    public void consume(ConsumerRecord<String, RentalVo> payload) {
+    public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());
         log.info("Headers: " + payload.headers());
         log.info("Partion: " + payload.partition());
         log.info("Order: " + payload.value());
 
-        RentalVo rental = payload.value();
+        RentalVo rental = JsonUtils.fromJson(payload.value(), RentalVo.class);
 
         DockVo dock = dockService.get(rental.getDockId());
         if (dock != null) {

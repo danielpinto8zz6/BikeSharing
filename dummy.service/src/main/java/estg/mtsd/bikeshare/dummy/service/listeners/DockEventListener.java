@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class DockEventListener {
 
-    @Value("${dock-event.consumer")
+    @Value("${topic.dock-event.consumer")
     private String topicName;
 
-    @KafkaListener(topics = "${dock-event.consumer}", groupId = "group_id")
+    @KafkaListener(topics = "${topic.dock-event.consumer}", groupId = "group_id")
     public void consume(ConsumerRecord<String, DockEvent> event) {
         if (event.value().getEvent() == DockEvent.DockEventEnum.UNLOCK_BIKE) {
             System.out.println("Unlocking bike...");

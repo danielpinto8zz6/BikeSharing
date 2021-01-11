@@ -4,8 +4,7 @@ CREATE TABLE rental (
     bike_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     start_date TIMESTAMP WITHOUT TIME ZONE,
-    end_date TIMESTAMP WITHOUT TIME ZONE,
-    status INTEGER
+    end_date TIMESTAMP WITHOUT TIME ZONE
 );
 
 CREATE SEQUENCE hibernate_sequence START 1;

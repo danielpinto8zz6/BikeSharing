@@ -12,8 +12,9 @@ spring:
     platform: postgres
     username: postgres
   jpa:
+    generate-dll: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         jdbc:
