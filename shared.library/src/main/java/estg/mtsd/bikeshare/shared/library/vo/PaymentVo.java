@@ -7,13 +7,18 @@ import java.util.Date;
 @Data
 public class PaymentVo {
 
+    public static final Integer AWAITING_PAYMENT = 0;
+    public static final Integer VALIDATING_PAYMENT = 1;
+    public static final Integer PAID = 2;
+    public static final Integer PAYMENT_FAILED = 3;
+
     private Integer id;
 
     private Integer rentalId;
 
     private Double value;
 
-    private Boolean isPaid;
+    private Integer status;
 
     private Integer method;
 

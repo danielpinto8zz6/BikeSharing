@@ -1,35 +1,21 @@
 server:
-  port: 8400
+  port: 9600
 spring:
   profiles:
     active: "dev"
   application:
-    name: payment-service
-  datasource:
-    initialization-mode: always
-    password: Pass2020!
-    platform: postgres
-    url: jdbc:postgresql://postgres-dock:5432/payment
-    username: postgres
-  jpa:
-    generate-dll: true
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
+    name: payment-validator-service
 
   kafka:
     producer:
-      group-id: payment
+      group-id: payment-validator
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 topic:
   payment:
-    producer: payment
+    producer: payment-event
+    consumer: payment
 
 auto:
   create:
@@ -42,16 +28,16 @@ eureka:
     fetchRegistry: true
   instance:
     preferIpAddress: true
-    hostname: payment-service
+    hostname: payment-validator-service
 
-    
+
 ---
 spring:
-  profiles: dev  
+  profiles: dev
   kafka:
     consumer:
       bootstrap-servers: localhost:9094
-    
+
 eureka:
   client:
     registerWithEureka: true
@@ -67,9 +53,6 @@ eureka:
     service-url:
       default-zone: http://localhost:8761/eureka
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/payment
-
   kafka:
     consumer:
       bootstrap-servers: localhost:9094
@@ -79,9 +62,6 @@ eureka:
 ---
 spring:
   profiles: prod
-
-  datasource:
-    url: jdbc:postgresql://postgres-payment:5432/payment
 
   kafka:
     consumer:

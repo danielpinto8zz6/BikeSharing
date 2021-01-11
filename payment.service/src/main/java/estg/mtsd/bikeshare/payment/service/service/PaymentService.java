@@ -1,12 +1,13 @@
 package estg.mtsd.bikeshare.payment.service.service;
 
+import estg.mtsd.bikeshare.shared.library.vo.PaymentDataVo;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentVo;
 
 import java.util.List;
 
 public interface PaymentService {
 
-    void save(PaymentVo paymentVo);
+    void save(PaymentDataVo paymentDataVo);
 
     void update(PaymentVo paymentVo);
 

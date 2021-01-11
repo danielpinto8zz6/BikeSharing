@@ -29,6 +29,8 @@ spring:
 topic:
   payment-request:
     consumer: payment-request
+  payment-event:
+    consumer: payment-event
 
 auto:
   create:

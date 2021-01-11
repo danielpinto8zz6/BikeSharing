@@ -1,6 +1,7 @@
 package estg.mtsd.bikeshare.payment.service.controller;
 
 import estg.mtsd.bikeshare.payment.service.service.PaymentService;
+import estg.mtsd.bikeshare.shared.library.vo.PaymentDataVo;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,8 @@ public class PaymentController {
 
 	@PostMapping("payment")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void save(PaymentVo paymentVo) {
-		paymentService.save(paymentVo);
+	public void save(PaymentDataVo paymentDataVo) {
+		paymentService.save(paymentDataVo);
 	}
 
 	@GetMapping("payment/{id}")

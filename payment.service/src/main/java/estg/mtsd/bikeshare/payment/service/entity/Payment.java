@@ -20,8 +20,8 @@ public class Payment {
 	@Column(name="value")
 	private Double value ;
 
-	@Column(name="is_paid")
-	private Boolean isPaid ;
+	@Column(name="status")
+	private Integer status ;
 
 	@Column(name="method")
 	private Integer method ;

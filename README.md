@@ -17,6 +17,7 @@
 | dummy-service  | 9200  |
 | travel-history-receiver-service  | 9300  |
 | rental-process-service  | 9500  |
+| payment-validator-service  | 9600  |
 | zuul-server  | 8762  |
 | eureka-server  | 8761  ||
 
