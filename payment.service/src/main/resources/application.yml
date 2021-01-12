@@ -9,7 +9,6 @@ spring:
     initialization-mode: always
     password: Pass2020!
     platform: postgres
-    url: jdbc:postgresql://postgres-dock:5432/payment
     username: postgres
   jpa:
     generate-dll: true
@@ -44,18 +43,6 @@ eureka:
     preferIpAddress: true
     hostname: payment-service
 
-    
----
-spring:
-  profiles: dev  
-  kafka:
-    consumer:
-      bootstrap-servers: localhost:9094
-    
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
 
 ---
 spring:
