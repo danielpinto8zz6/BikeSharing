@@ -24,7 +24,7 @@ public class PaymentListener {
     PaymentEventProducer paymentEventProducer;
 
 
-    @KafkaListener(topics = "${topic.payment-request.consumer}", groupId = "payment-validator")
+    @KafkaListener(topics = "${topic.payment.consumer}", groupId = "payment-validator")
     public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());
