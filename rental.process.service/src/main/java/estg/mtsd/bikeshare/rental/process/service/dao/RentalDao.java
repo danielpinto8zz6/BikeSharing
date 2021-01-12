@@ -10,7 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface RentalDao extends JpaRepository<Rental, Integer> {
-    List<Rental> findAllByBikeIdAndDateBetween(Integer bikeId, Date startDate, Date endDate);
+
+    List<Rental> findAllByBikeIdAndStartDateBetween(Integer bikeId, Date startDate, Date endDate);
 
     Optional<Rental> findByBikeIdAndEndDateIsNull(Integer bikeId);
 }
