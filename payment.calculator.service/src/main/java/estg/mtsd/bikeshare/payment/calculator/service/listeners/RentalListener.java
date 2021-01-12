@@ -27,7 +27,7 @@ public class RentalListener {
     @Autowired
     private PaymentRequestProducer paymentRequestProducer;
 
-    @KafkaListener(topics = "${topic.dock-event.consumer}", groupId = "payment-calculator")
+    @KafkaListener(topics = "${topic.rental.consumer}", groupId = "payment-calculator")
     public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());
