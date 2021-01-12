@@ -17,7 +17,7 @@ spec:
       containers:
         - name: pgadmin4
           image: dpage/pgadmin4
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: Always
           envFrom:                                # Get the environmental variables from a secret file whose name is "postgres-secret" 
             - secretRef:
                 name: pgadmin-secret
