@@ -26,6 +26,10 @@ spec:
       app: account-service
   template:
     metadata:
+      annotations:
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8100"
       labels:
         app: account-service
     spec:

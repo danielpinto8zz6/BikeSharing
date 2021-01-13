@@ -26,6 +26,10 @@ spec:
       app: travel-history-process-service
   template:
     metadata:
+      annotations:
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8700"
       labels:
         app: travel-history-process-service
     spec:

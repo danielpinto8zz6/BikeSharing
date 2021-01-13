@@ -22,12 +22,13 @@ import estg.mtsd.bikeshare.account.service.service.UserService;
 import estg.mtsd.bikeshare.shared.library.vo.UserVo;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
 	UserService userService;
 
-	@PostMapping("user")
+	@PostMapping()
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@ResponseBody
 	public void save(@RequestBody UserVo userVo) {
@@ -39,22 +40,22 @@ public class UserController {
 	// 	return userService.get(id);
 	// }
 
-	@RequestMapping("user/{email}")
+	@RequestMapping("/{email}")
 	public UserVo get(@PathVariable String email) {
 		return userService.getByUsername(email);
 	}
 
-	@RequestMapping("user")
+	@RequestMapping()
 	public List<UserVo> getAll() {
 		return userService.getAll();
 	}
 
-	@PutMapping("user")
+	@PutMapping()
 	public void update(UserVo userVo) {
 		userService.update(userVo);
 	}
 
-	@DeleteMapping("user/{id}")
+	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Integer id) {
 		userService.delete(id);
 	}

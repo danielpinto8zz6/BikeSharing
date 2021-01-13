@@ -26,6 +26,10 @@ spec:
       app: zuul-server
   template:
     metadata:
+      annotations:
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
       labels:
         app: zuul-server
     spec:
