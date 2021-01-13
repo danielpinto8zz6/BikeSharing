@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb-travel-history
+  name: mongodb
   labels:
-    app: mongodb-travel-history
+    app: mongodb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongodb-travel-history
+      app: mongodb
   template:
     metadata:
       labels:
-        app: mongodb-travel-history
+        app: mongodb
     spec:
       containers:
         - image: mongo
@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: Always
           envFrom:
             - secretRef:
-                name: mongodb-travel-history-secret
+                name: mongodb-secret
           ports:
             - containerPort: 27017
               name: mongodb
@@ -30,19 +30,19 @@ spec:
       volumes:
         - name: mongodb
           persistentVolumeClaim:
-            claimName: mongo-travel-history-pv-claim
+            claimName: mongodb-pv-claim
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb-travel-history
+  name: mongodb
   labels:
-    app: mongodb-travel-history
+    app: mongodb
 spec:
   ports:
   - protocol: TCP
     port: 27017
     targetPort: 27017
   selector:
-    app: mongodb-travel-history
+    app: mongodb

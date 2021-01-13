@@ -20,7 +20,7 @@ spec:
         imagePullPolicy: Always
         envFrom:                                # Get the environmental variables from a secret file whose name is "postgres-secret" 
           - secretRef:
-              name: mongodb-travel-history-secret
+              name: mongodb-secret
         ports:
         - containerPort: 8081
        

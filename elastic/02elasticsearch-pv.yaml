@@ -8,11 +8,11 @@ metadata:
 spec:
   storageClassName: manual                    # Storage class. A PV Claim requesting the same storageClass can be bound to this volume.
   capacity:
-    storage: 1Gi
+    storage: 2Gi
   accessModes:
     - ReadWriteOnce
   hostPath:                                   # hostPath PersistentVolume is used for development and testing. It uses a file/directory on the Node to emulate network-attached storage
-    path: "/mnt/data/elastic"
+    path: "/var/lib/elastic"
   persistentVolumeReclaimPolicy: Retain       # Retain the PV even after PVC is deleted. 
 
 ---
@@ -29,4 +29,4 @@ spec:                                         # Access mode and resource limits
     - ReadWriteOnce                          # ReadWriteMany means the volume can be mounted as read-write by many Nodes
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
