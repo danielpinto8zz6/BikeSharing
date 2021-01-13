@@ -1,40 +1,40 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: travel-history-service
+  name: payment-validator-service
   labels:
-    app: travel-history-service
+    app: payment-validator-service
 spec:
   selector:
-    app: travel-history-service
+    app: payment-validator-service
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 8600
+      targetPort: 9600
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: travel-history-service
+  name: payment-validator-service
   labels:
-    app: travel-history-service
+    app: payment-validator-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: travel-history-service
+      app: payment-validator-service
   template:
     metadata:
       labels:
-        app: travel-history-service
+        app: payment-validator-service
     spec:
       containers:
-        - name: travel-history-service
-          image: registry.gitlab.com/danielpinto8zz6/bikeshare/travel-history-service:latest
+        - name: payment-validator-service
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/payment-validator-service:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8600
+            - containerPort: 9600
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"

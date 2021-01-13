@@ -39,4 +39,4 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
       imagePullSecrets: 
-      - name: gitlab-dummy
+      - name: gitlab-auth

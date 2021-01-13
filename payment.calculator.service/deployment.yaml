@@ -40,4 +40,5 @@ spec:
               value: "prod"
             - name: JVM_OPTS
               value: "-Xms1g -Xmx1g"
-
+      imagePullSecrets: 
+      - name: gitlab-auth
