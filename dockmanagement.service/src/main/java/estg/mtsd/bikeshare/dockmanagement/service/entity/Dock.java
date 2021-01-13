@@ -25,7 +25,7 @@ public class Dock {
 	@Column(name="location")
 	private String location ;
 
-	@Column(name="bikeId")
+	@Column(name="bike_id")
 	private Integer bikeId ;
 
 }
