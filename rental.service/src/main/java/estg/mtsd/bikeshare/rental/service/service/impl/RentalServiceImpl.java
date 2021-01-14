@@ -37,10 +37,10 @@ public class RentalServiceImpl implements RentalService {
 		Integer bikeId = rentalVo.getBikeId();
 
 		// Check if bike is still available
-		boolean isBikeAvailable = dockService.dockHasBike(dockId, bikeId);
-		if (!isBikeAvailable) {
-			throw new Exception("Bike is not available!");
-		}
+		// boolean isBikeAvailable = dockService.dockHasBike(dockId, bikeId);
+		// if (!isBikeAvailable) {
+		// 	throw new Exception("Bike is not available!");
+		// }
 
 		Rental rental = new Rental();
 		BeanUtils.copyProperties(rentalVo, rental);
