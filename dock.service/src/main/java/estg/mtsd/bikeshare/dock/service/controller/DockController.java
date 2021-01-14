@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,28 +24,29 @@ import estg.mtsd.bikeshare.dock.service.service.DockService;
 import estg.mtsd.bikeshare.shared.library.vo.DockVo;
 
 @RestController
+@RequestMapping("/dock")
 public class DockController {
 
 	@Autowired
 	DockService dockService;
 
-	@GetMapping("hasBike")
+	@GetMapping("/hasBike")
 	public Boolean dockHasBike(@RequestParam("dockId") Integer dockId, @RequestParam("bikeId") Integer bikeId) {
 		return dockService.dockHasBike(dockId, bikeId);
 	}
 
-	@PostMapping("dock")
+	@PostMapping()
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void save(@RequestBody DockVo dockVo) {
 		dockService.save(dockVo);
 	}
 
-	@GetMapping("dock/{id}")
+	@GetMapping("/{id}")
 	public DockVo get(@PathVariable Integer id) {
 		return dockService.get(id);
 	}
 
-	@GetMapping("dock")
+	@GetMapping()
 	public Page<DockVo> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
 			@RequestParam(defaultValue = "false") Boolean onlyWithBikes) {
 		PageRequest paging = PageRequest.of(page, size);
@@ -56,12 +58,12 @@ public class DockController {
 		return dockService.getAll(paging);
 	}
 
-	@PutMapping("dock")
+	@PutMapping()
 	public void update(DockVo dockVo) {
 		dockService.update(dockVo);
 	}
 
-	@DeleteMapping("dock/{id}")
+	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Integer id) {
 		dockService.delete(id);
 	}
