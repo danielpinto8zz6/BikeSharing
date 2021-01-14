@@ -29,7 +29,7 @@ public class RentalListener {
     @Value("${topic.rental.consumer")
     private String topicName;
 
-    @KafkaListener(topics = "${topic.rental.consumer}", groupId = "group_id")
+    @KafkaListener(topics = "${topic.rental.consumer}", groupId = "dock-management")
     public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());

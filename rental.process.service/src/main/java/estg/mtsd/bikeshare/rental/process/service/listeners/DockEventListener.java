@@ -27,7 +27,7 @@ public class DockEventListener {
     @Autowired
     private RentalProducer rentalProducer;
 
-    @KafkaListener(topics = "${topic.dock-event.consumer}", groupId = "group_id")
+    @KafkaListener(topics = "${topic.dock-event.consumer}", groupId = "rental-process")
     public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());

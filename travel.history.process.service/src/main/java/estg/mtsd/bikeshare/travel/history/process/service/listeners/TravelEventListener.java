@@ -22,7 +22,7 @@ public class TravelEventListener {
     @Value("${topic.name.consumer")
     private String topicName;
 
-    @KafkaListener(topics = "${topic.name.consumer}", groupId = "group_id")
+    @KafkaListener(topics = "${topic.name.consumer}", groupId = "travel-history-process")
     public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
         log.info("key: " + payload.key());
