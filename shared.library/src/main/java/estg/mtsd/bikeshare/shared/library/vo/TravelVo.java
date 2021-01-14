@@ -18,7 +18,7 @@ public class TravelVo {
 
 	private Integer rentalId;
 
-	private Integer userId;
+	private String userEmail;
 
 	private List<TravelEventVo> gps;
 	

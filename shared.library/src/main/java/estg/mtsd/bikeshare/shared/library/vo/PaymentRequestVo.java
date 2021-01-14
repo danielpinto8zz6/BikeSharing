@@ -15,7 +15,7 @@ public class PaymentRequestVo {
 
     private Integer rentalId;
 
-    private Integer userId;
+    private String userEmail;
 
     private Double value;
 

@@ -1,6 +1,6 @@
 CREATE TABLE Feedback (
 id INTEGER PRIMARY KEY,
-userId INTEGER ,
+userEmail VARCHAR(255) ,
 travelId INTEGER ,
 message VARCHAR(255) ,
 rating INTEGER 

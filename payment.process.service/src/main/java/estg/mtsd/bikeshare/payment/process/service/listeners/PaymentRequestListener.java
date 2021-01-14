@@ -40,7 +40,7 @@ public class PaymentRequestListener {
         paymentVo.setTimestamp(new Date());
         paymentVo.setRentalId(paymentRequestVo.getRentalId());
         paymentVo.setValue(paymentRequestVo.getValue());
-        paymentVo.setUserId(paymentRequestVo.getUserId());
+        paymentVo.setUserEmail(paymentRequestVo.getUserEmail());
 
         paymentService.save(paymentVo);
 

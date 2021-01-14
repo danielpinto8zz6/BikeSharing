@@ -35,11 +35,6 @@ public class UserController {
 		userService.save(userVo);
 	}
 
-	// @GetMapping("user/{id}")
-	// public UserVo get(@PathVariable Integer id) {
-	// 	return userService.get(id);
-	// }
-
 	@RequestMapping("/{email}")
 	public UserVo get(@PathVariable String email) {
 		return userService.getByUsername(email);

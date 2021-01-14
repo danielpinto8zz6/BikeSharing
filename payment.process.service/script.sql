@@ -5,7 +5,7 @@ value DOUBLE ,
 is_paid BOOLEAN ,
 method INTEGER ,
 timestamp TIMESTAMP WITHOUT TIME ZONE ,
-user_id INTEGER 
+user_email VARCHAR(255) 
 );
 
 CREATE TABLE invoice (

@@ -39,7 +39,7 @@ public class RentalListener {
 
         double value = paymentCalculatorService.calculate(rentalVo.getStartDate(), rentalVo.getEndDate());
 
-        PaymentRequestVo paymentRequestVo = new PaymentRequestVo(rentalVo.getStartDate(), rentalVo.getEndDate(), rentalVo.getId(), rentalVo.getUserId(), value);
+        PaymentRequestVo paymentRequestVo = new PaymentRequestVo(rentalVo.getStartDate(), rentalVo.getEndDate(), rentalVo.getId(), rentalVo.getUserEmail(), value);
 
         paymentRequestProducer.send(paymentRequestVo);
     }

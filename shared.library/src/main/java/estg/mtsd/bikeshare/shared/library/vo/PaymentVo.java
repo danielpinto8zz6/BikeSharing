@@ -24,6 +24,6 @@ public class PaymentVo {
 
     private Date timestamp;
 
-    private Integer userId;
+    private String userEmail;
 
 }

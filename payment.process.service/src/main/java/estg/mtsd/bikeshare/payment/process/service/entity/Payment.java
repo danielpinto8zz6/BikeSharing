@@ -29,8 +29,8 @@ public class Payment {
 	@Column(name="timestamp")
 	private Date timestamp ;
 
-	@Column(name="user_id")
-	private Integer userId ;
+	@Column(name="user_email")
+	private String userEmail ;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "invoice_id", referencedColumnName = "id")

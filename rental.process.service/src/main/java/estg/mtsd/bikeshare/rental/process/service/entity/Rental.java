@@ -21,8 +21,8 @@ public class Rental {
 	@Column(name = "bike_id")
 	private Integer bikeId;
 
-	@Column(name = "user_id")
-	private Integer userId;
+	@Column(name = "user_email")
+	private String userEmail;
 
 	@Column(name = "start_date")
 	private Date startDate;

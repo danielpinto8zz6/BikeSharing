@@ -2,7 +2,7 @@ CREATE TABLE rental (
     id INTEGER PRIMARY KEY,
     dock_id INTEGER NOT NULL,
     bike_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
+    user_email VARCHAR(255),
     start_date TIMESTAMP WITHOUT TIME ZONE,
     end_date TIMESTAMP WITHOUT TIME ZONE
 );
