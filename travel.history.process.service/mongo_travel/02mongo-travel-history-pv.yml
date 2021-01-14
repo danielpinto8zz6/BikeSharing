@@ -13,6 +13,7 @@ spec:
     - ReadWriteMany
   hostPath:
     path: "/var/lib/mongodb"
+  persistentVolumeReclaimPolicy: Retain
 
 ---
 apiVersion: v1
