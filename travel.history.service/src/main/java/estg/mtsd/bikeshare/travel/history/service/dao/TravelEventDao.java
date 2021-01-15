@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 import estg.mtsd.bikeshare.travel.history.service.entity.TravelEvent;
 
 @Repository
-public interface TravelEventDao extends MongoRepository<TravelEvent, String>{
+public interface TravelEventDao extends MongoRepository<TravelEvent, Integer> {
+
     List<TravelEvent> findAllByRentalId(Integer rentalId);
 
     Optional<TravelEvent> findByRentalId(Integer rentalId);
@@ -17,4 +18,5 @@ public interface TravelEventDao extends MongoRepository<TravelEvent, String>{
     boolean existsByRentalId(Integer rentalId);
 
     void deleteByRentalId(Integer rentalId);
+
 }
