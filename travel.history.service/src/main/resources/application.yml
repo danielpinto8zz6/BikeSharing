@@ -23,7 +23,7 @@ spring:
   
   data:
     mongodb:
-      uri: mongodb://mongo:Pass2020!@localhost:27888/travel-history?authSource=admin&retryWrites=true
+      uri: mongodb://mongo:Pass2020!@localhost:27017/travel-history?authSource=admin&retryWrites=true
 
 eureka:
   client:
@@ -36,7 +36,7 @@ spring:
     
   data:
     mongodb:
-      uri: mongodb://mongo:Pass2020!@mongodb:27888/travel-history?authSource=admin&retryWrites=true
+      uri: mongodb://mongo:Pass2020!@mongodb:27017/travel-history?authSource=admin&retryWrites=true
     
 eureka:
   client:
