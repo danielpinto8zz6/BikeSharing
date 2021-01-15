@@ -1,4 +1,4 @@
 #!/bin/sh
 
-kubectl apply -f postgres_rental/
-kubectl apply -f deployment.yaml
+kubectl apply -f $BASEDIR/postgres_rental/
+kubectl apply -f $BASEDIR/deployment.yaml

@@ -4,6 +4,7 @@ start=`date +%s`
 
 echo 'building and pushing services/docker images...'
 
+./shared.library/build.sh
 ./travel.history.process.service/build-and-push-docker-image.sh
 ./bikemanagement.service/build-and-push-docker-image.sh
 ./dockmanagement.service/build-and-push-docker-image.sh

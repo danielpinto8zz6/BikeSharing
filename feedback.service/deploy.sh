@@ -1,4 +1,4 @@
 #!/bin/sh
 
-kubectl apply -f postgres_feedback/
-kubectl apply -f deployment.yaml
+kubectl apply -f $BASEDIR/postgres_feedback/
+kubectl apply -f $BASEDIR/deployment.yaml

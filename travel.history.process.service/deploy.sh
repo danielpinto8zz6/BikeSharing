@@ -1,4 +1,4 @@
 #!/bin/sh
 
-kubectl apply -f deployment.yaml
-kubectl apply -f mongo_travel
+kubectl apply -f $BASEDIR/deployment.yaml
+kubectl apply -f $BASEDIR/mongo_travel
