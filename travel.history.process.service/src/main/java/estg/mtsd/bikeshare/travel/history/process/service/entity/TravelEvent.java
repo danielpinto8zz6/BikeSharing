@@ -9,7 +9,7 @@ import java.util.Date;
 @Document("travel_event")
 public class TravelEvent {
 
-    private int travelId;
+    private int rentalId;
 
     private double latitude;
 
