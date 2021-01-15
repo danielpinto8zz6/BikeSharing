@@ -49,4 +49,4 @@ end=`date +%s`
 
 runtime=$((end-start))
 
-echo 'took $runtime'
+echo $runtime
