@@ -34,15 +34,22 @@ public class TravelEventServiceImpl implements TravelEventService {
     }
 
     @Override
-    public TravelEventVo get(Integer rentalId) {
-        Optional<TravelEvent> travelEventOptional = travelEventDao.findByRentalId(rentalId);
-        TravelEventVo travelEventVo = null;
-        if (travelEventOptional.isPresent()) {
-            travelEventVo = new TravelEventVo();
-            BeanUtils.copyProperties(travelEventOptional.get(), travelEventVo);
+    public List<TravelEventVo> getAllByRentalId(Integer rentalId) {
+        Optional<List<TravelEvent>> travelEventsOptional = travelEventDao.findAllByRentalId(rentalId);
+        List<TravelEventVo> travelEventVoList = new ArrayList<>();
+        if (travelEventsOptional.isPresent()) {
+
+            if (!travelEventsOptional.get().isEmpty()) {
+                for (TravelEvent travelEvent : travelEventsOptional.get()) {
+                    TravelEventVo travelEventVo = new TravelEventVo();
+                    BeanUtils.copyProperties(travelEvent, travelEventVo);
+
+                    travelEventVoList.add(travelEventVo);
+                }
+            }
         }
 
-        return travelEventVo;
+        return travelEventVoList;
     }
 
     @Override
@@ -53,6 +60,8 @@ public class TravelEventServiceImpl implements TravelEventService {
             for (TravelEvent travelEvent : travelEventList) {
                 TravelEventVo travelEventVo = new TravelEventVo();
                 BeanUtils.copyProperties(travelEvent, travelEventVo);
+                
+                travelEventVoList.add(travelEventVo);
             }
         }
         return travelEventVoList;

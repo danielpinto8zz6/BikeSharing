@@ -20,9 +20,9 @@ public class TravelEventController {
         travelEventService.save(travelEventVo);
     }
 
-    @GetMapping("travel/{id}")
-    public TravelEventVo get(@PathVariable Integer id) {
-        return travelEventService.get(id);
+    @GetMapping("travel/{rentalId}")
+    public List<TravelEventVo> getAllByRentalId(@PathVariable Integer rentalId) {
+        return travelEventService.getAllByRentalId(rentalId);
     }
 
     @GetMapping("travel")

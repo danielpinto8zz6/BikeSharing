@@ -11,9 +11,7 @@ import estg.mtsd.bikeshare.travel.history.service.entity.TravelEvent;
 @Repository
 public interface TravelEventDao extends MongoRepository<TravelEvent, Integer> {
 
-    List<TravelEvent> findAllByRentalId(Integer rentalId);
-
-    Optional<TravelEvent> findByRentalId(Integer rentalId);
+    Optional<List<TravelEvent>> findAllByRentalId(Integer rentalId);
 
     boolean existsByRentalId(Integer rentalId);
 

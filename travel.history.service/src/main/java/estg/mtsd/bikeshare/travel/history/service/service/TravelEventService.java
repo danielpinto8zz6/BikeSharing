@@ -10,7 +10,7 @@ public interface TravelEventService {
 
     void delete(Integer rentalId);
 
-    TravelEventVo get(Integer rentalId);
+    List<TravelEventVo> getAllByRentalId(Integer rentalId);
 
     List<TravelEventVo> getAll();
 

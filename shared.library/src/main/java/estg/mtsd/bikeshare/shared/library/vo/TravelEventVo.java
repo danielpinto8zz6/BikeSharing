@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class TravelEventVo {
 
-    private Integer rentalId;
+    private int rentalId;
 
     private double latitude;
 

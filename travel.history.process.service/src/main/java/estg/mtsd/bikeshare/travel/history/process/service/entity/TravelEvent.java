@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
 @Data
-@Document("travel_event")
+@Document("event")
 public class TravelEvent {
 
     private int rentalId;
