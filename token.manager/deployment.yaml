@@ -1,0 +1,44 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: token-manager
+  labels:
+    app: token-manager
+spec:
+  selector:
+    app: token-manager
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 9700
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: token-manager
+  labels:
+    app: token-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: token-manager
+  template:
+    metadata:
+      labels:
+        app: token-manager
+    spec:
+      containers:
+        - name: token-manager
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/token-manager:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9700
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: JVM_OPTS
+              value: "-Xms1g -Xmx1g"
+      imagePullSecrets: 
+      - name: gitlab-auth
