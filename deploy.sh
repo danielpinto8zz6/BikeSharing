@@ -23,6 +23,7 @@ echo 'building and pushing services/docker images...'
 ./rental.process.service/build-and-push-docker-image.sh
 ./payment.process.service/build-and-push-docker-image.sh
 ./payment.validator.service/build-and-push-docker-image.sh
+./token.manager/build-and-push-docker-image.sh
 
 echo 'deploying to k8s...'
 
@@ -44,6 +45,7 @@ echo 'deploying to k8s...'
 ./rental.process.service/deploy.sh
 ./payment.process.service/deploy.sh
 ./payment.validator.service/deploy.sh
+./token.manager/deploy.sh
 
 end=`date +%s`
 
