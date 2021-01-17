@@ -1,7 +1,9 @@
 package estg.mtsd.bikeshare.payment.process.service.listeners;
 
+import estg.mtsd.bikeshare.payment.process.service.producers.NotificationProducer;
 import estg.mtsd.bikeshare.payment.process.service.service.PaymentService;
 import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
+import estg.mtsd.bikeshare.shared.library.vo.NotificationVo;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentRequestVo;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentVo;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,9 @@ public class PaymentRequestListener {
     @Autowired
     PaymentService paymentService;
 
+    @Autowired
+    NotificationProducer notificationProducer;
+
     @KafkaListener(topics = "${topic.payment-request.consumer}", groupId = "payment-process")
     public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
@@ -44,6 +49,12 @@ public class PaymentRequestListener {
 
         paymentService.save(paymentVo);
 
-        // TODO: Notify user
+        NotificationVo notificationVo = new NotificationVo();
+        notificationVo.setEmail(paymentVo.getUserEmail());
+        notificationVo.setTitle("Payment request");
+        notificationVo.setBody("Please make payment!");
+        notificationVo.setPaymentVo(paymentVo);
+
+        notificationProducer.send(notificationVo);
     }
 }

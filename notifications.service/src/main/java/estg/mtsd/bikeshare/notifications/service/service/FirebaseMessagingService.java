@@ -5,7 +5,7 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 import com.google.gson.reflect.TypeToken;
-import estg.mtsd.bikeshare.notifications.service.vo.NotificationVo;
+import estg.mtsd.bikeshare.shared.library.vo.NotificationVo;
 import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import org.springframework.stereotype.Service;
 

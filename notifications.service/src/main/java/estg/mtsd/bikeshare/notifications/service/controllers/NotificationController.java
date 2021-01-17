@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import estg.mtsd.bikeshare.notifications.service.service.FirebaseMessagingService;
-import estg.mtsd.bikeshare.notifications.service.vo.NotificationVo;
+import estg.mtsd.bikeshare.shared.library.vo.NotificationVo;
 
 @Controller
 public class NotificationController {

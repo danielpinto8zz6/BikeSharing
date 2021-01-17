@@ -1,6 +1,5 @@
-package estg.mtsd.bikeshare.notifications.service.vo;
+package estg.mtsd.bikeshare.shared.library.vo;
 
-import estg.mtsd.bikeshare.shared.library.vo.PaymentVo;
 import lombok.Data;
 
 @Data

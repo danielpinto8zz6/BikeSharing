@@ -5,17 +5,20 @@ spring:
     active: "dev"
   application:
     name: payment-process-service
+
   kafka:
     consumer:
       auto-offset-reset: earliest
       group-id: payment-process
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
   datasource:
     initialization-mode: always
     password: Pass2020!
     platform: postgres
     username: postgres
+
   jpa:
     generate-dll: true
     hibernate:
@@ -31,6 +34,8 @@ topic:
     consumer: payment-request
   payment-event:
     consumer: payment-event
+  notification:
+    producer: notification
 
 auto:
   create:

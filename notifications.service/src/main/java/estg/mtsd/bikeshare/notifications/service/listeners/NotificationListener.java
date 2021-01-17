@@ -3,7 +3,7 @@ package estg.mtsd.bikeshare.notifications.service.listeners;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import estg.mtsd.bikeshare.notifications.service.service.FirebaseMessagingService;
 import estg.mtsd.bikeshare.notifications.service.service.TokenService;
-import estg.mtsd.bikeshare.notifications.service.vo.NotificationVo;
+import estg.mtsd.bikeshare.shared.library.vo.NotificationVo;
 import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
