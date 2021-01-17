@@ -30,23 +30,9 @@ eureka:
     preferIpAddress: true
     hostname: payment-validator-service
 
-
 ---
 spring:
   profiles: dev
-  kafka:
-    consumer:
-      bootstrap-servers: localhost:9094
-
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-
----
-spring:
-  profiles: dev
-
 
 eureka:
   client:
