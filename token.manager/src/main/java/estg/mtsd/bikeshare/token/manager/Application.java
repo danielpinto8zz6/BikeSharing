@@ -1,5 +1,6 @@
 package estg.mtsd.bikeshare.token.manager;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -10,13 +11,24 @@ import org.springframework.data.redis.core.RedisTemplate;
 @SpringBootApplication
 public class Application {
 
+    @Value("${spring.redis.host}")
+    private String redisHost;
+
+    @Value("${spring.redis.port}")
+    private Integer redisPort;
+
+    @Value("${spring.redis.password}")
+    private String redisPassword;
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
-        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration("localhost", 6379);
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(redisHost,
+                redisPort);
+        redisStandaloneConfiguration.setPassword(redisPassword);
         return new JedisConnectionFactory(redisStandaloneConfiguration);
     }
 

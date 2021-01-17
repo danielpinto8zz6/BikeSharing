@@ -9,14 +9,21 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 @Repository
 public class TokenRepositoryImpl implements TokenRepository {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-
-    @Autowired
     private HashOperations hashOperations;
+
+    // This annotation makes sure that the method needs to be executed after
+    // dependency injection is done to perform any initialization.
+    @PostConstruct
+    private void intializeHashOperations() {
+        hashOperations = redisTemplate.opsForHash();
+    }
 
     @Override
     public void save(String email, String token) {

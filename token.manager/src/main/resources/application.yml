@@ -7,8 +7,8 @@ spring:
     name: token-manager
 
   redis:
-    host: localhost
     port: 6379
+    password: admin
 
 eureka:
   client:
@@ -18,10 +18,11 @@ eureka:
     preferIpAddress: true
     hostname: token-manager
 
-
 ---
 spring:
   profiles: dev
+  redis:
+    host: localhost
 
 eureka:
   instance:
@@ -32,7 +33,9 @@ eureka:
 ---
 spring:
   profiles: prod
-      
+  redis:
+    host: redis-0
+
 eureka:
   instance:
   client:

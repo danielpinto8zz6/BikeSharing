@@ -55,6 +55,9 @@ zuul:
       payment-service:
           path: /payment/**
           serviceId: payment-service
+      token-manager:
+        path: /token/**
+        serviceId: token-manager
 hystrix:
   command:
     default:
