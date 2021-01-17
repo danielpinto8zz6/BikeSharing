@@ -2,6 +2,7 @@ package estg.mtsd.bikeshare.notifications.service.listeners;
 
 import com.google.firebase.messaging.FirebaseMessagingException;
 import estg.mtsd.bikeshare.notifications.service.service.FirebaseMessagingService;
+import estg.mtsd.bikeshare.notifications.service.service.TokenService;
 import estg.mtsd.bikeshare.notifications.service.vo.NotificationVo;
 import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,9 @@ public class NotificationListener {
     @Autowired
     FirebaseMessagingService messagingService;
 
+    @Autowired
+    TokenService tokenService;
+
     @KafkaListener(topics = "${topic.notification.consumer}", groupId = "notification")
     public void consume(ConsumerRecord<String, String> payload) {
         log.info("Tópico: " + topicName);
@@ -33,10 +37,14 @@ public class NotificationListener {
 
         NotificationVo notificationVo = JsonUtils.fromJson(payload.value(), NotificationVo.class);
 
-        try {
-            messagingService.sendNotification(notificationVo);
-        } catch (FirebaseMessagingException e) {
-            e.printStackTrace();
+        if (notificationVo.getEmail() != null) {
+            String token = tokenService.findById(notificationVo.getEmail());
+
+            try {
+                messagingService.sendNotification(notificationVo, token);
+            } catch (FirebaseMessagingException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

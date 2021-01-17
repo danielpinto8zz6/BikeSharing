@@ -22,7 +22,7 @@ public class FirebaseMessagingService {
     }
 
 
-    public String sendNotification(NotificationVo notificationVo) throws FirebaseMessagingException {
+    public String sendNotification(NotificationVo notificationVo, String token) throws FirebaseMessagingException {
 
         Notification notification = Notification
                 .builder()
@@ -32,7 +32,7 @@ public class FirebaseMessagingService {
 
         Message.Builder messageBuilder = Message
                 .builder()
-                .setToken(notificationVo.getToken())
+                .setToken(token)
                 .setNotification(notification);
 
         if (notificationVo.getPaymentVo() != null) {

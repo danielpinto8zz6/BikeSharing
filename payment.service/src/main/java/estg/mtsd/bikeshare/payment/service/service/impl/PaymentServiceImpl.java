@@ -93,8 +93,8 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @Transactional
-    public List<PaymentVo> getAll() {
-        List<Payment> paymentList = paymentDao.findAll();
+    public List<PaymentVo> getAll(String userEmail) {
+        List<Payment> paymentList = paymentDao.findAllByUserEmail(userEmail);
         List<PaymentVo> paymentVoList = new ArrayList<>();
         if (!paymentList.isEmpty()) {
             for (Payment payment : paymentList) {

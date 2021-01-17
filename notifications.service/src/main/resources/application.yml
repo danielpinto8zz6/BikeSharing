@@ -5,12 +5,11 @@ spring:
     active: "dev"
   application:
     name: notification-service
-management:
-  security:
-    enabled: false
-security:
-  basic:
-    enable: false
+
+  redis:
+    port: 6379
+    password: admin
+
   kafka:
     consumer:
       auto-offset-reset: earliest
@@ -38,6 +37,10 @@ eureka:
 ---
 spring:
   profiles: dev
+
+  redis:
+    host: localhost
+
   kafka:
     consumer:
       auto-offset-reset: earliest
@@ -51,6 +54,10 @@ eureka:
 ---
 spring:
   profiles: prod
+
+  redis:
+    host: redis-0
+
   kafka:
     consumer:
       auto-offset-reset: earliest

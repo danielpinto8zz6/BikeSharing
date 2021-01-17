@@ -19,7 +19,9 @@
 | rental-process-service  | 9500  |
 | payment-validator-service  | 9600  |
 | token-manager  | 9700  |
-| zuul-server  | 8762  |
+| token-manager  | 9700  |
+| notification-service  | 9800  |
+| zuul-server  | 9090  |
 | eureka-server  | 8761  ||
 
 ### Kafka

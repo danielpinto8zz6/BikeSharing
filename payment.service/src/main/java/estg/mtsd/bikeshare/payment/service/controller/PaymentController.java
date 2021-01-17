@@ -1,6 +1,8 @@
 package estg.mtsd.bikeshare.payment.service.controller;
 
 import estg.mtsd.bikeshare.payment.service.service.PaymentService;
+import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
+import estg.mtsd.bikeshare.shared.library.utils.JwtUtils;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentDataVo;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +31,11 @@ public class PaymentController {
 	}
 
 	@GetMapping("payment")
-	public List<PaymentVo> getAll() {
-		return paymentService.getAll();
+	public List<PaymentVo> getAll(@RequestHeader("Authorization") String token)
+	{
+		String email = JwtUtils.parseUserEmail(token);
+
+		return paymentService.getAll(email);
 	}
 	
 	@PutMapping("payment")

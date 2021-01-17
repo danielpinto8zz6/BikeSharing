@@ -30,7 +30,7 @@ public class Payment {
 	private Date timestamp ;
 
 	@Column(name="user_email")
-	private Integer userEmail ;
+	private String userEmail ;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "invoice_id", referencedColumnName = "id")

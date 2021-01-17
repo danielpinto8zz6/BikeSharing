@@ -15,7 +15,7 @@ public interface PaymentService {
 
     PaymentVo get(Integer id);
 
-    List<PaymentVo> getAll();
+    List<PaymentVo> getAll(String userEmail);
 
 }
 

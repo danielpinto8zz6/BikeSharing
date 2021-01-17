@@ -10,8 +10,6 @@ public class NotificationVo {
 
     private String body;
 
-    private String token;
-
     private String email;
 
     private PaymentVo paymentVo;
