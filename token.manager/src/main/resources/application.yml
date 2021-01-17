@@ -1,0 +1,40 @@
+server:
+  port: 9700
+spring:
+  profiles:
+    active: "dev"
+  application:
+    name: token-manager
+
+  redis:
+    host: localhost
+    port: 6379
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+  instance:
+    preferIpAddress: true
+    hostname: token-manager
+
+
+---
+spring:
+  profiles: dev
+
+eureka:
+  instance:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+---
+spring:
+  profiles: prod
+      
+eureka:
+  instance:
+  client:
+    service-url:
+      defaultZone: http://eureka:8761/eureka

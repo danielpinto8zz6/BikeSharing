@@ -17,6 +17,4 @@ public class InvoiceVo {
 
     private Date timestamp;
 
-    private PaymentVo payment;
-
 }

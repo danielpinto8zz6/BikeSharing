@@ -21,6 +21,4 @@ public class PaymentDataVo {
 
     private String creditCardCode;
 
-    private InvoiceVo invoice;
-
 }

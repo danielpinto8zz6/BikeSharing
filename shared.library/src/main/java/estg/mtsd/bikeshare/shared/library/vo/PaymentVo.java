@@ -26,4 +26,6 @@ public class PaymentVo {
 
     private String userEmail;
 
+    private InvoiceVo invoiceVo;
+
 }

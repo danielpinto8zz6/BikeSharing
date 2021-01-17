@@ -50,24 +50,6 @@ spring:
   
   datasource:
     url: jdbc:postgresql://localhost:5432/rental
-
-  kafka:
-    consumer:
-      bootstrap-servers: localhost:9094
-    producer:
-      bootstrap-servers: localhost:9094
-      
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-
----
-spring:
-  profiles: dev
-  
-  datasource:
-    url: jdbc:postgresql://localhost:5432/rental
   
   kafka:
     producer:

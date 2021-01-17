@@ -28,6 +28,7 @@
         <module>travel.history.service</module>
         <module>zuul.server</module>
         <module>dummy.service</module>
+        <module>token.manager</module>
     </modules>
 
     <build>
