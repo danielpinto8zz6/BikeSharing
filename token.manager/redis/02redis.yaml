@@ -29,7 +29,7 @@ spec:
               cpu: .25
               memory: 512Mi
           volumeMounts:
-            - mountPath: /var/lib/redis/
+            - mountPath: /data
               name: redis-volume
       volumes:
         - name: redis-volume

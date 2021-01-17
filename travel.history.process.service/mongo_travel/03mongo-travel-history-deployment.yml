@@ -25,7 +25,7 @@ spec:
             - containerPort: 27017
               name: mongodb
           volumeMounts:
-            - mountPath: /var/lib/mongodb
+            - mountPath: /data/db/
               name: mongodb
       volumes:
         - name: mongodb
