@@ -65,7 +65,6 @@ spring:
       bootstrap-servers: localhost:9094
 
 eureka:
-  instance:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka

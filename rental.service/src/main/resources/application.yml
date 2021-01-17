@@ -56,7 +56,6 @@ spring:
       bootstrap-servers: localhost:9094
 
 eureka:
-  instance:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
@@ -73,7 +72,6 @@ spring:
       bootstrap-servers: kafka-0.broker.kafka:9092
       
 eureka:
-  instance:
   client:
     service-url:
       defaultZone: http://eureka:8761/eureka
