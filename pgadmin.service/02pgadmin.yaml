@@ -18,7 +18,7 @@ spec:
         - name: pgadmin4
           image: dpage/pgadmin4
           imagePullPolicy: Always
-          envFrom:                                # Get the environmental variables from a secret file whose name is "postgres-secret" 
+          envFrom:
             - secretRef:
                 name: pgadmin-secret
           ports:
