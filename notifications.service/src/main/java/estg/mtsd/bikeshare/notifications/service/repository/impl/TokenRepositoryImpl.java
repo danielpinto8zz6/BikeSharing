@@ -13,7 +13,7 @@ public class TokenRepositoryImpl implements TokenRepository {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-    private HashOperations hashOperations;
+    private HashOperations<String, String, String> hashOperations;
 
     // This annotation makes sure that the method needs to be executed after
     // dependency injection is done to perform any initialization.
@@ -24,7 +24,7 @@ public class TokenRepositoryImpl implements TokenRepository {
 
     @Override
     public String findById(String email) {
-        return (String) hashOperations.get("token", email);
+        return (String) hashOperations.get("TOKEN", email);
     }
 
 }

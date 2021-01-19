@@ -38,6 +38,7 @@ public class Application {
     RedisTemplate<String, String> redisTemplate() {
         RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(jedisConnectionFactory());
+        redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
 }

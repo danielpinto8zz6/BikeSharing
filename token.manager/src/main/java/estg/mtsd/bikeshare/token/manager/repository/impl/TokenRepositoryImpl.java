@@ -16,10 +16,9 @@ public class TokenRepositoryImpl implements TokenRepository {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-    private HashOperations hashOperations;
 
-    // This annotation makes sure that the method needs to be executed after
-    // dependency injection is done to perform any initialization.
+    private HashOperations<String, String, String> hashOperations;
+
     @PostConstruct
     private void initializeHashOperations() {
         hashOperations = redisTemplate.opsForHash();
@@ -27,17 +26,17 @@ public class TokenRepositoryImpl implements TokenRepository {
 
     @Override
     public void save(String email, String token) {
-        hashOperations.put("token", email, token);
+        hashOperations.put("TOKEN", email, token);
     }
 
     @Override
     public Map<String, String> findAll() {
-        return hashOperations.entries("token");
+        return hashOperations.entries("TOKEN");
     }
 
     @Override
     public String findById(String email) {
-        return (String) hashOperations.get("token", email);
+        return (String) hashOperations.get("TOKEN", email);
     }
 
     @Override
@@ -47,6 +46,6 @@ public class TokenRepositoryImpl implements TokenRepository {
 
     @Override
     public void delete(String email) {
-        hashOperations.delete("token", email);
+        hashOperations.delete("TOKEN", email);
     }
 }
