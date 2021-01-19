@@ -24,6 +24,7 @@ echo 'deploying to k8s...'
 ./payment.validator.service/deploy.sh
 ./notifications.service/deploy.sh
 ./token.manager/deploy.sh
+./pgadmin.service/deploy.sh
 
 end=`date +%s`
 
