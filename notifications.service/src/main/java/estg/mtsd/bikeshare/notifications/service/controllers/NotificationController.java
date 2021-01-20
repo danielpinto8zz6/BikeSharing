@@ -28,12 +28,9 @@ public class NotificationController {
 
     @RequestMapping("/send-notification")
     @ResponseBody
-    public String sendNotification(@RequestBody NotificationVo notificationVo,
-            @RequestHeader("Authorization") String jwtToken) throws FirebaseMessagingException {
+    public String sendNotification(@RequestBody NotificationVo notificationVo) throws FirebaseMessagingException {
 
-        String email = JwtUtils.parseUserEmail(jwtToken);
-
-        String token = tokenService.findById(email);
+        String token = tokenService.findById(notificationVo.getEmail());
 
         return firebaseService.sendNotification(notificationVo, token);
     }
