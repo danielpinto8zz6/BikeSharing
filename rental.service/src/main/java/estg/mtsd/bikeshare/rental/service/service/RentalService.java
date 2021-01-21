@@ -15,6 +15,6 @@ public interface RentalService {
 
     RentalVo get(Integer id);
 
-    List<RentalVo> getAll();
+    List<RentalVo> getAll(String email);
 
 }

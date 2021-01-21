@@ -95,8 +95,8 @@ public class RentalServiceImpl implements RentalService {
 
 	@Override
 	@Transactional
-	public List<RentalVo> getAll() {
-		List<Rental> rentalList = rentalDao.findAll();
+	public List<RentalVo> getAll(String email) {
+		List<Rental> rentalList = rentalDao.findAllByUserEmail(email);
 		List<RentalVo> rentalVoList = new ArrayList<>();
 		if (!rentalList.isEmpty()) {
 			for (Rental rental : rentalList) {

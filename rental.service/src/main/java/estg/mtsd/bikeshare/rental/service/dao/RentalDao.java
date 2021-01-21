@@ -10,4 +10,6 @@ import estg.mtsd.bikeshare.rental.service.entity.Rental;
 @Repository
 public interface RentalDao extends JpaRepository<Rental, Integer> {
     List<Rental> findAllByBikeIdAndStartDateBetween(Integer bikeId, Date startDate, Date endDate);
+
+    List<Rental> findAllByUserEmail(String email);
 }

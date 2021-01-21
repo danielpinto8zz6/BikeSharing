@@ -5,18 +5,10 @@ import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 
+import estg.mtsd.bikeshare.shared.library.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import estg.mtsd.bikeshare.rental.service.service.RentalService;
 import estg.mtsd.bikeshare.shared.library.vo.RentalVo;
@@ -39,8 +31,9 @@ public class RentalController {
 	}
 
 	@GetMapping("rental")
-	public List<RentalVo>  getAll() {
-		return rentalService.getAll();
+	public List<RentalVo>  getAll(@RequestHeader("Authorization") String token) {
+		String email = JwtUtils.parseUserEmail(token);
+		return rentalService.getAll(email);
 	}
 	
 	@PutMapping("rental")
