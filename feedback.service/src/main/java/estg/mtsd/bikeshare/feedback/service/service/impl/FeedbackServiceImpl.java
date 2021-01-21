@@ -20,78 +20,71 @@ import estg.mtsd.bikeshare.feedback.service.vo.FeedbackVo;
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
 
-	@Autowired
-	FeedbackDao feedbackDao;
+    @Autowired
+    FeedbackDao feedbackDao;
 
-	@Override
-	@Transactional
-	public void save(FeedbackVo feedbackVo) {	
-		Integer id = feedbackVo.getId();
-		Boolean objectAlreadyExists=feedbackDao.existsById(id);
-		if(!objectAlreadyExists) {
-			Feedback feedback = new Feedback();
-			BeanUtils.copyProperties(feedbackVo, feedback);
-			feedbackDao.save(feedback);
-		}else {
-			throw new EntityExistsException();
-		}
-		
-	}
-	
-	@Override
-	@Transactional
-	public void update(FeedbackVo feedbackVo) {
-		Integer id = feedbackVo.getId();
-		Boolean objectExists=feedbackDao.existsById(id);
-		if(objectExists) {
-			Feedback feedback = new Feedback();
-			BeanUtils.copyProperties(feedbackVo, feedback);
-			feedbackDao.save(feedback);
-		}else {
-			throw new EntityNotFoundException();
-		}
-	}
+    @Override
+    @Transactional
+    public void save(FeedbackVo feedbackVo) {
+        Feedback feedback = new Feedback();
+        BeanUtils.copyProperties(feedbackVo, feedback);
+        feedbackDao.save(feedback);
+    }
 
-	@Override
-	@Transactional
-	public void delete(Integer id) {
-		Boolean objectExists=feedbackDao.existsById(id);
-		if(objectExists) {
-			feedbackDao.deleteById(id);
-		}else {
-			throw new EntityNotFoundException();
-		}
-	}
+    @Override
+    @Transactional
+    public void update(FeedbackVo feedbackVo) {
+        Integer id = feedbackVo.getId();
+        Boolean objectExists = feedbackDao.existsById(id);
+        if (objectExists) {
+            Feedback feedback = new Feedback();
+            BeanUtils.copyProperties(feedbackVo, feedback);
+            feedbackDao.save(feedback);
+        } else {
+            throw new EntityNotFoundException();
+        }
+    }
 
-	@Override
-	@Transactional
-	public FeedbackVo get(Integer id) {
-		Optional<Feedback> feedbackOptional = feedbackDao.findById(id);
-		FeedbackVo feedbackVo=null;
-		if(feedbackOptional.isPresent()) {
-			feedbackVo = new FeedbackVo();
-			BeanUtils.copyProperties(feedbackOptional.get(), feedbackVo);	
-		}else {
-			throw new EntityNotFoundException();
-		}
-		
-		return feedbackVo;
-	}
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        Boolean objectExists = feedbackDao.existsById(id);
+        if (objectExists) {
+            feedbackDao.deleteById(id);
+        } else {
+            throw new EntityNotFoundException();
+        }
+    }
 
-	@Override
-	@Transactional
-	public List<FeedbackVo> getAll() {
-		List<Feedback> feedbackList = feedbackDao.findAll();
-		List<FeedbackVo> feedbackVoList = new ArrayList<>();
-		if (feedbackList != null && !feedbackList.isEmpty()) {
-			for (Feedback feedback : feedbackList) {
-				FeedbackVo feedbackVo = new FeedbackVo();
-				BeanUtils.copyProperties(feedback, feedbackVo);
-				feedbackVoList.add(feedbackVo);
-			}
-		}
-		return feedbackVoList;
-	}
+    @Override
+    @Transactional
+    public FeedbackVo get(Integer id) {
+        Optional<Feedback> feedbackOptional = feedbackDao.findById(id);
+        FeedbackVo feedbackVo = null;
+        if (feedbackOptional.isPresent()) {
+            feedbackVo = new FeedbackVo();
+            BeanUtils.copyProperties(feedbackOptional.get(), feedbackVo);
+        } else {
+            throw new EntityNotFoundException();
+        }
+
+        return feedbackVo;
+    }
+
+    @Override
+    @Transactional
+    public List<FeedbackVo> getAll() {
+        List<Feedback> feedbackList = feedbackDao.findAll();
+        List<FeedbackVo> feedbackVoList = new ArrayList<>();
+        if (feedbackList != null && !feedbackList.isEmpty()) {
+            for (Feedback feedback : feedbackList) {
+                FeedbackVo feedbackVo = new FeedbackVo();
+                BeanUtils.copyProperties(feedback, feedbackVo);
+                feedbackVoList.add(feedbackVo);
+            }
+        }
+        return feedbackVoList;
+    }
 
 }
 
