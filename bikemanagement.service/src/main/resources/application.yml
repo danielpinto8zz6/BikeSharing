@@ -5,11 +5,13 @@ spring:
     active: "dev"
   application:
     name: bike-management-service
+
   datasource:
     initialization-mode: always
     password: Pass2020!
     platform: postgres
     username: postgres
+
   jpa:
     generate-dll: true
     hibernate:
@@ -26,7 +28,7 @@ eureka:
     fetchRegistry: true
   instance:
     preferIpAddress: true
-    hostname: bike-management-service
+    hostname: bike-management
 
 ---
 spring:
