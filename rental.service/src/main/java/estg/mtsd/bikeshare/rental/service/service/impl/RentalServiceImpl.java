@@ -1,7 +1,5 @@
 package estg.mtsd.bikeshare.rental.service.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -10,6 +8,8 @@ import javax.transaction.Transactional;
 import estg.mtsd.bikeshare.rental.service.entity.Rental;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.rental.service.dao.RentalDao;
@@ -95,17 +95,17 @@ public class RentalServiceImpl implements RentalService {
 
 	@Override
 	@Transactional
-	public List<RentalVo> getAll(String email) {
-		List<Rental> rentalList = rentalDao.findAllByUserEmail(email);
-		List<RentalVo> rentalVoList = new ArrayList<>();
-		if (!rentalList.isEmpty()) {
-			for (Rental rental : rentalList) {
-				RentalVo rentalVo = new RentalVo();
-				BeanUtils.copyProperties(rental, rentalVo);
-				rentalVoList.add(rentalVo);
-			}
-		}
-		return rentalVoList;
+	public Page<RentalVo> getAll(Pageable pageable, String email) {
+		Page<Rental> entities = rentalDao.findAllByUserEmail(pageable, email);
+
+		return entities.map(this::convertToRentalVo);
+	}
+
+	private RentalVo convertToRentalVo(Rental entity) {
+		RentalVo rentalVo = new RentalVo();
+		BeanUtils.copyProperties(entity, rentalVo);
+
+		return rentalVo;
 	}
 
 }

@@ -1,15 +1,16 @@
 package estg.mtsd.bikeshare.rental.service.dao;
 
-import java.util.Date;
-import java.util.List;
-
+import estg.mtsd.bikeshare.rental.service.entity.Rental;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import estg.mtsd.bikeshare.rental.service.entity.Rental;
+
+import java.util.List;
 
 @Repository
 public interface RentalDao extends JpaRepository<Rental, Integer> {
-    List<Rental> findAllByBikeIdAndStartDateBetween(Integer bikeId, Date startDate, Date endDate);
 
-    List<Rental> findAllByUserEmail(String email);
+    Page<Rental> findAllByUserEmail(Pageable pageable, String email);
+
 }

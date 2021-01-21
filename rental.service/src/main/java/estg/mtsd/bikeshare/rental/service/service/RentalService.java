@@ -1,8 +1,8 @@
 package estg.mtsd.bikeshare.rental.service.service;
 
-import java.util.List;
-
 import estg.mtsd.bikeshare.shared.library.vo.RentalVo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 
 public interface RentalService {
@@ -15,6 +15,6 @@ public interface RentalService {
 
     RentalVo get(Integer id);
 
-    List<RentalVo> getAll(String email);
+    Page<RentalVo> getAll(Pageable pageable, String email);
 
 }
