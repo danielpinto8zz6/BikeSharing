@@ -7,9 +7,9 @@ public class FeedbackVo {
 
 	private Integer id;
 
-	private Integer userEmail;
+	private String userEmail;
 
-	private Integer travelId;
+	private Integer rentalId;
 
 	private String message;
 

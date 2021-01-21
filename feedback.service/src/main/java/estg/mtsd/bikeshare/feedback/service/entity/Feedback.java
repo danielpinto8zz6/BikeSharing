@@ -19,8 +19,8 @@ public class Feedback {
 	@Column(name = "userEmail")
 	private String userEmail;
 
-	@Column(name = "travelId")
-	private Integer travelId;
+	@Column(name = "rentalId")
+	private Integer rentalId;
 
 	@Column(name = "message")
 	private String message;
