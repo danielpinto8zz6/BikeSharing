@@ -8,13 +8,13 @@ import estg.mtsd.bikeshare.shared.library.vo.PaymentDataVo;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -93,17 +93,17 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @Transactional
-    public List<PaymentVo> getAll(String userEmail) {
-        List<Payment> paymentList = paymentDao.findAllByUserEmail(userEmail);
-        List<PaymentVo> paymentVoList = new ArrayList<>();
-        if (!paymentList.isEmpty()) {
-            for (Payment payment : paymentList) {
-                PaymentVo paymentVo = new PaymentVo();
-                BeanUtils.copyProperties(payment, paymentVo);
-                paymentVoList.add(paymentVo);
-            }
-        }
-        return paymentVoList;
+    public Page<PaymentVo> getAll(Pageable pageable, String userEmail) {
+        Page<Payment> entities = paymentDao.findAllByUserEmail(pageable, userEmail);
+
+        return entities.map(this::convertToPaymentVo);
+    }
+
+    private PaymentVo convertToPaymentVo(Payment entity) {
+        PaymentVo paymentVo = new PaymentVo();
+        BeanUtils.copyProperties(entity, paymentVo);
+
+        return paymentVo;
     }
 
 }
