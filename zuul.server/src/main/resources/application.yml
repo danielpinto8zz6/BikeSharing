@@ -9,6 +9,8 @@ spring:
 zuul:
   sensitiveHeaders: Cookie,Set-Cookie
   ribbon:
+    ConnectTimeout: 10000
+    ReadTimeout: 10000
     eager-load:
       enabled: true
   #Service will be mapped under the /api URI
