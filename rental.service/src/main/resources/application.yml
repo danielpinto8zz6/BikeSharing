@@ -23,13 +23,13 @@ spring:
   
   kafka:
     producer:
-      group-id: rental
+      group-id: dock-event
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 topic:
-  rental:
-    producer: rental
+  unlock-bike:
+    producer: unlock-bike
     
 auto:
   create:

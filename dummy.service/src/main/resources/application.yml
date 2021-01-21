@@ -18,9 +18,10 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 topic:
-  dock-event:
-    producer: dock-event
-    consumer: dock-event
+  open-dock:
+    consumer: open-dock
+  dock-closed:
+    producer: dock-closed
 
 auto:
   create:

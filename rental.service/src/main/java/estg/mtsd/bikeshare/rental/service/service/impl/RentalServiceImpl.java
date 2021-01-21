@@ -6,6 +6,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import estg.mtsd.bikeshare.rental.service.entity.Rental;
+import estg.mtsd.bikeshare.shared.library.vo.UnlockBikeEvent;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.rental.service.dao.RentalDao;
-import estg.mtsd.bikeshare.rental.service.producers.RentalProducer;
+import estg.mtsd.bikeshare.rental.service.producers.UnlockBikeEventProducer;
 import estg.mtsd.bikeshare.rental.service.service.DockServiceProxy;
 import estg.mtsd.bikeshare.rental.service.service.RentalService;
 import estg.mtsd.bikeshare.shared.library.vo.RentalVo;
@@ -28,7 +29,7 @@ public class RentalServiceImpl implements RentalService {
 	private DockServiceProxy dockService;
 
 	@Autowired
-	private RentalProducer rentalProducer;
+	private UnlockBikeEventProducer unlockBikeEventProducer;
 
 	@Override
 	@Transactional
@@ -48,7 +49,9 @@ public class RentalServiceImpl implements RentalService {
 
 		// Notify kafka to open dock and remove bike from dock
 		BeanUtils.copyProperties(rental, rentalVo);
-		rentalProducer.send(rentalVo);
+		UnlockBikeEvent event = new UnlockBikeEvent(rentalVo.getBikeId(), rentalVo.getDockId());
+
+		unlockBikeEventProducer.send(event);
 
 		return rentalVo;
 	}

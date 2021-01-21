@@ -34,8 +34,8 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 topic:
-  dock-event:
-    consumer: dock-event
+  bike-inserted:
+    consumer: bike-inserted
   rental:
     producer: rental
 
