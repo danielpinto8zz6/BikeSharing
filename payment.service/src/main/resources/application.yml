@@ -50,10 +50,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/payment
   
   kafka:
-    consumer:
-      bootstrap-servers: localhost:9094
-    producer:
-      bootstrap-servers: localhost:9094
+    bootstrap-servers: localhost:9094
 
 eureka:
   client:
@@ -68,10 +65,7 @@ spring:
     url: jdbc:postgresql://postgres-payment:5432/payment
   
   kafka:
-    consumer:
-      bootstrap-servers: kafka-0.kafka.kafka:9092
-    producer:
-      bootstrap-servers: kafka-0.kafka.kafka:9092
+    bootstrap-servers: kafka-0.kafka.kafka:9092
       
 eureka:
   client:

@@ -29,9 +29,9 @@ auto:
 ---
 spring:
   profiles: dev
+
   kafka:
-    producer:
-      bootstrap-servers: localhost:9094
+    bootstrap-servers: localhost:9094
 
 eureka:
   client:
@@ -41,9 +41,10 @@ eureka:
 ---
 spring:
   profiles: prod
+
   kafka:
-    producer:
-      bootstrap-servers: kafka-0.kafka.kafka:9092
+    bootstrap-servers: kafka-0.kafka.kafka:9092
+
 eureka:
   client:
     serviceUrl:

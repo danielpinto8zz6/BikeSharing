@@ -36,9 +36,9 @@ eureka:
 ---
 spring:
   profiles: dev
+
   kafka:
-    consumer:
-      bootstrap-servers: localhost:9094
+    bootstrap-servers: localhost:9094
 
   data:
     mongodb:
@@ -52,9 +52,9 @@ eureka:
 ---
 spring:
   profiles: prod
+  
   kafka:
-    consumer:
-      bootstrap-servers: kafka-0.kafka.kafka:9092
+    bootstrap-servers: kafka-0.kafka.kafka:9092
 
   data:
     mongodb:

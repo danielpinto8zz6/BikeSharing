@@ -42,9 +42,7 @@ spring:
     host: localhost
 
   kafka:
-    consumer:
-      auto-offset-reset: earliest
-      bootstrap-servers: localhost:9094
+    bootstrap-servers: localhost:9094
 
 eureka:
   client:
@@ -59,9 +57,7 @@ spring:
     host: redis-0.redis.default
 
   kafka:
-    consumer:
-      auto-offset-reset: earliest
-      bootstrap-servers: kafka-0.kafka.kafka:9092
+    bootstrap-servers: kafka-0.kafka.kafka:9092
 
 eureka:
   client:
