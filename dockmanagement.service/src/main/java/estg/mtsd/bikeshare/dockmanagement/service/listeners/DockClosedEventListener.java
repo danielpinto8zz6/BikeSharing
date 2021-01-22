@@ -24,7 +24,7 @@ public class DockClosedEventListener {
     @Autowired
     private BikeInsertedEventProducer bikeInsertedEventProducer;
 
-    @KafkaListener(topics = "${topic.dock-closed.consumer", groupId = "dock-management")
+    @KafkaListener(topics = "${topic.dock-closed.consumer}", groupId = "dock-management")
     public void consume(ConsumerRecord<String, String> payload) {
         DockClosedEvent event = JsonUtils.fromJson(payload.value(), DockClosedEvent.class);
 

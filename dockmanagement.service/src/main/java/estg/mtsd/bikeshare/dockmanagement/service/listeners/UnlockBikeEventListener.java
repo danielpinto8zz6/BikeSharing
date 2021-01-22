@@ -22,7 +22,7 @@ public class UnlockBikeEventListener {
     @Autowired
     OpenDockEventProducer openDockEventProducer;
 
-    @KafkaListener(topics = "${topic.unlock-bike.consumer", groupId = "dock-management")
+    @KafkaListener(topics = "${topic.unlock-bike.consumer}", groupId = "dock-management")
     public void consume(ConsumerRecord<String, String> payload) {
         UnlockBikeEvent event = JsonUtils.fromJson(payload.value(), UnlockBikeEvent.class);
 

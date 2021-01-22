@@ -18,9 +18,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class NotificationListener {
 
-    @Value("${topic.notification.consumer")
-    private String topicName;
-
     @Autowired
     FirebaseMessagingService messagingService;
 
@@ -29,12 +26,6 @@ public class NotificationListener {
 
     @KafkaListener(topics = "${topic.notification.consumer}", groupId = "notification")
     public void consume(ConsumerRecord<String, String> payload) {
-        log.info("Tópico: " + topicName);
-        log.info("key: " + payload.key());
-        log.info("Headers: " + payload.headers());
-        log.info("Partion: " + payload.partition());
-        log.info("Order: " + payload.value());
-
         NotificationVo notificationVo = JsonUtils.fromJson(payload.value(), NotificationVo.class);
 
         if (notificationVo.getEmail() != null) {

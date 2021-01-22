@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OpenDockEventListener {
 
-    @Value("${topic.open-dock.consumer")
+    @Value("${topic.open-dock.consumer}")
     private String topicName;
 
     @KafkaListener(topics = "${topic.open-dock.consumer}", groupId = "dummy")

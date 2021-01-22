@@ -16,13 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class PaymentRequestListener {
-
-    @Value("${topic.payment-request.consumer")
-    private String topicName;
 
     @Autowired
     PaymentService paymentService;
@@ -32,12 +28,6 @@ public class PaymentRequestListener {
 
     @KafkaListener(topics = "${topic.payment-request.consumer}", groupId = "payment-process")
     public void consume(ConsumerRecord<String, String> payload) {
-        log.info("Tópico: " + topicName);
-        log.info("key: " + payload.key());
-        log.info("Headers: " + payload.headers());
-        log.info("Partion: " + payload.partition());
-        log.info("Order: " + payload.value());
-
         PaymentRequestVo paymentRequestVo = JsonUtils.fromJson(payload.value(), PaymentRequestVo.class);
 
         PaymentVo paymentVo = new PaymentVo();

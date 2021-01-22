@@ -16,22 +16,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class PaymentListener {
-
-    @Value("${topic.payment.consumer")
-    private String topicName;
-
     @Autowired
     PaymentEventProducer paymentEventProducer;
 
 
     @KafkaListener(topics = "${topic.payment.consumer}", groupId = "payment-validator")
     public void consume(ConsumerRecord<String, String> payload) {
-        log.info("Tópico: " + topicName);
-        log.info("key: " + payload.key());
-        log.info("Headers: " + payload.headers());
-        log.info("Partion: " + payload.partition());
-        log.info("Order: " + payload.value());
-
         PaymentVo payment = JsonUtils.fromJson(payload.value(), PaymentVo.class);
 
         paymentEventProducer.send(new PaymentEvent(payment.getId(), PaymentEvent.PaymentStatus.PAYMENT_SUCCEED));

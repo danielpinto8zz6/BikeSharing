@@ -19,17 +19,9 @@ public class TravelEventListener {
     @Autowired
     TravelEventService travelEventService;
 
-    @Value("${topic.name.consumer")
-    private String topicName;
 
     @KafkaListener(topics = "${topic.name.consumer}", groupId = "travel-history-process")
     public void consume(ConsumerRecord<String, String> payload) {
-        log.info("Tópico: " + topicName);
-        log.info("key: " + payload.key());
-        log.info("Headers: " + payload.headers());
-        log.info("Partion: " + payload.partition());
-        log.info("Order: " + payload.value());
-
         TravelEventVo travelEvent = JsonUtils.fromJson(payload.value(), TravelEventVo.class);
 
         travelEventService.save(travelEvent);
