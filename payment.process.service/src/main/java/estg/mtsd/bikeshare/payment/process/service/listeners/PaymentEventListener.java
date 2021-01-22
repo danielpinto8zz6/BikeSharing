@@ -39,7 +39,7 @@ public class PaymentEventListener {
         PaymentEvent paymentEvent = JsonUtils.fromJson(payload.value(), PaymentEvent.class);
 
         PaymentVo paymentVo = paymentService.get(paymentEvent.getId());
-        NotificationVo notificationVo = null;
+        NotificationVo notificationVo;
         if (paymentVo != null) {
             switch (paymentEvent.getStatus()) {
                 case PAYMENT_SUCCEED:
