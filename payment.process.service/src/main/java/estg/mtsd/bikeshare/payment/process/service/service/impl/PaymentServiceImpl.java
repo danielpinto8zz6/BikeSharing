@@ -9,7 +9,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import estg.mtsd.bikeshare.payment.process.service.dao.PaymentDao;
-import estg.mtsd.bikeshare.payment.process.service.entity.Invoice;
 import estg.mtsd.bikeshare.payment.process.service.entity.Payment;
 import estg.mtsd.bikeshare.payment.process.service.service.PaymentService;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentVo;

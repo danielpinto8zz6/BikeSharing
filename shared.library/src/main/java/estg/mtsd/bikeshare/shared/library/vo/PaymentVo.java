@@ -26,6 +26,10 @@ public class PaymentVo {
 
     private String userEmail;
 
-    private InvoiceVo invoiceVo;
+    private String name;
+
+    private Integer taxNumber;
+
+    private String company;
 
 }

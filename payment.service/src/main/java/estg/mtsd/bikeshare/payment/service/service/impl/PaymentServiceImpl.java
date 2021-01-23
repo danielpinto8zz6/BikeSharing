@@ -35,10 +35,10 @@ public class PaymentServiceImpl implements PaymentService {
             Payment payment = new Payment();
 
             payment.setStatus(PaymentVo.VALIDATING_PAYMENT);
-            payment.getInvoice().setCompany(paymentDataVo.getCompany());
-            payment.getInvoice().setName(paymentDataVo.getName());
-            payment.getInvoice().setTaxNumber(paymentDataVo.getTaxNumber());
-            payment.getInvoice().setTimestamp(new Date());
+            payment.setCompany(paymentDataVo.getCompany());
+            payment.setName(paymentDataVo.getName());
+            payment.setTaxNumber(paymentDataVo.getTaxNumber());
+            payment.setTimestamp(new Date());
 
             payment = paymentDao.save(payment);
 
