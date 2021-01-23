@@ -26,7 +26,9 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	@Transactional
 	public void save(PaymentVo paymentVo) {
+		Invoice invoice = new Invoice();
 		Payment payment = new Payment();
+		payment.setInvoice(invoice);
 		BeanUtils.copyProperties(paymentVo, payment);
 		paymentDao.save(payment);
 	}
