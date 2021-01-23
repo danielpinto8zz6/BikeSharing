@@ -5,12 +5,12 @@ import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 
+import estg.mtsd.bikeshare.shared.library.vo.BikeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import estg.mtsd.bikeshare.bikemanagement.service.service.BikeService;
-import estg.mtsd.bikeshare.bikemanagement.service.vo.BikeVo;
 
 @RestController
 public class BikeController {

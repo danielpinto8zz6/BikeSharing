@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
+import estg.mtsd.bikeshare.shared.library.vo.BikeVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import estg.mtsd.bikeshare.bikemanagement.service.dao.BikeDao;
 import estg.mtsd.bikeshare.bikemanagement.service.entity.Bike;
 import estg.mtsd.bikeshare.bikemanagement.service.service.BikeService;
-import estg.mtsd.bikeshare.bikemanagement.service.vo.BikeVo;
 
 @Service
 public class BikeServiceImpl implements BikeService {
