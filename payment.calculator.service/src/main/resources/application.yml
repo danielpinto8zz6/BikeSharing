@@ -24,7 +24,7 @@ security:
 
 topic:
   rental:
-    consumer: rental-payment
+    consumer: rental
   payment-request:
     producer: payment-request
 

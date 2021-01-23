@@ -3,11 +3,15 @@ package estg.mtsd.bikeshare.dummy.service.listeners;
 import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import estg.mtsd.bikeshare.shared.library.vo.OpenDockEvent;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class OpenDockEventListener {
@@ -20,6 +24,6 @@ public class OpenDockEventListener {
 
         OpenDockEvent event = JsonUtils.fromJson(payload.value(), OpenDockEvent.class);
 
-        System.out.println("Opening dock: " + event.getDockId());
+        log.info("Opening dock: " + event.getDockId());
     }
 }

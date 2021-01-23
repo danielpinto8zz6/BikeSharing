@@ -1,12 +1,12 @@
 package estg.mtsd.bikeshare.shared.library.vo;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
 public class UnlockBikeEvent extends BikeShareEvent {
     public UnlockBikeEvent(Integer bikeId, Integer dockId) {
         this.setBikeId(bikeId);

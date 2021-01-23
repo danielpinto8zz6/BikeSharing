@@ -25,28 +25,21 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	@Transactional
 	public void save(PaymentVo paymentVo) {
-		Integer id = paymentVo.getId();
-		boolean objectAlreadyExists=paymentDao.existsById(id);
-		if(!objectAlreadyExists) {
-			Payment payment = new Payment();
-			BeanUtils.copyProperties(paymentVo, payment);
-			paymentDao.save(payment);
-		}else {
-			throw new EntityExistsException();
-		}
-		
+		Payment payment = new Payment();
+		BeanUtils.copyProperties(paymentVo, payment);
+		paymentDao.save(payment);
 	}
 
 	@Override
 	@Transactional
 	public void update(PaymentVo paymentVo) {
 		Integer id = paymentVo.getId();
-		boolean objectExists=paymentDao.existsById(id);
-		if(objectExists) {
+		boolean objectExists = paymentDao.existsById(id);
+		if (objectExists) {
 			Payment payment = new Payment();
 			BeanUtils.copyProperties(paymentVo, payment);
 			paymentDao.save(payment);
-		}else {
+		} else {
 			throw new EntityNotFoundException();
 		}
 	}
@@ -54,10 +47,10 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	@Transactional
 	public void delete(Integer id) {
-		boolean objectExists=paymentDao.existsById(id);
-		if(objectExists) {
+		boolean objectExists = paymentDao.existsById(id);
+		if (objectExists) {
 			paymentDao.deleteById(id);
-		}else {
+		} else {
 			throw new EntityNotFoundException();
 		}
 	}
@@ -67,10 +60,10 @@ public class PaymentServiceImpl implements PaymentService {
 	public PaymentVo get(Integer id) {
 		Optional<Payment> paymentOptional = paymentDao.findById(id);
 		PaymentVo paymentVo;
-		if(paymentOptional.isPresent()) {
+		if (paymentOptional.isPresent()) {
 			paymentVo = new PaymentVo();
 			BeanUtils.copyProperties(paymentOptional.get(), paymentVo);
-		}else {
+		} else {
 			throw new EntityNotFoundException();
 		}
 
@@ -93,4 +86,3 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 }
-
