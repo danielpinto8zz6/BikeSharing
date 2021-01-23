@@ -28,7 +28,7 @@ public class UnlockBikeEventListener {
 
         DockVo dock = dockService.get(event.getDockId());
         if (dock != null) {
-            dock.setBikeId(null);
+            dock.setBikeId(-1);
 
             dockService.update(dock);
 
