@@ -9,6 +9,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import estg.mtsd.bikeshare.payment.process.service.dao.PaymentDao;
+import estg.mtsd.bikeshare.payment.process.service.entity.Invoice;
 import estg.mtsd.bikeshare.payment.process.service.entity.Payment;
 import estg.mtsd.bikeshare.payment.process.service.service.PaymentService;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentVo;
@@ -25,7 +26,9 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	@Transactional
 	public void save(PaymentVo paymentVo) {
+		Invoice invoice = new Invoice();
 		Payment payment = new Payment();
+		payment.setInvoice(invoice);
 		BeanUtils.copyProperties(paymentVo, payment);
 		paymentDao.save(payment);
 	}
