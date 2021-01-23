@@ -1,4 +1,4 @@
-package estg.mtsd.bikeshare.bikemanagement.service.entity;
+package estg.mtsd.bikeshare.bike.validator.service.entity;
 
 import lombok.Data;
 

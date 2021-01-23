@@ -1,9 +1,6 @@
 package estg.mtsd.bikeshare.dockmanagement.service.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 
@@ -13,6 +10,7 @@ import lombok.Data;
 public class Dock {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id")
 	private Integer id ;
 

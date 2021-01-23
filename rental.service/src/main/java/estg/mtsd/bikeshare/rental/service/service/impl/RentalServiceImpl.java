@@ -6,7 +6,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import estg.mtsd.bikeshare.rental.service.entity.Rental;
-import estg.mtsd.bikeshare.shared.library.vo.UnlockBikeEvent;
+import estg.mtsd.bikeshare.shared.library.vo.ValidateBikeEvent;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,8 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import estg.mtsd.bikeshare.rental.service.dao.RentalDao;
-import estg.mtsd.bikeshare.rental.service.producers.UnlockBikeEventProducer;
-import estg.mtsd.bikeshare.rental.service.service.DockServiceProxy;
+import estg.mtsd.bikeshare.rental.service.producers.ValidateBikeEventProducer;
 import estg.mtsd.bikeshare.rental.service.service.RentalService;
 import estg.mtsd.bikeshare.shared.library.vo.RentalVo;
 
@@ -26,32 +25,20 @@ public class RentalServiceImpl implements RentalService {
 	RentalDao rentalDao;
 
 	@Autowired
-	private DockServiceProxy dockService;
-
-	@Autowired
-	private UnlockBikeEventProducer unlockBikeEventProducer;
+	private ValidateBikeEventProducer validateBikeEventProducer;
 
 	@Override
 	@Transactional
 	public RentalVo rental(RentalVo rentalVo) throws Exception {
-		Integer dockId = rentalVo.getDockId();
-		Integer bikeId = rentalVo.getBikeId();
-
-		// Check if bike is still available
-		boolean isBikeAvailable = dockService.dockHasBike(dockId, bikeId);
-		if (!isBikeAvailable) {
-			throw new Exception("Bike is not available!");
-		}
 
 		Rental rental = new Rental();
 		BeanUtils.copyProperties(rentalVo, rental);
 		rentalDao.save(rental);
 
-		// Notify kafka to open dock and remove bike from dock
 		BeanUtils.copyProperties(rental, rentalVo);
-		UnlockBikeEvent event = new UnlockBikeEvent(rentalVo.getBikeId(), rentalVo.getDockId());
+		ValidateBikeEvent event = new ValidateBikeEvent(rentalVo.getUserEmail(), rentalVo.getBikeId(), rentalVo.getDockId(), rentalVo.getBikeCode());
 
-		unlockBikeEventProducer.send(event);
+		validateBikeEventProducer.send(event);
 
 		return rentalVo;
 	}

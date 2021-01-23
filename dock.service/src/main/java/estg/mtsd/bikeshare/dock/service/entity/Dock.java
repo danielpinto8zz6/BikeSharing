@@ -31,4 +31,7 @@ public class Dock {
 	@Column(name = "bike_id")
 	private Integer bikeId;
 
+	@Column(name = "bike_code")
+	private String bikeCode;
+
 }

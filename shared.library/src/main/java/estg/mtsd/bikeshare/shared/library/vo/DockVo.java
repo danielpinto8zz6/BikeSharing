@@ -5,13 +5,15 @@ import lombok.Data;
 @Data
 public class DockVo {
 
-	private Integer id ;
+    private Integer id;
 
-	private Long latitude ;
+    private Long latitude;
 
-	private Long longitude ;
+    private Long longitude;
 
-	private String location ;
+    private String location;
 
-	private Integer bikeId ;
+    private Integer bikeId;
+
+    private String bikeCode;
 }

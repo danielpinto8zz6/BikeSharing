@@ -28,8 +28,8 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 topic:
-  unlock-bike:
-    producer: unlock-bike
+  validate-bike:
+    producer: validate-bike
     
 auto:
   create:

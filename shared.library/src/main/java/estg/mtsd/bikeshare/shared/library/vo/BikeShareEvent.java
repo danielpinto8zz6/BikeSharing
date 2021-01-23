@@ -6,6 +6,9 @@ import java.util.Date;
 
 @Data
 abstract class BikeShareEvent {
+
+    String userEmail;
+    
     Integer bikeId;
 
     Integer dockId;

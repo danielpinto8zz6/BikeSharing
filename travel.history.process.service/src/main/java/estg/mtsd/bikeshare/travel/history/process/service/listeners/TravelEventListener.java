@@ -20,7 +20,7 @@ public class TravelEventListener {
     TravelEventService travelEventService;
 
 
-    @KafkaListener(topics = "${topic.name.consumer}", groupId = "travel-history-process")
+    @KafkaListener(topics = "${topic.travel-event.consumer}", groupId = "travel-history-process")
     public void consume(ConsumerRecord<String, String> payload) {
         TravelEventVo travelEvent = JsonUtils.fromJson(payload.value(), TravelEventVo.class);
 

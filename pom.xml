@@ -31,6 +31,7 @@
         <module>dummy.service</module>
         <module>token.manager</module>
         <module>notifications.service</module>
+        <module>bike.validator.service</module>
     </modules>
 
     <build>

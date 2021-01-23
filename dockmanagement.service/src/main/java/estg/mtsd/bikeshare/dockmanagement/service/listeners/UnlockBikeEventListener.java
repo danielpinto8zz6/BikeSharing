@@ -4,6 +4,7 @@ import estg.mtsd.bikeshare.dockmanagement.service.producers.OpenDockEventProduce
 import estg.mtsd.bikeshare.dockmanagement.service.service.DockService;
 import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import estg.mtsd.bikeshare.shared.library.vo.DockVo;
+import estg.mtsd.bikeshare.shared.library.vo.NotificationVo;
 import estg.mtsd.bikeshare.shared.library.vo.OpenDockEvent;
 import estg.mtsd.bikeshare.shared.library.vo.UnlockBikeEvent;
 import lombok.RequiredArgsConstructor;
@@ -24,16 +25,27 @@ public class UnlockBikeEventListener {
 
     @KafkaListener(topics = "${topic.unlock-bike.consumer}", groupId = "dock-management")
     public void consume(ConsumerRecord<String, String> payload) {
+
         UnlockBikeEvent event = JsonUtils.fromJson(payload.value(), UnlockBikeEvent.class);
 
-        DockVo dock = dockService.get(event.getDockId());
-        if (dock != null) {
-            dock.setBikeId(null);
+        if (event != null) {
+            DockVo dock = dockService.get(event.getDockId());
+            if (dock != null) {
+                Integer dockId = dock.getId();
+                Integer bikeId = dock.getBikeId();
 
-            dockService.update(dock);
+                dock.setBikeId(null);
+                dock.setBikeCode(null);
 
-            OpenDockEvent openDockEvent = new OpenDockEvent(dock.getBikeId(), dock.getId());
-            openDockEventProducer.send(openDockEvent);
+                dockService.update(dock);
+
+                OpenDockEvent openDockEvent = new OpenDockEvent(bikeId, dockId);
+                openDockEventProducer.send(openDockEvent);
+
+                NotificationVo notificationVo = new NotificationVo();
+                notificationVo.setEmail(event.getUserEmail());
+                notificationVo.setTitle("Enjoy your ride!");
+            }
         }
     }
 }

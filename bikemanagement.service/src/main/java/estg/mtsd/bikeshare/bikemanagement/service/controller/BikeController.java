@@ -7,15 +7,7 @@ import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import estg.mtsd.bikeshare.bikemanagement.service.service.BikeService;
 import estg.mtsd.bikeshare.bikemanagement.service.vo.BikeVo;
@@ -28,7 +20,7 @@ public class BikeController {
 
 	@PostMapping("bike")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void save(BikeVo bikeVo) {
+	public void save(@RequestBody BikeVo bikeVo) {
 		bikeService.save(bikeVo);
 	}
 
@@ -43,7 +35,7 @@ public class BikeController {
 	}
 	
 	@PutMapping("bike")
-	public void update(BikeVo bikeVo) {
+	public void update(@RequestBody BikeVo bikeVo) {
 		bikeService.update(bikeVo);
 	}
 	

@@ -14,7 +14,7 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 topic:
-  name:
+  travel-event:
     consumer: travel-event
 
 auto:

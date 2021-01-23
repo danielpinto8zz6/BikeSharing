@@ -1,16 +1,17 @@
 server:
-  port: 8900
+  port: 9900
 spring:
   profiles:
     active: "dev"
   application:
-    name: dock-management-service
+    name: bike-validator-service
 
   datasource:
     initialization-mode: always
     password: Pass2020!
     platform: postgres
     username: postgres
+
   jpa:
     generate-dll: true
     hibernate:
@@ -23,23 +24,19 @@ spring:
   kafka:
     consumer:
       auto-offset-reset: earliest
-      group-id: dock-management
+      group-id: bike-validator
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     producer:
-      group-id: dock-management
+      group-id: bike-validator
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 topic:
-  bike-inserted:
-    producer: bike-inserted
+  validate-bike:
+    producer: validate-bike
   unlock-bike:
-    consumer: unlock-bike
-  open-dock:
-    producer: open-dock
-  dock-closed:
-    consumer: dock-closed
+    producer: unlock-bike
   notification:
     producer: notification
 
@@ -51,7 +48,7 @@ auto:
 eureka:
   instance:
     preferIpAddress: true
-    hostname: dock-management-service
+    hostname: bike-validator-service
   client:
     registerWithEureka: true
     fetchRegistry: true
@@ -61,7 +58,7 @@ spring:
   profiles: dev
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/dock
+    url: jdbc:postgresql://localhost:5432/bike
 
   kafka:
     bootstrap-servers: localhost:9094
@@ -76,7 +73,7 @@ spring:
   profiles: prod
 
   datasource:
-    url: jdbc:postgresql://postgres-dock:5432/dock
+    url: jdbc:postgresql://postgres-dock:5432/bike
 
   kafka:
     bootstrap-servers: kafka-0.kafka.kafka:9092
@@ -85,4 +82,5 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka:8761/eureka
+
 

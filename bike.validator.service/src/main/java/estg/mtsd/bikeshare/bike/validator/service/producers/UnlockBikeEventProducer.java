@@ -1,13 +1,12 @@
-package estg.mtsd.bikeshare.rental.service.producers;
+package estg.mtsd.bikeshare.bike.validator.service.producers;
 
+import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import estg.mtsd.bikeshare.shared.library.vo.UnlockBikeEvent;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-
-import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -21,6 +20,6 @@ public class UnlockBikeEventProducer {
     public void send(UnlockBikeEvent event) {
         kafkaTemplate.send(topicName, JsonUtils.toJson(event));
 
-        log.info("Adding dock event to queue!");
+        log.info("Adding unlock bike event to queue!");
     }
 }

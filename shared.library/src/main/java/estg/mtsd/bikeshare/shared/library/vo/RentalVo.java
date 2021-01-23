@@ -13,6 +13,8 @@ public class RentalVo {
 
 	private Integer bikeId;
 
+	private String bikeCode;
+
 	private String userEmail;
 
 	private Date startDate;

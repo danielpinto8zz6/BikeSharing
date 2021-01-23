@@ -21,6 +21,7 @@
 | token-manager  | 9700  |
 | token-manager  | 9700  |
 | notification-service  | 9800  |
+| bike-validator-service  | 9900  |
 | zuul-server  | 9090  |
 | eureka-server  | 8761  ||
 

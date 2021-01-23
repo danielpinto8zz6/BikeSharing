@@ -59,7 +59,7 @@ public class BikeServiceImpl implements BikeService {
     @Transactional
     public BikeVo get(Integer id) {
         Optional<Bike> bikeOptional = bikeDao.findById(id);
-        BikeVo bikeVo = null;
+        BikeVo bikeVo;
         if (bikeOptional.isPresent()) {
             bikeVo = new BikeVo();
             BeanUtils.copyProperties(bikeOptional.get(), bikeVo);

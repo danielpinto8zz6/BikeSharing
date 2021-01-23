@@ -7,11 +7,15 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-public class BikeInsertedEvent extends BikeShareEvent {
+public class ValidateBikeEvent extends BikeShareEvent {
 
-    public BikeInsertedEvent(Integer bikeId, Integer dockId) {
+    private String bikeCode;
+
+    public ValidateBikeEvent(String userEmail, Integer bikeId, Integer dockId, String bikeCode) {
+        this.setUserEmail(userEmail);
         this.setBikeId(bikeId);
         this.setDockId(dockId);
+        this.setBikeCode(bikeCode);
         this.setTimestamp(new Date());
     }
 }
