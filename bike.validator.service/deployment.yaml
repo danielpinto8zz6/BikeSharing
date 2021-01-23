@@ -1,0 +1,42 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: bike-validator-service
+  labels:
+    app: bike-validator-service
+spec:
+  selector:
+    app: bike-validator-service
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 9900
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bike-validator-service
+  labels:
+    app: bike-validator-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bike-validator-service
+  template:
+    metadata:
+      labels:
+        app: bike-validator-service
+    spec:
+      containers:
+        - name: bike-validator-service
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/bike-validator-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9900
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+      imagePullSecrets: 
+      - name: gitlab-auth
