@@ -28,8 +28,8 @@ eureka:
     fetchRegistry: true
   instance:
     preferIpAddress: true
-    hostname: bike-management
-
+    hostname: bike-management-service
+    
 ---
 spring:
   profiles: dev
