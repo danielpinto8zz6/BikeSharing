@@ -23,7 +23,7 @@ public class PaymentController {
 
     @PostMapping("payment")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void save(PaymentDataVo paymentDataVo) {
+    public void save(@RequestBody  PaymentDataVo paymentDataVo) {
         paymentService.save(paymentDataVo);
     }
 
