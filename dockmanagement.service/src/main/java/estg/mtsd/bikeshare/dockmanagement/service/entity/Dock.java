@@ -15,10 +15,10 @@ public class Dock {
 	private Integer id ;
 
 	@Column(name="latitude")
-	private Long latitude ;
+	private Double latitude ;
 
 	@Column(name="longitude")
-	private Long longitude ;
+	private Double longitude ;
 
 	@Column(name="location")
 	private String location ;

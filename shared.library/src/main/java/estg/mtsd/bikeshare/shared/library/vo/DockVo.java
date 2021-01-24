@@ -7,12 +7,12 @@ public class DockVo {
 
     private Integer id;
 
-    private Long latitude;
+    private Double latitude;
 
-    private Long longitude;
+    private Double longitude;
 
     private String location;
 
     private Integer bikeId;
-    
+
 }
