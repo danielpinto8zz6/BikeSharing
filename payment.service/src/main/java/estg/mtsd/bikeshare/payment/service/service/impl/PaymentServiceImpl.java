@@ -6,6 +6,7 @@ import estg.mtsd.bikeshare.payment.service.producers.PaymentProducer;
 import estg.mtsd.bikeshare.payment.service.service.PaymentService;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentDataVo;
 import estg.mtsd.bikeshare.shared.library.vo.PaymentVo;
+import org.checkerframework.checker.nullness.Opt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,15 +31,13 @@ public class PaymentServiceImpl implements PaymentService {
     @Transactional
     public void save(PaymentDataVo paymentDataVo) {
         Integer id = paymentDataVo.getPaymentId();
-        boolean objectExists = paymentDao.existsById(id);
-        if (objectExists) {
-            Payment payment = new Payment();
-
+        Optional<Payment> paymentOptional = paymentDao.findById(id);
+        if (paymentOptional.isPresent()) {
+            Payment payment = paymentOptional.get();
             payment.setStatus(PaymentVo.VALIDATING_PAYMENT);
             payment.setCompany(paymentDataVo.getCompany());
             payment.setName(paymentDataVo.getName());
             payment.setTaxNumber(paymentDataVo.getTaxNumber());
-            payment.setTimestamp(new Date());
 
             payment = paymentDao.save(payment);
 
