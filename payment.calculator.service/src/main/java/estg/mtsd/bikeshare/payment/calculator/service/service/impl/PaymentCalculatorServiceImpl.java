@@ -11,7 +11,7 @@ import estg.mtsd.bikeshare.payment.calculator.service.service.PaymentCalculatorS
 @Service
 public class PaymentCalculatorServiceImpl implements PaymentCalculatorService {
 
-	private static final double PRICE_PER_MINUTE_IN_FIRST_15_MINUTES = 0.5;
+	private static final double PRICE_PER_MINUTE_IN_FIRST_15_MINUTES = 0.05;
 	private static final double PRICE_PER_MINUTE_AFTER_15_MINUTES = 0.1;
 
 	@Override
