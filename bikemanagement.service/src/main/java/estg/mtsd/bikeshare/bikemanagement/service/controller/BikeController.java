@@ -26,7 +26,10 @@ public class BikeController {
 
 	@GetMapping("bike/{id}")
 	public BikeVo get( @PathVariable Integer id) {
-		return bikeService.get(id);
+		BikeVo bikeVo = bikeService.get(id);
+		bikeVo.setCode(null);
+
+		return bikeVo;
 	}
 
 	@GetMapping("bike")
