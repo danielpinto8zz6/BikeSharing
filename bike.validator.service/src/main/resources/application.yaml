@@ -34,7 +34,7 @@ spring:
 
 topic:
   validate-bike:
-    producer: validate-bike
+    consumer: validate-bike
   unlock-bike:
     producer: unlock-bike
   notification:
