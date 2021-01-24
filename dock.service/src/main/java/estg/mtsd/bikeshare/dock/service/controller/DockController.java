@@ -30,11 +30,6 @@ public class DockController {
 	@Autowired
 	DockService dockService;
 
-	@GetMapping("/hasBike")
-	public Boolean dockHasBike(@RequestParam("dockId") Integer dockId, @RequestParam("bikeId") Integer bikeId) {
-		return dockService.dockHasBike(dockId, bikeId);
-	}
-
 	@PostMapping()
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void save(@RequestBody DockVo dockVo) {
