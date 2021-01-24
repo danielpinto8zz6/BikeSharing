@@ -40,7 +40,7 @@ zuul:
       rental-service:
           path: /rental/**
           serviceId: rental-service
-      bikemanagement-service:
+      bike-management-service:
           path: /bike-management/**
           serviceId: bike-management-service
       dummy-service:
