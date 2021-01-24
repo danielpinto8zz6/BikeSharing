@@ -1,5 +1,6 @@
 package estg.mtsd.bikeshare.dockmanagement.service.listeners;
 
+import estg.mtsd.bikeshare.dockmanagement.service.producers.NotificationProducer;
 import estg.mtsd.bikeshare.dockmanagement.service.producers.OpenDockEventProducer;
 import estg.mtsd.bikeshare.dockmanagement.service.service.DockService;
 import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
@@ -23,6 +24,9 @@ public class UnlockBikeEventListener {
     @Autowired
     OpenDockEventProducer openDockEventProducer;
 
+    @Autowired
+    NotificationProducer notificationProducer;
+
     @KafkaListener(topics = "${topic.unlock-bike.consumer}", groupId = "dock-management")
     public void consume(ConsumerRecord<String, String> payload) {
 
@@ -44,6 +48,8 @@ public class UnlockBikeEventListener {
                 NotificationVo notificationVo = new NotificationVo();
                 notificationVo.setEmail(event.getUserEmail());
                 notificationVo.setTitle("Enjoy your ride!");
+
+                notificationProducer.send(notificationVo);
             }
         }
     }
