@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class ValidateBikeEventListener {
@@ -29,7 +28,7 @@ public class ValidateBikeEventListener {
     @Autowired
     NotificationProducer notificationProducer;
 
-    @KafkaListener(topics = "${topic.name.consumer}", groupId = "travel-history-process")
+    @KafkaListener(topics = "${topic.validate-bike.consumer}", groupId = "travel-history-process")
     public void consume(ConsumerRecord<String, String> payload) {
         ValidateBikeEvent event = JsonUtils.fromJson(payload.value(), ValidateBikeEvent.class);
 
