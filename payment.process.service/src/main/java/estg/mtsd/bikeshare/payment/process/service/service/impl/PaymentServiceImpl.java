@@ -23,10 +23,15 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Override
 	@Transactional
-	public void save(PaymentVo paymentVo) {
+	public PaymentVo save(PaymentVo paymentVo) {
 		Payment payment = new Payment();
 		BeanUtils.copyProperties(paymentVo, payment);
-		paymentDao.save(payment);
+
+		payment = paymentDao.save(payment);
+
+		BeanUtils.copyProperties(payment, paymentVo);
+
+		return paymentVo;
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class PaymentRequestListener {
         paymentVo.setValue(paymentRequestVo.getValue());
         paymentVo.setUserEmail(paymentRequestVo.getUserEmail());
 
-        paymentService.save(paymentVo);
+        paymentVo = paymentService.save(paymentVo);
 
         NotificationVo notificationVo = new NotificationVo();
         notificationVo.setEmail(paymentVo.getUserEmail());
