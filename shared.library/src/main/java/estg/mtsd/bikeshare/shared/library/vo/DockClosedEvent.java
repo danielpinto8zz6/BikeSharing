@@ -9,12 +9,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class DockClosedEvent extends BikeShareEvent {
 
-    private String bikeCode;
-
-    public DockClosedEvent(Integer bikeId, Integer dockId, String bikeCode) {
+    public DockClosedEvent(Integer bikeId, Integer dockId) {
         this.setBikeId(bikeId);
         this.setDockId(dockId);
-        this.setBikeCode(bikeCode);
         this.setTimestamp(new Date());
     }
 }

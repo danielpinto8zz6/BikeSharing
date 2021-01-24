@@ -35,7 +35,6 @@ public class UnlockBikeEventListener {
                 Integer bikeId = dock.getBikeId();
 
                 dock.setBikeId(null);
-                dock.setBikeCode(null);
 
                 dockService.update(dock);
 

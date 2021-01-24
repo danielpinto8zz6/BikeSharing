@@ -8,7 +8,8 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 public class UnlockBikeEvent extends BikeShareEvent {
-    public UnlockBikeEvent(Integer bikeId, Integer dockId) {
+    public UnlockBikeEvent(String userEmail, Integer bikeId, Integer dockId) {
+        this.setUserEmail(userEmail);
         this.setBikeId(bikeId);
         this.setDockId(dockId);
         this.setTimestamp(new Date());

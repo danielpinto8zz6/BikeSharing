@@ -35,7 +35,6 @@ public class DockClosedEventListener {
             }
 
             dock.setBikeId(event.getBikeId());
-            dock.setBikeCode(event.getBikeCode());
 
             dockService.update(dock);
 

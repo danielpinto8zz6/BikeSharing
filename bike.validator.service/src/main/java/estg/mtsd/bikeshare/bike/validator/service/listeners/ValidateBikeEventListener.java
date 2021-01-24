@@ -34,9 +34,9 @@ public class ValidateBikeEventListener {
 
         if (event != null) {
             BikeVo bikeVo = bikeService.get(event.getBikeId());
-            if (bikeVo != null && bikeVo.getCode().equals(event.getBikeCode())) {
+            if (bikeVo != null && bikeVo.getCode().equalsIgnoreCase(event.getBikeCode())) {
 
-                UnlockBikeEvent unlockBikeEvent = new UnlockBikeEvent(event.getBikeId(), event.getDockId());
+                UnlockBikeEvent unlockBikeEvent = new UnlockBikeEvent(event.getUserEmail(), event.getBikeId(), event.getDockId());
                 unlockBikeEventProducer.send(unlockBikeEvent);
 
                 return;

@@ -14,6 +14,5 @@ public class DockVo {
     private String location;
 
     private Integer bikeId;
-
-    private String bikeCode;
+    
 }
