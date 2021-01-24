@@ -73,7 +73,7 @@ spring:
   profiles: prod
 
   datasource:
-    url: jdbc:postgresql://postgres-dock:5432/bike
+    url: jdbc:postgresql://postgres-bike:5432/bike
 
   kafka:
     bootstrap-servers: kafka-0.kafka.kafka:9092
