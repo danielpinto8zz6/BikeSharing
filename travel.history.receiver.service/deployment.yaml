@@ -40,12 +40,9 @@ spec:
             - name: JVM_OPTS
               value: "-Xms1g -Xmx1g"
           resources:
-            requests:
-              memory: "128Mi"
-              cpu: "128m"
             limits:
-              memory: "512Mi"
-              cpu: "256m"
+              memory: "256Mi"
+              cpu: "64m"
       imagePullSecrets:
         - name: gitlab-auth
 ---
@@ -64,7 +61,7 @@ spec:
   metrics: 
   - type: Resource 
     resource: 
-      name: memory 
+      name: cpu 
       target:
         type: Utilization
         averageUtilization: 80

@@ -1,7 +1,6 @@
 package estg.mtsd.bikeshare.dummy.service.producers;
 
 import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
-import estg.mtsd.bikeshare.shared.library.vo.BikeInsertedEvent;
 import estg.mtsd.bikeshare.shared.library.vo.DockClosedEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
