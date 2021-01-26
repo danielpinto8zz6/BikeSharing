@@ -40,8 +40,8 @@ spec:
               value: "prod"
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "512m"
+              memory: "256Mi"
+
       imagePullSecrets: 
       - name: gitlab-auth
 ---
@@ -60,7 +60,7 @@ spec:
   metrics: 
   - type: Resource 
     resource: 
-      name: cpu 
+      name: memory 
       target:
         type: Utilization
         averageUtilization: 80
