@@ -4,6 +4,7 @@ metadata:
   name: postgres-dock-pv-volume
   labels:
     type: local
+    app: postgres-dock
 spec:
   storageClassName: manual                    # Storage class. A PV Claim requesting the same storageClass can be bound to this volume.
   capacity:
