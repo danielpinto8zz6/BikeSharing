@@ -36,8 +36,7 @@ metadata:
     app: eureka
 spec:
   serviceName: 'eureka'
-  # n instances
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: eureka
