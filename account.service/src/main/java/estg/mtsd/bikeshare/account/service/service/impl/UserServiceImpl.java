@@ -58,6 +58,9 @@ public class UserServiceImpl implements UserService {
 		if (objectExists) {
 			User user = new User();
 			BeanUtils.copyProperties(userVo, user);
+			
+			user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
+
 			userDao.save(user);
 		} else {
 			throw new EntityNotFoundException();
