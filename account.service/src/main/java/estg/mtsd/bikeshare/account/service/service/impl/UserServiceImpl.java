@@ -54,12 +54,12 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void update(UserVo userVo) {
 		Integer id = userVo.getId();
-		Boolean objectExists = userDao.existsById(id);
-		if (objectExists) {
+		Optional<User> userOptional = userDao.findById(id);
+		if (userOptional.isPresent()) {
 			User user = new User();
 			BeanUtils.copyProperties(userVo, user);
 			
-			user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
+			user.setPassword(userOptional.get().getPassword());
 
 			userDao.save(user);
 		} else {
