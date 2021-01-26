@@ -40,8 +40,8 @@ spec:
               value: "prod"
           resources:
             limits:
-              memory: "256Mi"
-              cpu: "256m"
+              memory: "512Mi"
+              cpu: "512m"
       imagePullSecrets: 
       - name: gitlab-auth 
 ---
