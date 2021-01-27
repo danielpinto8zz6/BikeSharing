@@ -8,9 +8,9 @@ metadata:
 spec:
   storageClassName: manual                    # Storage class. A PV Claim requesting the same storageClass can be bound to this volume.
   capacity:
-    storage: 500Mi
+    storage: 2Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   hostPath:                                   # hostPath PersistentVolume is used for development and testing. It uses a file/directory on the Node to emulate network-attached storage
     path: /var/lib/postgresql/data/bike
   persistentVolumeReclaimPolicy: Retain       # Retain the PV even after PVC is deleted. 
@@ -25,7 +25,7 @@ metadata:                                     # Claim name and labels
 spec:                                         # Access mode and resource limits
   storageClassName: manual                    # Request a certain storage class
   accessModes:
-    - ReadWriteMany                           # ReadWriteMany means the volume can be mounted as read-write by many Nodes
+    - ReadWriteOnce                           # ReadWriteMany means the volume can be mounted as read-write by many Nodes
   resources:
     requests:
-      storage: 500Mi
+      storage: 1Gi
