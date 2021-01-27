@@ -10,7 +10,7 @@ spec:
   capacity:
     storage: 2Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   hostPath:                                   # hostPath PersistentVolume is used for development and testing. It uses a file/directory on the Node to emulate network-attached storage
     path: /var/lib/postgresql/data/dock
   persistentVolumeReclaimPolicy: Retain       # Retain the PV even after PVC is deleted. 
@@ -25,7 +25,7 @@ metadata:                                     # Claim name and labels
 spec:                                         # Access mode and resource limits
   storageClassName: manual                    # Request a certain storage class
   accessModes:
-    - ReadWriteOnce                           # ReadWriteMany means the volume can be mounted as read-write by many Nodes
+    - ReadWriteMany                           # ReadWriteMany means the volume can be mounted as read-write by many Nodes
   resources:
     requests:
       storage: 1Gi

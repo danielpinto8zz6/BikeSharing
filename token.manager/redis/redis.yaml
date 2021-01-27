@@ -35,7 +35,7 @@ spec:
   - metadata:
       name: redis-volume
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes: [ "ReadWriteMany" ]
       resources:
         requests:
           storage: 512Mi
