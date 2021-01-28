@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: pgadmin
   labels:                                        # Labels applied to this deployment 
@@ -8,7 +8,6 @@ spec:
   selector:
    matchLabels:
     app: pgadmin
-  serviceName: pgadmin
   replicas: 1
   template:
     metadata:
@@ -25,17 +24,6 @@ spec:
           ports:
             - containerPort: 80
               name: pgadminport
-          volumeMounts:
-            - mountPath: /data/pgadmin
-              name: pgadmin-volume
-  volumeClaimTemplates:
-  - metadata:
-      name: pgadmin-volume
-    spec:
-      accessModes: [ "ReadWriteMany" ]
-      resources:
-        requests:
-          storage: 512Mi
 
 ---
 apiVersion: v1

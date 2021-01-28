@@ -27,12 +27,12 @@ spec:
             - containerPort: 5432                   # The port that the container exposes 
               name: postgres
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data/feedback
+            - mountPath: /var/lib/postgresql/data
               name: postgres-feedback-db		    # This name should match the name specified in `volumes.name`
       volumes:                                      # A PersistentVolume is mounted as a volume to the Pod 
         - name: postgres-feedback-db
           persistentVolumeClaim:
-            claimName: postgres-feedback-pv-claim
+            claimName: postgres-feedback-pvc
 
 ---
 apiVersion: v1                                      # API version

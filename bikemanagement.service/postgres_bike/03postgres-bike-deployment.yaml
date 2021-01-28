@@ -27,12 +27,12 @@ spec:
             - containerPort: 5432                   # The port that the container exposes 
               name: postgres
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data/bike
+            - mountPath: /var/lib/postgresql/data
               name: postgres-bike-db		    # This name should match the name specified in `volumes.name`
       volumes:                                      # A PersistentVolume is mounted as a volume to the Pod 
         - name: postgres-bike-db
           persistentVolumeClaim:
-            claimName: postgres-bike-pv-claim
+            claimName: postgres-bike-pvc
 
 ---
 apiVersion: v1                                      # API version
