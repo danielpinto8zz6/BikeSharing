@@ -25,12 +25,12 @@ spec:
             - containerPort: 27017
               name: mongodb
           volumeMounts:
-            - mountPath: /data/db/
+            - mountPath: /data
               name: mongodb
       volumes:
         - name: mongodb
           persistentVolumeClaim:
-            claimName: mongodb-pv-claim
+            claimName: mongo-travel-history-pvc
 
 ---
 apiVersion: v1
