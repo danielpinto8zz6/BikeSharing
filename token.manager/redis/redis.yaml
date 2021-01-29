@@ -31,11 +31,10 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: redis-volume
-  volumeClaimTemplates:
   - metadata:
       name: redis-volume
     spec:
-      accessModes: [ "ReadWriteMany" ]
+      accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
           storage: 1Gi
