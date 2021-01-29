@@ -50,6 +50,11 @@ public class UserController {
 		userService.update(userVo);
 	}
 
+	@PutMapping("/password")
+	public void updatePassword(@RequestBody UserVo userVo) {
+		userService.updatePassword(userVo);
+	}
+
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Integer id) {
 		userService.delete(id);

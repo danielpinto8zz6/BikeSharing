@@ -10,6 +10,8 @@ public interface UserService {
 
 	void update(UserVo userVo);
 
+	void updatePassword(UserVo userVo);
+
 	void delete(Integer id);
 
 	UserVo get(Integer id);

@@ -129,12 +129,12 @@ spec:
     spec:
       containers:
       - args:
+        - --kubelet-insecure-tls
+        - --kubelet-preferred-address-types=InternalIP
         - --cert-dir=/tmp
         - --secure-port=4443
         - --cert-dir=/tmp
         - --v=2
-        - --kubelet-insecure-tls
-        - --kubelet-preferred-address-types=InternalIP
         image: k8s.gcr.io/metrics-server/metrics-server:v0.4.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
