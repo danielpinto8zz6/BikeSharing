@@ -51,6 +51,6 @@ public class DummyWebController {
 
 		log.info("Closing bike: " + bikeId);
 
-		return "dummy";
+		return "redirect:/dummy";
 	}
 }
