@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .button {
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+        }
+        
+        .button1 {background-color: #ff0000;}
+        </style>
+
+    <title>Dummy Web: Docking Bike Events</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Refresh" content="5">
+    <meta name="description" content="...">
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th> Dock nº </th>
+                <th> Bike nº </th>
+                <th> Dummy button </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${bikes.empty}">
+                <td colspan="2"> No bikes in use </td>
+            </tr>
+            <tr th:each="bike : ${bikes}">
+                <td><span th:text="${bike.getDockId()}"></span></td>
+                <td><span th:text="${bike.getBikeId()}"></span></td>
+                <td>
+                    <form th:action="@{/}">
+                        <button type="submit" th:name="close" th:value="${bike}" class="button button1">CLOSE</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,68 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: feedback-service
+  labels:
+    app: feedback-service
+spec:
+  selector:
+    app: feedback-service
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8300
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feedback-service
+  labels:
+    app: feedback-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: feedback-service
+  template:
+    metadata:
+      labels:
+        app: feedback-service
+    spec:
+      containers:
+        - name: feedback-service
+          image: registry.gitlab.com/danielpinto8zz6/bikeshare/feedback-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8300
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: JVM_OPTS
+              value: "-Xms1g -Xmx1g"
+          resources:
+            limits:
+              memory: "256Mi"
+
+      imagePullSecrets: 
+      - name: gitlab-auth
+---
+
+kind: HorizontalPodAutoscaler 
+apiVersion: autoscaling/v2beta2
+metadata: 
+  name: feedback-service
+spec: 
+  maxReplicas: 3 
+  minReplicas: 1 
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: feedback-service
+  metrics: 
+  - type: Resource 
+    resource: 
+      name: memory 
+      target:
+        type: Utilization
+        averageUtilization: 80

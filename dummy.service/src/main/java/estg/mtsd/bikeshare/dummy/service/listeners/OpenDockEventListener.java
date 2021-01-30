@@ -1,5 +1,6 @@
 package estg.mtsd.bikeshare.dummy.service.listeners;
 
+import estg.mtsd.bikeshare.dummy.service.data.docks;
 import estg.mtsd.bikeshare.shared.library.utils.JsonUtils;
 import estg.mtsd.bikeshare.shared.library.vo.OpenDockEvent;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,10 @@ public class OpenDockEventListener {
     public void consume(ConsumerRecord<String, String> payload) {
 
         OpenDockEvent event = JsonUtils.fromJson(payload.value(), OpenDockEvent.class);
+
+        synchronized(docks.myDockList) {
+            docks.myDockList.add(event);
+        }
 
         log.info("Opening dock: " + event.getDockId());
     }
