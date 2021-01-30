@@ -5,7 +5,7 @@ start=`date +%s`
 echo 'deploying to k8s...'
 
 ./eureka.server/deploy.sh
-sleep 3m
+sleep 1m
 
 ./zuul.server/deploy.sh
 sleep 1m
