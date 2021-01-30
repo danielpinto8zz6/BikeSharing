@@ -5,11 +5,14 @@ start=`date +%s`
 echo 'deploying to k8s...'
 
 ./eureka.server/deploy.sh
-./token.manager/deploy.sh
-
-sleep 1m
+sleep 3m
 
 ./zuul.server/deploy.sh
+sleep 1m
+
+./token.manager/deploy.sh
+sleep 1m
+
 ./account.service/deploy.sh
 ./auth.service/deploy.sh
 ./bike.validator.service/deploy.sh
@@ -26,7 +29,6 @@ sleep 1m
 ./pgadmin.service/deploy.sh
 ./rental.process.service/deploy.sh
 ./rental.service/deploy.sh
-#./token.manager/deploy.sh
 ./travel.history.process.service/deploy.sh
 ./travel.history.receiver.service/deploy.sh
 ./travel.history.service/deploy.sh
