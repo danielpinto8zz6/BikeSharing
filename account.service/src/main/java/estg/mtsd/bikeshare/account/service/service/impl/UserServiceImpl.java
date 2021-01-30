@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userDao.findById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            user.setPassword(userVo.getPassword());
+            user.setPassword(bCryptPasswordEncoder().encode(userVo.getPassword()));
 
             userDao.save(user);
         } else {
