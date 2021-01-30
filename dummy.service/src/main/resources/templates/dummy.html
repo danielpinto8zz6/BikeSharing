@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <style>
-        .button {
+        .a {
           border: none;
           color: white;
           padding: 15px 32px;
@@ -14,13 +14,12 @@
           cursor: pointer;
         }
         
-        .button1 {background-color: #ff0000;}
+        .a1 {background-color: #ff0000;}
         </style>
 
     <title>Dummy Web: Docking Bike Events</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Refresh" content="5">
-    <meta name="description" content="...">
+    <meta http-equiv="Refresh" content="300">
 </head>
 <body>
     <table>
@@ -39,9 +38,7 @@
                 <td><span th:text="${bike.getDockId()}"></span></td>
                 <td><span th:text="${bike.getBikeId()}"></span></td>
                 <td>
-                    <form th:action="@{/}">
-                        <button type="submit" th:name="close" th:value="${bike}" class="button button1">CLOSE</button>
-                    </form>
+                    <a th:href="@{/dummy/close/dock/{dockId}/bike/{bikeId}(dockId = ${bike.getDockId()}, bikeId = ${bike.getBikeId()})}" class="a a1">CLOSE</a>
                 </td>
             </tr>
         </tbody>
