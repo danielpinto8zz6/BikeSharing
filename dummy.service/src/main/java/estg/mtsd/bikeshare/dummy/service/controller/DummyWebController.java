@@ -22,7 +22,7 @@ public class DummyWebController {
 	public String loadBikes(Model model) {
 
 		synchronized(docks.myDockList) {
-			model.addAttribute("form", docks.myDockList);
+			model.addAttribute("bikes", docks.myDockList);
 		}
 		
 		return "dummy";
