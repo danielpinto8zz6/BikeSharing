@@ -7,9 +7,11 @@ metadata:
 spec:
   selector:
     app: dummy-service
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-    - port: 80
+    - name: padmin-port
+      nodePort: 31600
+      port: 80
       targetPort: 9200
 
 ---
