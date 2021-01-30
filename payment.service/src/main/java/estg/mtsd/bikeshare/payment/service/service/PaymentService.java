@@ -19,5 +19,6 @@ public interface PaymentService {
 
     Page<PaymentVo> getAll(Pageable pageable, String userEmail);
 
+    PaymentVo getByRentalId(Integer rentalId);
 }
 

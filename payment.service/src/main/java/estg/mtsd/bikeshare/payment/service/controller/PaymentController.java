@@ -32,6 +32,11 @@ public class PaymentController {
         return paymentService.get(id);
     }
 
+    @GetMapping("payment/rental/{id}")
+    public PaymentVo getByRentalId(@PathVariable Integer rentalId) {
+        return paymentService.getByRentalId(rentalId);
+    }
+
     @GetMapping("payment")
     public Page<PaymentVo> getAll(@RequestParam(defaultValue = "0") int page,
                                   @RequestParam(defaultValue = "10") int size,

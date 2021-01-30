@@ -98,6 +98,20 @@ public class PaymentServiceImpl implements PaymentService {
         return entities.map(this::convertToPaymentVo);
     }
 
+    @Override
+    public PaymentVo getByRentalId(Integer rentalId) {
+        Optional<Payment> paymentOptional = paymentDao.findByRentalId(rentalId);
+        PaymentVo paymentVo;
+        if (paymentOptional.isPresent()) {
+            paymentVo = new PaymentVo();
+            BeanUtils.copyProperties(paymentOptional.get(), paymentVo);
+        } else {
+            throw new EntityNotFoundException();
+        }
+
+        return paymentVo;
+    }
+
     private PaymentVo convertToPaymentVo(Payment entity) {
         PaymentVo paymentVo = new PaymentVo();
         BeanUtils.copyProperties(entity, paymentVo);
