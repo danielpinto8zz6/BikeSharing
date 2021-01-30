@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import estg.mtsd.bikeshare.dummy.service.data.docks;
 import estg.mtsd.bikeshare.dummy.service.producers.DockClosedEventProducer;
 import estg.mtsd.bikeshare.shared.library.vo.DockClosedEvent;
+import estg.mtsd.bikeshare.shared.library.vo.OpenDockEvent;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -33,8 +34,23 @@ public class DummyWebController {
 
 		dockClosedEventProducer.send(new DockClosedEvent(bikeId, dockId));
 		
+		synchronized(docks.myDockList) {
+
+			OpenDockEvent myOpenDockEventToRemove = null;
+			for (OpenDockEvent myOpenDockEvent : docks.myDockList) {
+				
+				if (myOpenDockEvent.getBikeId() == bikeId && myOpenDockEvent.getDockId() == dockId) {
+					
+					myOpenDockEventToRemove = myOpenDockEvent;
+					break;
+				}
+			}
+
+			docks.myDockList.remove(myOpenDockEventToRemove);
+		}
+
 		log.info("Closing bike: " + bikeId);
 
-		return "redirect:/dummy";
+		return "dummy";
 	}
 }
