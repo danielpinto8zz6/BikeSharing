@@ -38,9 +38,6 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
-          resources:
-            limits:
-              memory: "256Mi"
 
       imagePullSecrets: 
       - name: gitlab-auth

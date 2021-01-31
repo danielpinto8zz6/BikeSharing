@@ -33,8 +33,8 @@ public class PaymentController {
     }
 
     @GetMapping("payment/rental/{id}")
-    public PaymentVo getByRentalId(@PathVariable Integer rentalId) {
-        return paymentService.getByRentalId(rentalId);
+    public PaymentVo getByRentalId(@PathVariable Integer id) {
+        return paymentService.getByRentalId(id);
     }
 
     @GetMapping("payment")
