@@ -26,6 +26,7 @@ public class DummyWebController {
 
 		synchronized(docks.myDockList) {
 			model.addAttribute("bikes", docks.myDockList);
+			model.addAttribute("form", new OpenDockEvent());
 		}
 		
 		return "dummy";
