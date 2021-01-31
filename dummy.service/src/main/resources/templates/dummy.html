@@ -36,7 +36,7 @@
                     <td colspan="2"> No bikes in use </td>
                 </tr>
                 <tr th:each="bike : ${bikes}">
-                    <input type="hidden" id="bikeId" name="bikeId" value="${bike.getBikeId()}">
+                    <input type="hidden" id="bikeId" name="bikeId" th:value="${bike.getBikeId()}">
                     <td><span th:text="${bike.getBikeId()}"></span></td>
                     <td><input type="number" id="dockId" name="dockId"/></td>
                     <td>
