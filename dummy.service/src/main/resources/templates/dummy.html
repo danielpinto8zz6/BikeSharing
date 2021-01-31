@@ -36,8 +36,7 @@
                     <td colspan="2"> No bikes in use </td>
                 </tr>
                 <tr th:each="bike : ${bikes}">
-                    <input type="hidden" id="bikeId" name="bikeId" value="${bike.getBikeId()}">
-                    <td><span th:text="${bike.getBikeId()}"></span></td>
+                    <td><input type="number" id="bikeId" name="bikeId" value="${bike.getBikeId()}" disabled></td>
                     <td><input type="number" id="dockId" name="dockId"/></td>
                     <td>
                         <button type="submit" class="a a1">CLOSE</a>
