@@ -52,7 +52,7 @@ public class DummyWebController {
 			docks.myDockList.remove(myOpenDockEventToRemove);
 		}
 
-		log.info("Closing bike: " + bike.getBikeId());
+		log.info("Closing bike: " + bike.getBikeId() + " in dock id: " + bike.getDockId());
 
 		return "redirect:/dummy";
 	}
