@@ -12,7 +12,9 @@ import estg.mtsd.bikeshare.payment.calculator.service.service.PaymentCalculatorS
 public class PaymentCalculatorServiceImpl implements PaymentCalculatorService {
 
 	private static final double PRICE_PER_MINUTE_IN_FIRST_15_MINUTES = 0.5;
-	private static final double PRICE_PER_MINUTE_AFTER_15_MINUTES = 0.1;
+	private static final double PRICE_PER_MINUTE_AFTER_15_MINUTES = 1;
+	private static final int FIFTEEN_MINUTES_IN_SECONDS = 900;
+	private static final int SECONDS_PER_MINUTE = 60;
 
 	@Override
 	public double calculate(Date startDate, Date endDate) {
@@ -22,13 +24,14 @@ public class PaymentCalculatorServiceImpl implements PaymentCalculatorService {
 
 		long diff = endDate.getTime() - startDate.getTime();
 
-		long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+		long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
 
-		if (minutes <= 15) {
-			return minutes * PRICE_PER_MINUTE_IN_FIRST_15_MINUTES;
+		if (seconds <= FIFTEEN_MINUTES_IN_SECONDS) {
+			return (seconds / SECONDS_PER_MINUTE) * PRICE_PER_MINUTE_IN_FIRST_15_MINUTES;
 		}
 
-		return (15 * PRICE_PER_MINUTE_IN_FIRST_15_MINUTES) + ((minutes - 15) * PRICE_PER_MINUTE_AFTER_15_MINUTES);
+		return (15 * PRICE_PER_MINUTE_IN_FIRST_15_MINUTES)
+				+ (((seconds - FIFTEEN_MINUTES_IN_SECONDS) / SECONDS_PER_MINUTE) * PRICE_PER_MINUTE_AFTER_15_MINUTES);
 	}
 
 }
