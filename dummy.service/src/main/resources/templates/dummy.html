@@ -25,8 +25,8 @@
     <table>
         <thead>
             <tr>
-                <th> Dock nº </th>
-                <th> Bike nº </th>
+                <th> Bike Nº </th>
+                <th> Dock </th>
                 <th> Dummy button </th>
             </tr>
         </thead>
@@ -35,8 +35,8 @@
                 <td colspan="2"> No bikes in use </td>
             </tr>
             <tr th:each="bike : ${bikes}">
-                <td><span th:text="${bike.getDockId()}"></span></td>
                 <td><span th:text="${bike.getBikeId()}"></span></td>
+                <td><input type="number" min="0" th:field="*{bike.getDockId()}"/></td>
                 <td>
                     <a th:href="@{/dummy/close/dock/{dockId}/bike/{bikeId}(dockId = ${bike.getDockId()}, bikeId = ${bike.getBikeId()})}" class="a a1">CLOSE</a>
                 </td>

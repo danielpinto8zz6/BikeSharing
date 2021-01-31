@@ -39,7 +39,7 @@ public class DummyWebController {
 			OpenDockEvent myOpenDockEventToRemove = null;
 			for (OpenDockEvent myOpenDockEvent : docks.myDockList) {
 				
-				if (myOpenDockEvent.getBikeId() == bikeId && myOpenDockEvent.getDockId() == dockId) {
+				if (myOpenDockEvent.getBikeId() == bikeId) {
 					
 					myOpenDockEventToRemove = myOpenDockEvent;
 					break;
