@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import estg.mtsd.bikeshare.dummy.service.data.docks;
 import estg.mtsd.bikeshare.dummy.service.producers.DockClosedEventProducer;
@@ -29,17 +31,17 @@ public class DummyWebController {
 		return "dummy";
 	}
 
-	@GetMapping("/dummy/close/dock/{dockId}/bike/{bikeId}")
-	public String closeBike(@PathVariable("dockId") int dockId, @PathVariable("bikeId") int bikeId, Model model) {
+	@PostMapping("/dummy")
+	public String closeBike(@ModelAttribute("form") OpenDockEvent bike) {
 
-		dockClosedEventProducer.send(new DockClosedEvent(bikeId, dockId));
+		dockClosedEventProducer.send(new DockClosedEvent(bike.getBikeId(), bike.getDockId()));
 		
 		synchronized(docks.myDockList) {
 
 			OpenDockEvent myOpenDockEventToRemove = null;
 			for (OpenDockEvent myOpenDockEvent : docks.myDockList) {
 				
-				if (myOpenDockEvent.getBikeId() == bikeId) {
+				if (myOpenDockEvent.getBikeId() == bike.getBikeId()) {
 					
 					myOpenDockEventToRemove = myOpenDockEvent;
 					break;
@@ -49,7 +51,7 @@ public class DummyWebController {
 			docks.myDockList.remove(myOpenDockEventToRemove);
 		}
 
-		log.info("Closing bike: " + bikeId);
+		log.info("Closing bike: " + bike.getBikeId());
 
 		return "redirect:/dummy";
 	}

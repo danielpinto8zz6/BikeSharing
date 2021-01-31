@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <style>
-        .a {
+        .button {
           border: none;
           color: white;
           padding: 15px 32px;
@@ -14,7 +14,7 @@
           cursor: pointer;
         }
         
-        .a1 {background-color: #ff0000;}
+        .button1 {background-color: #ff0000;}
         </style>
 
     <title>Dummy Web: Docking Bike Events</title> 
@@ -22,26 +22,28 @@
     <meta http-equiv="refresh" content="5">
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th> Bike Nº </th>
-                <th> Dock </th>
-                <th> Dummy button </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:if="${bikes.empty}">
-                <td colspan="2"> No bikes in use </td>
-            </tr>
-            <tr th:each="bike : ${bikes}">
-                <td><span th:text="${bike.getBikeId()}"></span></td>
-                <td><input type="number" min="0" th:field="*{bike.getDockId()}"/></td>
-                <td>
-                    <a th:href="@{/dummy/close/dock/{dockId}/bike/{bikeId}(dockId = ${bike.getDockId()}, bikeId = ${bike.getBikeId()})}" class="a a1">CLOSE</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <form th:action="@{/dummy}" th:object="${form}" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th> Bike Nº </th>
+                    <th> Dock </th>
+                    <th> Dummy button </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${bikes.empty}">
+                    <td colspan="2"> No bikes in use </td>
+                </tr>
+                <tr th:each="bike : ${bikes}">
+                    <td><span  id="bikeId" name="bikeId" th:text="${bike.getBikeId()}"></span></td>
+                    <td><input type="number" id="dockId" name="dockId"/></td>
+                    <td>
+                        <button type="submit" class="a a1">CLOSE</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
 </body>
 </html>
