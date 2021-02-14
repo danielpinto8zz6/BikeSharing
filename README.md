@@ -33,3 +33,8 @@ Each service has a `deploy.sh` service which is responsable for deploying the pr
 
 ### Build and deploy everything one shot
 There's a script called `deploy.sh` in the root of services folder, which will build all services and docker images, deploy all docker images to gitlab container registry and deploy the micro-services, databases and services to kubernetes.
+
+
+------------
+
+*More detailed information about how to configure access to kubernetes or our vagrant image can't be found on reports folder, in `report.pdf`*
