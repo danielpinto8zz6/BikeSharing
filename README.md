@@ -25,7 +25,11 @@
 | zuul-server  | 9090  |
 | eureka-server  | 8761  ||
 
-### Kafka
-```cd kafka-docker```
+### Build and push services
+Each service has a `build-and-push-docker-image.sh` script which is responsable for building the service and respective docker image and deploy it to our gitlab container registry.
 
-```docker-compose -f docker-compose-expose.yml up```
+### Deploy services
+Each service has a `deploy.sh` service which is responsable for deploying the previous deployed docker image in kubernetes according to the service configurations specificed in deployment.yaml.
+
+### Build and deploy everything one shot
+There's a script called `deploy.sh` in the root of services folder, which will build all services and docker images, deploy all docker images to gitlab container registry and deploy the micro-services, databases and services to kubernetes.
