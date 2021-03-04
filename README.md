@@ -26,7 +26,7 @@
 | eureka-server  | 8761  ||
 
 ### Build and push services
-Each service has a `build-and-push-docker-image.sh` script which is responsable for building the service and respective docker image and deploy it to our gitlab container registry.
+Each service has a `build-and-push-docker-image.sh` script which is responsible for building the service and respective docker image and deploy it to our gitlab container registry.
 
 ### Deploy services
 Each service has a `deploy.sh` service which is responsable for deploying the previous deployed docker image in kubernetes according to the service configurations specificed in deployment.yaml.
