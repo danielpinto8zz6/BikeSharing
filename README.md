@@ -37,4 +37,4 @@ There's a script called `deploy.sh` in the root of services folder, which will b
 
 ------------
 
-*More detailed information about how to configure access to kubernetes or our vagrant image can't be found on reports folder, in `report.pdf`*
+*More detailed information about how to configure access to kubernetes or our vagrant box can be found on reports folder, in `report.pdf`*
